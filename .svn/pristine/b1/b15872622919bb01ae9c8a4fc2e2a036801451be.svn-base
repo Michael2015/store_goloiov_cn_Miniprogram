@@ -1,0 +1,20 @@
+.login-view {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, .5);
+    transform: translate3d(0, 100%, 0);
+}
+
+.trueshow {
+    transform: translate3d(0, 0, 0);
+    transition-duration: 400ms;
+}
+
+.falseshow {
+    transform: translate3d(0, 100%, 0);
+    transition-duration: 200ms;
+}

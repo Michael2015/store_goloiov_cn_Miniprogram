@@ -1,0 +1,14 @@
+<!--components/order/popup/shouhuo.wxml-->
+<!-- 收货弹窗 -->
+<view wx:if="{{show}}">
+  <view class="mask" bindtap="hide"></view>
+  <view class="wrap">
+    <view class="title">如您选择立即加入排队免单您将:</view>
+    <view class="one">1.无法享受7天无理由退货；</view>
+    <view class="two">2.如因商品质量问题，商家将优先免费更换。</view>
+    <view class="btn-wrap">
+      <view class="active" bindtap="left">排队免单</view>
+      <view bindtap="right">一般收货</view>
+    </view>
+  </view>
+</view>

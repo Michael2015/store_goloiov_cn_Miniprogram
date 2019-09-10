@@ -1,0 +1,81 @@
+<view class="order">
+    <view class="top">
+        <view class="search">
+            <view>
+                <view class="icon">
+                    <image mode="widthFix" src='/assets/image/search.png'></image>
+                </view>
+                <view class="input">
+                    <input placeholder="搜索" value="{{keyword}}" placeholder-class="placeholder"  focus="{{inputFocus}}" type='text' confirm-type="搜索" bindconfirm="search" bindinput="handleSearchInput" bindfocus="handleSearchFocus" bindblur="handleSearchBlur"/>
+                </view>
+                <view class="icon-clear" wx:if="{{showClearIcon}}">
+                    <view bindtap="clearKeyword"></view>
+                </view>
+            </view>
+        </view>
+        <view class="tab">
+            <block wx:for="{{tabs}}" wx:key="{{index}}">
+                <view bindtap="tabChange" data-index="{{index}}" class="{{currentTab===index? 'active': ''}}">{{item}}</view>
+            </block>
+        </view>
+
+        <view class="other"></view>
+    </view>
+    <swiper
+            indicator-dots="{{false}}"
+            autoplay="{{false}}"
+            duration="500"
+            class="list-swiper"
+            bindchange="listChange"
+            current="{{currentTab}}"
+    >
+        <block wx:for="{{tabs}}" wx:key="{{index}}">
+            <swiper-item class="list-swiper-item">
+                <block wx:if="{{currentTab===index}}">
+                <scroll-view scroll-y class="list-scroll-view" bindscrolltolower="handleScrollToLower">
+                    <view class="list">
+                        <block wx:for="{{orderList}}" wx:key="{{index}}">
+                        <view class="item" data-orderid="{{item.order_id}}" bindtap="toDetail">
+                            <view class="header">
+                                <view class="col-1">
+                                    <image src="{{item.avatar}}"></image>
+                                    <text>{{item.nickname}}</text>
+                                </view>
+                                <view class="col-2">{{item.add_time}}</view>
+                            </view>
+                            <view class="body">
+                                <view class="col-1">
+                                    <image src="{{item.image}}"></image>
+                                </view>
+                                <view class="col-2">
+                                    <view class="t">{{item.store_name}}</view>
+                                    <view class="d">{{item.suk}}</view>
+                                </view>
+                                <view class="col-3">X {{item.total_num}}</view>
+                                <view class="btn-track" catchtap="toTrack2" wx:if="{{item.is_has_express}}">
+                                    <view data-id="{{item.delivery_id}}" data-name="{{item.delivery_name}}">查看物流</view>
+                                </view>
+                            </view>
+                            <view class="footer">
+                                <view class="left">合计: <text>￥{{item.pay_price}}</text>元</view>
+                                <!-- <view class="right">{{item.gp_msg}}</view> -->
+                                <view class="right">
+                                    <block wx:if="{{item.status_of_order === 0}}">待支付</block>
+                                    <block wx:if="{{item.status_of_order === 1}}">待发货</block>
+                                    <block wx:elif="{{item.status_of_order === 2}}">退款中</block>
+                                    <block wx:elif="{{item.status_of_order === 3}}">已发货</block>
+                                    <block wx:elif="{{item.status_of_order === 4}}">已退款</block>
+                                    <block wx:elif="{{item.status_of_order === 5 && (item.status == 2 || item.status == 4)}}">已收货</block>
+                                    <block wx:elif="{{item.status_of_order === 5 && item.status == 3}}">已评价</block>
+                                </view>
+                            </view>
+                        </view>
+                        </block>
+                        <view class="no-more" wx:if="{{!more}}">没有更多数据</view>
+                    </view>
+                </scroll-view>
+                </block>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>

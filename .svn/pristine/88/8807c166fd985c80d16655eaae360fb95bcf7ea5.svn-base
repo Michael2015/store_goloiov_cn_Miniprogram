@@ -1,0 +1,45 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="godetail">
+        <image src="{{info.image}}" mode="aspectFit" class="cimg"></image>
+    </view>
+    <view class="textView">
+        <view class="title">{{info.store_name}}</view>
+        <view class="desc0" wx:if="{{product_rebate_amount}}">返利金额<text class="red">{{product_rebate_amount}}元</text></view>
+        <view class="desc1" wx:if="{{invite_user_count}}"><image src="../../../assets/image/jth.png" mode="aspectFit"></image><text>您购买的此商品已经进入免单排队，再邀请{{invite_user_count}}人即可免单。</text></view>
+    </view>
+    <view class="line"></view>
+    <view class="btnView">
+        <view class="item">
+            <button open-type="share" class="share"></button>
+            <image src="../../../assets/image/contactIcon.png" mode="widthFix"></image>
+            <view>转发客户</view>
+        </view>
+        <view class="item" bindtap="getShareImg">
+            <image src="../../../assets/image/posterIcon.png" mode="widthFix"></image>
+            <view>超级海报</view>
+        </view>
+          <view class="item" bindtap="show_modal" wx:if="{{coupon_id}}">
+            <image src="../../../assets/image/share_coupon.png" mode="widthFix"></image>
+            <view>优惠券</view>
+        </view>
+    </view>
+    <button class="back" bindtap="back">返回</button>
+</view>
+
+<view class="modal-mask"  catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+            <image src="/assets/image/coupon_bg.png" bindtap="get_coupon"></image>
+            <view class="modal-content">
+                <view class="nav">
+                    <view class="head">¥{{coupon_price}}元</view>
+                    <view class="title">有效期至：{{coupon_date}}</view>
+                    <view class="title">温馨提示：每件商品只能领一张券，请务必在有效期内使用</view>
+                </view>
+            </view>
+            <view class="close" bindtap="hide_modal">
+                    <image src="/assets/image/closeTip.png"></image>
+            </view>
+</view>
+<canvas canvas-id='posterCanvas' style='width:560px;height:800px;'></canvas>
+<composite-poster id="compositePoster-view"></composite-poster>

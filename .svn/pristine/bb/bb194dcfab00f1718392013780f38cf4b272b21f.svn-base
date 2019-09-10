@@ -1,0 +1,7 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "操作手册",
+  "navigationBarBackgroundColor": "#e70002",
+  "navigationBarTextStyle": "white",
+  "disableScroll": true
+}

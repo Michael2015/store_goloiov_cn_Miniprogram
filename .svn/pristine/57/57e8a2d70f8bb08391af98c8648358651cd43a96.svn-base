@@ -1,0 +1,47 @@
+<!--index.wxml-->
+<view class="view">
+    <form bindsubmit="formSubmit" report-submit>
+        <view class="item address" wx:if="{{is_show_action == 0 || (isload && getAddressList.length)}}" bindtap="{{is_show_action?'goAddList':''}}">
+            <view class="location_view">
+                <image mode="widthFix" src='/assets/image/location.png' class="location_icon"></image>
+            </view>
+            <view class="textView">
+                <view class="address_name">收货人： {{def_add.real_name}} {{def_add.phone}}</view>
+                <view class="address_text">{{def_add.province}} {{def_add.city}} {{def_add.district}} {{def_add.detail}}</view>
+            </view>
+            <image mode="widthFix" src='/assets/image/right_ccc.png' class="more"></image>
+        </view>
+        <view wx:else class="no_address" bindtap="goAddAddress">
+            + 添加收货地址
+        </view>
+        <scroll-view scroll-y class="leaveMsgAndList">
+            <view class="commodity">
+                <view class="commodity_info">
+                    <image src="{{info.image?info.image:info.slider_image[0]}}" mode="widthFix" class="commodity_image"></image>
+                    <view>
+                        <view class="commodity_name">
+                            <view class="name">{{info.store_name}}</view>
+                            <view class="price">￥{{price.price}}</view>
+                        </view>
+                        <view class="commodity_num">
+                            <view class="spec">{{price.attr}}</view>
+                            <view class="num">× 1</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="number">
+                    <view class="title">商品单价：¥ {{price.price}}元</view> 
+                    <view class="title">优惠金额：¥ {{coupon_total?coupon_total:'0.00'}}元</view> 
+                    <view class="title title2">实付金额：¥ <em>{{coupon_total?(price.price - coupon_total):price.price}}</em>元</view> 
+                    <!-- <van-stepper value="{{ 1 }}" bind:change="onChange" /> -->
+                </view>
+            </view>
+            <view class="leaveMsg">
+                <image src="/assets/image/msg.png" mode="widthFix"></image>
+                <input placeholder="留言内容/备注 （ 选填 ）最多100字符" placeholder-class="search_input_placeholder" bindinput="{{is_show_action?'setMark':''}}" value="{{mark}}" disabled="{{is_show_action?'disabled':''}}" maxlength="100"/>
+            </view>
+            <view style="height:100rpx"></view>
+        </scroll-view>
+        <button class="confirm" form-type="submit" loading="{{disabled_loading}}" disabled="{{disabled_loading}}">立即付款（¥{{price.price - coupon_total}}元）</button>
+    </form>
+</view>

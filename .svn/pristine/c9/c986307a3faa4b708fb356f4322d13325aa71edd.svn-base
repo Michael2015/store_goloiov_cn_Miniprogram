@@ -1,0 +1,18 @@
+<view 
+    class="{{show}}show login-view" 
+    catchtouchmove="touchMove"
+    style="{{ headStyle }}"
+>
+<button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" data-opentype='getUserInfo'>
+  获取用户信息
+</button>
+<button bindtap="close">
+  关闭
+</button>
+<button bindtap="loginSuccess">
+  登录成功
+</button>
+<button bindtap="loginError">
+  登录失败
+</button>
+</view>

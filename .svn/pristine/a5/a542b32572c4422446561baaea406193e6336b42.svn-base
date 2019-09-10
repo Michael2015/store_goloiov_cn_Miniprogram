@@ -1,0 +1,181 @@
+page {
+  background: #fff;
+}
+
+.godetail {
+  width: 290rpx;
+  height: 290rpx;
+  margin: 89rpx auto 43rpx auto;
+  position: relative;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.godetail image {
+  width: 290rpx;
+  height: 290rpx;
+}
+
+.godetail view {
+  width: 290rpx;
+  height: 52rpx;
+  background: rgba(0, 0, 0, .5);
+  color: #fff;
+  text-align: center;
+  line-height: 52rpx;
+  font-size: 28rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.textView {
+  width: 541rpx;
+  margin: 30rpx auto 50rpx auto;
+  text-align: center;
+}
+
+.textView .title {
+  font-size: 36rpx;
+}
+
+.desc0 {
+  font-size: 30rpx;
+  margin-top: 13rpx;
+}
+
+.red {
+  color: #ee2828;
+}
+
+.desc1 {
+  margin-top: 30rpx;
+}
+
+.btnView {
+  display: flex;
+  justify-content: space-around;
+  width: 498rpx;
+  margin: 0 auto;
+}
+
+.btnView image {
+  width: 90rpx;
+  height: 90rpx;
+  margin-bottom: 30rpx;
+}
+
+.btnView .item {
+  font-size: 26rpx;
+  text-align: center;
+  color: #767575;
+  position: relative;
+}
+
+.line {
+  width: 626rpx;
+  height: 1rpx;
+  background: #ede9e9;
+  margin: 50rpx auto;
+}
+
+.btnView .item button {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.desc1 {
+  font-size: 26rpx;
+  color: #424242;
+}
+
+.desc1 image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-bottom: -5rpx;
+  margin-right: 15rpx;
+}
+.godetail2
+{
+    margin-top: 0rpx;
+    border-radius:0rpx;
+    height: 150rpx;
+}
+.godetail2 view 
+{
+  border-radius:20rpx;
+}
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+.modal-dialog {
+  width: 638rpx;
+  position: fixed;
+  top: 6%;
+  left: 6%;
+  z-index: 9999;
+}
+.modal-dialog image
+{
+  width:638rpx;
+  height: 826rpx;
+}
+.modal-title {
+  color: #030303;
+  text-align: center;
+  padding: 15rpx 0;
+}
+.modal-content {
+  position: absolute;
+  width: 638rpx;
+  text-align: center;
+  top: 55%;
+  color: #fff;
+  font-weight: bold;
+  height: 160rpx;
+}
+.modal-content .nav{
+    width: 60%;
+    margin: 0 auto;
+}
+.modal-content .head
+{
+    font-size: 50rpx;
+    padding: 8rpx 0;
+    color: #AA0000;
+}
+.modal-content .title
+{
+    text-align: left;
+    color:#555;
+    font-size: 25rpx;
+    font-weight: normal;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.modal-dialog .close
+{
+  width: 638rpx;
+  text-align: right;
+  position: fixed;
+  top: 2%;
+  left: 6%;
+}
+.modal-dialog .close image{
+    width: 50rpx;
+    height: 50rpx;
+}

@@ -1,0 +1,64 @@
+<!--pages/partner/personal/data/index.wxml-->
+<view style="width:100%;height:100%">
+  <view class="warp">
+    <view class="warp-item">
+      <view class="item-title avatar-title">头像</view>
+      <!-- <view class="item-content"> -->
+        <image src="{{avatar}}" class="avatar" mode="widthFix"></image>
+      <!-- </view> -->
+    </view>
+    <view class="warp-item">
+      <view class="item-title">名字</view>
+      <view class="item-content">{{name}}</view>
+    </view>
+    <view class="warp-item">
+      <view class="item-title">合伙人等级
+        <!-- <image src="/assets/image/question.png" class="question" bindtap="to" data-url="/pages/partner/personal/Explain/index" mode="widthFix"></image> -->
+      </view>
+      <view class="item-content">{{partner_level}}</view>
+    </view>
+    <view class="warp-item">
+      <view class="item-title">我加入的团队</view>
+      <view class="item-content">
+        <view wx:if="{{is_band_partner === 0}}" class="add" bindtap="addTeam">可添加 ></view> 
+        <view wx:if="{{is_band_partner === 1}}" class="call">{{spread_user_nickname}} {{spread_user_phone.length === 0?'':phonehide.toHide(spread_user_phone)}}
+          <image bindtap="openPhone" src="/assets/image/contact.png" mode="widthFix" class="phone"></image>
+        </view>
+      </view>
+    </view>
+    <view class="warp-item" bindtap="to" data-url="/pages/partner/personal/partner/index">
+      <view class="item-title">我发展的伙伴</view>
+      <view class="item-content">{{num}}人 ></view>
+    </view>
+  </view>
+  <view class="mask" wx:if="{{showMask}}">
+    <view class="phone-warp">
+      <view class="form-model" wx:if="{{!findTeam}}">
+        <view class="title-warp">请输入11位手机号</view>
+        <view class="input-warp"><input class="phone-input" placeholder="" data-phone="{{inputPhone}}" bindinput="Transfusion" maxlength="11"></input></view>
+        <view class="button-warp">
+          <!-- <button class="tabMask tabMaskR" bindtap="tabMask">取消</button> -->
+          <button class="tabMask" wx:if="{{inputPhone.length === 0 || inputPhone.length !== 11}}" disabled>下一步</button>
+          <button bindtap="next" class="tabMask" wx:else>下一步</button>
+        </view>
+      </view>
+      <view class="confirm-model" wx:if="{{findTeam}}">
+        <view class="confirm-title">是否确定加入{{inputName}}的团队？</view>
+        <view class="button-warp">
+          <button class="ChoiceBut no" bindtap="no">否</button>
+          <button class="ChoiceBut yes" bindtap="yes">是</button>
+        </view>
+      </view>
+      <view class="clone" bindtap="tabMask">
+        <image src="/assets/image/close.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+<wxs module="phonehide">
+  var toHide = function(array) {
+    var mphone = array.substring(0, 3) + '****' + array.substring(7);
+    return mphone;
+  }
+  module.exports.toHide = toHide;
+</wxs>

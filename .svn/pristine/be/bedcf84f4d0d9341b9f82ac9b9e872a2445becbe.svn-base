@@ -1,0 +1,93 @@
+/* pages/partner/personal/wallet/cash.wxss */
+page{
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+.wrap{
+  padding-top: 24rpx;
+}
+.form{
+  background: #fff;
+  padding:0 24rpx;
+}
+.form .input-wrap:after{
+  content: ' ';
+  display: block;
+  position: absolute;
+  height: 1px;
+  transform: scaleY(.5);
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  background: #e4e4e4;
+}
+.form .title{
+  font-size:24rpx;
+  color:#999;
+  line-height: 72rpx;
+}
+.form .title text{
+  font-size:28rpx;
+  color:#333;
+}
+.form .input-wrap{
+  display: flex;
+  align-items: center;
+  min-height: 100rpx;
+  position: relative;
+}
+.form .input-wrap .yuan{
+  width: 36rpx;
+  font-size: 36rpx;
+  color:#333;
+}
+.form .input-wrap input{
+  flex: 1;
+  /* background: gold; */
+  padding: 0 12rpx;
+  font-size: 30rpx;
+}
+.form .bottom{
+  line-height: 88rpx;
+  font-size: 28rpx;
+}
+.form .bottom .all{
+  color:#999;
+}
+.form .bottom .set-all{
+  color:#e70002;
+  float: right;
+  line-height: 88rpx;
+}
+.btn{
+  line-height: 90rpx;
+  border-radius: 45rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color:#fff;
+  background: linear-gradient(to right, #ef5456, #e70002);
+  margin:24rpx;
+  margin-bottom: 0;
+}
+.record{
+  line-height: 98rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #e70002;
+}
+.record.navigator-hover{
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0);
+}
+.rule{
+  padding: 0 24rpx;
+  font-size: 24rpx;
+  color:#999;
+  line-height: 40rpx;
+}
+.rule .title{
+  margin-bottom: 10rpx;
+}
+.rule .light{
+  color:#666;
+}

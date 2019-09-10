@@ -1,0 +1,8 @@
+/* pages/partner/personal/helper/gongpai.wxss */
+image{
+  width:100%;
+  height: auto;
+}
+scroll-view{
+  height: 100vh;
+}

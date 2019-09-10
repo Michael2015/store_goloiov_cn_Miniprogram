@@ -1,0 +1,132 @@
+const app = getApp()
+let text = '';
+Page({
+  data: {
+    storelist: [],
+    isLoad: 0,
+    page: 1,
+    limit: 10,
+    getinfo: {},
+    keyword: '',
+  },
+  getinfo() {
+    app.http.get('/api/partner/home/getinfo').then(res => {
+      wx.setNavigationBarTitle({
+        title: res.site_name
+      })
+      this.setData({
+        getinfo: res
+      })
+    })
+  },
+  storelist() {
+    app.http.post('/api/partner/home/storelist', {
+      page: this.data.page,
+      limit: this.data.limit,
+      keyword: this.data.keyword
+    }).then(res => {
+      let storelist = this.data.storelist.concat(res)
+      if (res && res.length < this.data.limit) {
+        this.setData({
+          isLoad: 1
+        })
+      } else {
+        this.data.page++
+      }
+      this.setData({
+        storelist
+      })
+      wx.hideLoading()
+    })
+  },
+  onLoad() {
+    this.getinfo()
+    // let si = setInterval(() => {
+    //   this.setData({
+    //     page: this.data.page + 1
+    //   }, () => {
+    //     this.storelist()
+    //     if (this.data.page === 5) {
+    //       clearInterval(si)
+    //     }
+    //   })
+    // }, 2000)
+  },
+  goDetails(e) {
+    let storelistItem = this.data.storelist.filter(ele => {
+      return ele.id == e.currentTarget.id
+    })
+    app.varStorage.set('storeDetail', storelistItem[0])
+    wx.navigateTo({
+      "url": "/pages/partner/share/index"
+    })
+  },
+  setSearchText(e) {
+    let detail_val = e.detail.value.trim()
+    if (detail_val != text) {
+      text = detail_val
+      this.setData({
+        page: 1,
+        storelist: [],
+        keyword: detail_val, // 不搜索空串
+      }, () => {
+        this.storelist()
+      })
+
+    }
+  },
+  searchCommodity() {
+    // this.setData({
+    //   page: 1,
+    //   storelist: []
+    // }, () => {
+    //   this.storelist()
+    // })
+  },
+  clearText() {
+    this.setData({
+      page: 1,
+      storelist: [],
+      keyword: '', // 不搜索空串
+    }, () => {
+      this.storelist()
+    })
+  },
+  loadmore() {
+    if (this.data.isLoad) return
+    wx.showLoading({
+      title: '加载中'
+    })
+    this.storelist()
+  },
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
+    console.log(app.varStorage.get('isShareBack'))
+    if (app.varStorage.get('isShareBack') === undefined) {
+      wx.showLoading({
+        title: '加载中',
+      })
+      this.setData({
+        page: 1,
+        storelist: [],
+        keyword: '', // 不搜索空串
+      }, () => {
+        this.storelist()
+      })
+    } else {
+      app.varStorage.del('isShareBack')
+    }
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '邀请你成为我的团队合伙人！',
+      path: '/pages/index/index?share_id=' + app.globalData.userInfo.uid + '&type=invite',
+      imageUrl: '/assets/image/partner_share_poster.png'
+    }
+  }
+})

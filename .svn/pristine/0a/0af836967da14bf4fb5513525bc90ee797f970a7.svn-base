@@ -1,0 +1,213 @@
+const app = getApp()
+let text = '';
+let self;
+Page({
+  data: {
+    storelist: [],
+    isLoad: 0,
+    page: 1,
+    limit: 10,
+    getinfo: {},
+    keyword: '',
+    noviceShow: null,
+    isAllowLoad:true,
+    isAllowLoad2:true,
+  },
+  getinfo() {
+    app.http.get('/api/partner/home/getinfo').then(res => {
+      wx.setNavigationBarTitle({
+        title: res.site_name
+      })
+      this.setData({
+        getinfo: res
+      })
+    })
+  },
+  storelist() {
+    this.data.isAllowLoad = false;
+    app.http.post('/api/partner/home/storelist', {
+      page: this.data.page,
+      limit: this.data.limit,
+      keyword: this.data.keyword
+    }).then(res => {
+      let storelist = this.data.storelist.concat(res)
+      if (res && res.length < this.data.limit) {
+        this.setData({
+          isLoad: 1
+        })
+      } else {
+        this.data.page++
+      }
+      this.setData({
+        storelist
+      })
+      this.data.isAllowLoad = true;
+      wx.hideLoading()
+    })
+  },
+  onLoad() {
+    this.getinfo()
+    self = this;
+    // let si = setInterval(() => {
+    //   this.setData({
+    //     page: this.data.page + 1
+    //   }, () => {
+    //     this.storelist()
+    //     if (this.data.page === 5) {
+    //       clearInterval(si)
+    //     }
+    //   })
+    // }, 2000)
+    wx.getStorage({
+      key: 'noviceShow',
+      success(e) {
+        self.setData({
+          noviceShow: 0
+        })
+      },
+      fail(e) {
+        self.setData({
+          noviceShow: 1
+        })
+      }
+    })
+  },
+  goDetails(e) {
+    let storelistItem = this.data.storelist.filter(ele => {
+      return ele.id == e.currentTarget.id
+    })
+    app.varStorage.set('storeDetail', storelistItem[0])
+    wx.navigateTo({
+      "url": "/pages/partner/share/index"
+    })
+  },
+  //领取优惠券
+  get_coupon(e)
+  {
+    let coupon_id = e.currentTarget.dataset.id;
+    let coupon_title = e.currentTarget.dataset.title;
+    wx.showModal({
+      title: '领取优惠券',
+      content: '您有一张券【'+coupon_title+'】，确定领取？',
+      showCancel: true,//是否显示取消按钮
+      cancelText:"放弃",//默认是“取消”
+      cancelColor:'lightgrey',//取消文字的颜色
+      confirmText:"领取",//默认是“确定”
+      confirmColor: 'red',//确定文字的颜色
+      success: function (res) {
+         if (res.cancel) {
+            //点击取消,默认隐藏弹框
+         } else {
+            //点击确定
+            app.http.post('/api/coupon/setcoupon', {
+              coupon_id: coupon_id
+            }).then(res => {
+              wx.showToast({
+                title: '领取成功',
+                icon: 'none'
+              })
+            })
+         }
+      },
+   })
+  },
+  setSearchText(e) {
+    let detail_val = e.detail.value.trim()
+
+    if(!this.data.isAllowLoad || !this.data.isAllowLoad2) return;
+
+    this.data.isAllowLoad2 = false;
+    if (detail_val != text) {
+      text = detail_val
+      this.setData({
+        page: 1,
+        storelist: [],
+        keyword: detail_val, // 不搜索空串
+      }, () => {
+        this.storelist()
+      })
+
+    }
+    this.data.isAllowLoad2 = true;
+  },
+  searchCommodity() {
+    // this.setData({
+    //   page: 1,
+    //   storelist: []
+    // }, () => {
+    //   this.storelist()
+    // })
+  },
+  clearText() {
+    this.setData({
+      page: 1,
+      storelist: [],
+      keyword: '', // 不搜索空串
+    }, () => {
+      this.storelist()
+    })
+  },
+  loadmore() {
+    if (this.data.isLoad || !this.data.isAllowLoad) return
+    wx.showLoading({
+      title: '加载中',
+      mask: true,
+    })
+    this.storelist()
+  },
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
+    console.log(app.varStorage.get('isShareBack'))
+    if (app.varStorage.get('isShareBack') === undefined) {
+      wx.showLoading({
+        title: '加载中',
+      })
+      this.setData({
+        page: 1,
+        storelist: [],
+        keyword: '', // 不搜索空串
+        isLoad:0,
+      })
+      this.storelist()
+    } else {
+      app.varStorage.del('isShareBack')
+    }
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '邀请你成为业务合伙人！',
+      path: '/pages/index/index?share_id=' + app.globalData.userInfo.uid + '&type=invite',
+      imageUrl: '/assets/image/partner_share_poster.png'
+    }
+  },
+  touchMove() {
+    return
+  },
+  goHelper() {
+    this.closeNovice();
+    wx.navigateTo({
+      "url": "/pages/partner/personal/helper/index"
+    })
+  },
+  goHelperAll() {
+    wx.navigateTo({
+      "url": "/pages/partner/useDesc/index"
+    })
+  },
+  closeNovice() {
+    wx.setStorage({
+      key: 'noviceShow',
+      data: 1,
+      success() {
+        self.setData({
+          noviceShow: 0
+        })
+      }
+    })
+  }
+})

@@ -1,0 +1,7 @@
+<!--components/no-data/index.wxml-->
+<view class="no-data" wx:if="{{list.length > 0 && isLoad == 0}}">正在玩命加载中...</view>
+<view class="no-data" wx:elif="{{list.length > 0 && isLoad == 1}}">这已经是我的底线了</view>
+<view class="no-data" wx:else>
+    <image class="no-data-image" src='/assets/image/kong.png'></image>
+    <text>当前列下暂无商品，敬请期待</text>
+</view>

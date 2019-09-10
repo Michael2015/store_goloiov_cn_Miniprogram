@@ -1,0 +1,36 @@
+const app = getApp()
+Page({
+  data: {
+    id: '',
+    name: '',
+    list: []
+  },
+  onLoad(options) {
+    this.setData({
+      id: options.id,
+      name: options.name
+    })
+    this.getTrackInfo()
+    // 缓存订单列表数据
+    app.varStorage.set('orderListKeepalive', true)
+  },
+  getTrackInfo() {
+    wx.showLoading()
+    console.log('h')
+    app.http.get('/api/Address/getnowexpress', {
+      delivery_name: this.data.name,
+      delivery_id: this.data.id
+    }).then(res => {
+      wx.hideLoading()
+      console.log(res.Traces)
+      this.setData({
+        list: res.Traces.reverse()
+      })
+    }).catch((e) => {
+      wx.hideLoading()
+    })
+  },
+  onUnload: function () {
+    wx.hideLoading()
+  }
+})

@@ -1,0 +1,5 @@
+<view class="tab-wrap">
+    <block wx:for="{{data}}" wx:key="{{item}}">
+        <view class="tab-item {{index==activeIndex?'active':''}}" data-index="{{index}}" bindtap="handleChange"><view class="txt">{{item}}</view></view>
+    </block>
+</view>

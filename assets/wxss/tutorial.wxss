@@ -1,0 +1,70 @@
+
+.seeTutorial {
+    position: fixed;
+    right: 2vw;
+    bottom: 12vh;
+    width: 120rpx;
+  }
+  
+  .novice {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    background: rgba(0, 0, 0, .63);
+  }
+  
+  .novice .novice_body {
+    position: absolute;
+    width: 500rpx;
+    left:50%;
+    top:42%;
+    transform: translate(-50%, -50%);
+    /* background: #fff; */
+    /* box-shadow: 4rpx 4rpx 20rpx 4rpx #ccc; */
+    font-size:0;
+  }
+  
+  .novice .novice_body .poster {
+    width: 100%;
+    height: auto;
+  }
+  .novice .novice_body .content{
+    background: #fff;
+    border-bottom-left-radius: 16rpx;
+    border-bottom-right-radius: 16rpx;
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    min-height: 300rpx;
+  }
+  .novice .novice_body .content .t{
+    font-size: 40rpx;
+    color:#606060;
+    line-height: 1;
+    padding-top: 46rpx;
+    padding-bottom: 22rpx;
+  }
+  .novice .novice_body .content .t-s{
+    font-size: 30rpx;
+    color: #909090;
+    line-height: 1;
+  }
+  .novice .novice_body .content .btn-cha{
+    display: block;
+    height: auto;
+    width: 344rpx;
+    margin: 50rpx auto 40rpx;
+  }
+  
+  .novice .novice_body .red_close {
+    width: 60rpx;
+    position: absolute;
+    left: 50%;
+    margin-left: -30rpx;
+    bottom: -130rpx;
+    z-index: 1;
+  }

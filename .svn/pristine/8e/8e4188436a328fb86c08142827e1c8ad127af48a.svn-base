@@ -1,0 +1,45 @@
+<!--pages/partner/personal/wallet/cash.wxml-->
+<view class="wrap">
+  <view class="bank-card">
+    <view class="t">提现至<text>银行卡</text></view>
+    <block wx:if="{{bank_code}}">
+      <view class="card">
+        <view>
+          <view class="bname">{{bank_name}}</view>
+          <view class="uname">储蓄卡 | {{real_name}}</view>
+          <view class="num"><text>****</text><text>****</text><text>****</text>{{bank_code}}</view>
+          <view class="btn-del" bindtap="delbank">删除</view>
+        </view>
+      </view>
+      <view class="btn-change" bindtap="goaddCard">更换银行卡</view>
+    </block>
+    <view class="add" bindtap="goaddCard" wx:if="{{!bank_code}}">
+      <view>
+        <view class="btn">
+          <text>+</text>
+        </view>
+      </view>
+    </view>
+    <view class="add-text"  wx:if="{{!bank_code}}">添加银行卡</view>
+  </view>
+  <view class="form">
+    <!-- <view class="title">提现至 <text>微信零钱</text></view> -->
+    <view class="input-wrap">
+      <view class="yuan">￥</view>
+      <input type="digit" bindinput="oninput" value="{{value}}"/>
+    </view>
+    <view class="bottom">
+      <text class="all">可提现金额 {{all}} 元</text>
+      <text class="set-all" bindtap="set">全部提现</text>
+    </view>
+  </view>
+  <view class="btn" bindtap="submit">提现</view>
+  <navigator url="cash-record" class="record">提现申请记录 >></navigator>
+  <view class="rule">
+    <view class="title">提现说明</view>
+    <view>1、每笔提现金额至少 <text class="light">5元</text>，平台收取 <text class="light">1%</text> 手续费</view>
+    <view>2、用户每日提现上限为 <text class="light">1万元</text>，每天最多提现 <text class="light">3</text> 次</view>
+    <view>3、如需帮助，请联系客服微信号：<text class="light">golo444</text> </view>
+    <view>最终解释权归运营方所有 </view>
+  </view>
+</view>

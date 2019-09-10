@@ -1,0 +1,20 @@
+<!--pages/partner/personal/partner/invite.wxml-->
+<view class="wrap">
+  <view class="content">
+    <view class="avatar">
+      <image src="{{data.avatar}}" mode="widthFix"></image>
+    </view>
+    <view class="nickname">{{data.nickname}}</view>
+    <view class="title">邀请你加入我的团队</view>
+    <view class="extra">
+      <view>万车品商城合伙人招募</view>
+      <view>—</view>
+      <view>自主创业，下单拿佣金</view>
+      <view>—</view>
+      <view>发展合伙人，在家收提成</view>
+      <view>—</view>
+      <view>在这里你就是老板</view>
+    </view>
+    <view class="btn" bindtap="join">立即加入</view>
+  </view>
+</view>

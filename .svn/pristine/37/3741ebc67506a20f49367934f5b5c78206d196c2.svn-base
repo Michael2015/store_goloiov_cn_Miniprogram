@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="content">
+        <view class="head">全部评论</view>
+        <view class="item"  wx:for="{{commentRecordList}}" wx:key="{{index}}">
+            <view class="md-col-12 h">
+                <view class="md-col-4 left">
+                    <image class="avatar-image" src="{{item.avatar}}" lazy-load="{{true}}"></image>
+                </view>
+                <view class="md-col-4 left">{{item.nickname}}</view>
+                <view class="md-col-4 right">{{item.add_time}}</view>
+            </view>
+            <view class="md-col-12 c">
+               {{item.comment}}
+            </view>
+            <view class="comment_pics">
+                <view wx:for="{{item.pics}}" wx:for-index="index" wx:for-item="it">
+                        <image src="{{it}}" data-index="{{index}}"  class="avatar-image-2"></image>
+               </view>
+            </view>
+        </view>
+         <view class="no-more">没有更多数据</view>
+    </view>
+</view>

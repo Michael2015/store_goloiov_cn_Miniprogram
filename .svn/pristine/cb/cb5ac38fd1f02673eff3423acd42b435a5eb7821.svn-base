@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "评论",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#ededed",
+  "usingComponents": {
+    "contact-user": "/utils/contactUser/index",
+    "popup-contact": "/components/order/contact/contact",
+    "popup-shouhuo": "/components/order/popup/shouhuo"
+  }
+}

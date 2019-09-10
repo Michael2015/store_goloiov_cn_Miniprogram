@@ -1,0 +1,50 @@
+/* pages/partner/personal/wallet/cash-record.wxss */
+.border-bottom{
+  position: relative;
+}
+.border-bottom:after{
+  content: ' ';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: #e4e4e4;
+  transform: scaleY(.5);
+  left:0;
+  bottom:0;
+}
+scroll-view{
+height: 100vh;
+}
+.wrap{
+  padding: 0 24rpx;
+}
+.item{
+  padding: 24rpx 0;
+  line-height: 1.2;
+}
+.item>view:after{
+  content: ' ';
+  display: block;
+  width: 100%;
+  height: 0;
+  clear: both;
+}
+.item .left{
+  float: left;
+}
+.item .right{
+  float: right;
+}
+.item .type, .item .num{
+  font-size: 28rpx;
+  color:#333;
+}
+
+.item .time, .item .status{
+  font-size: 24rpx;
+  color:#666;
+}
+.item .status.light{
+  color:#e70002;
+}

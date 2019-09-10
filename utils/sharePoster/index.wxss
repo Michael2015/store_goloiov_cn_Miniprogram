@@ -1,0 +1,43 @@
+canvas {
+    position: fixed;
+    top: -300vh;
+}
+
+.content {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background: rgba(0, 0, 0, .5)
+}
+
+.content .cImg {
+    height: 800rpx;
+    width: 560rpx;
+    border-radius: 20rpx;
+    display: block;
+    margin: 75rpx auto 0 auto;
+}
+
+.content .save {
+    width: 420rpx;
+    height: 80rpx;
+    background-image: linear-gradient(90deg,
+        #ef5456 0%,
+        #e70002 100%);
+    border-radius: 40px;
+    display: block;
+    margin-top: -160rpx;
+    color: #fff;
+    line-height: 80rpx;
+    font-size: 32rpx;
+}
+
+.close {
+    width: 54rpx;
+    height: 54rpx;
+    display: block;
+    margin: 150rpx auto 0 auto;
+}

@@ -1,0 +1,207 @@
+.item.address {
+    min-height: 176rpx;
+    background: #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 31rpx 115rpx 31rpx 24rpx;
+    width: 702rpx;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    margin: 24rpx auto 24rpx auto;
+    position: relative;
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.1);
+}
+
+.item.address .location_icon {
+    width: 40rpx;
+    margin: 0 58rpx 0 0;
+}
+
+.item.address .location_view {
+    width: 110rpx;
+}
+
+.item.address .address_name {
+    font-size: 28rpx;
+    color: #333333;
+    margin-bottom: 30rpx;
+}
+
+.item.address .address_text {
+    font-size: 24rpx;
+    color: #999999;
+    line-height: 37rpx;
+}
+
+.commodity {
+    width: 702rpx;
+    min-height: 215rpx;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 24rpx;
+    box-sizing: border-box;
+}
+
+.commodity_info {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 32rpx;
+    border-bottom: 1rpx solid #e4e4e4;
+}
+
+.commodity_info .commodity_name,
+.commodity_info .commodity_num {
+    display: flex;
+    justify-content: space-between;
+    width: 507rpx;
+    margin-bottom: 23rpx;
+}
+
+.commodity_info .commodity_image {
+    width: 120rpx;
+    height: 120rpx;
+    margin-right: 25rpx;
+}
+
+.commodity_info .commodity_name .name {
+    width: 324rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.commodity_info .commodity_name .price {
+    font-size: 24rpx;
+    color: #e70002;
+}
+
+.commodity_info .commodity_num {
+    font-size: 24rpx;
+    color: #999999;
+}
+
+.from {
+    width: 654rpx;
+    min-height: 515rpx;
+    border-radius: 20rpx;
+    border: solid 1rpx #e4e4e4;
+    margin: 0 auto;
+    padding: 0 36rpx 24rpx 36rpx;
+    box-sizing: border-box;
+    font-size: 28rpx;
+    color: #666666;
+}
+
+.from .item {
+    height: 88rpx;
+    border-bottom: 1rpx solid #e4e4e4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.submit {
+    min-height: 96rpx;
+    height: calc(96rpx + constant(safe-area-inset-bottom));
+    height: calc(96rpx + env(safe-area-inset-bottom));
+    width: 100vw;
+    background-color: #e70002;
+    font-size: 36rpx;
+    color: #ffffff;
+    border-radius: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.from .right {
+    width: 16rpx;
+    height: 26rpx;
+}
+
+.from .item input.big {
+    width: 500rpx;
+}
+
+.from .item input,
+.desc_input_placeholder {
+    text-align: right;
+}
+
+.from .item .select {
+    height: 100%;
+    width: 500rpx;
+    line-height: 88rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #999999;
+}
+
+.from .item .money {
+    display: flex;
+    align-items: center;
+}
+
+.from .item .money input {
+    width: 120rpx;
+    text-align: center;
+}
+
+.color_red {
+    color: #e70002;
+}
+
+.upUpoto .photo_title {
+    height: 88rpx;
+    display: flex;
+    align-items: center;
+    color: #666666;
+}
+
+.upUpoto .photo_title .min {
+    font-size: 20rpx;
+    color: #999999;
+}
+
+.add_img {
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.selectPhoto {
+    width: 120rpx;
+    height: 120rpx;
+    border: solid 1rpx #e4e4e4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_select_photo {
+    width: 120rpx;
+    height: 120rpx;
+    border: solid 1rpx #e4e4e4;
+    margin-right: 29rpx;
+    margin-bottom: 20rpx;
+}
+
+.photo_view {
+    margin-top: 24rpx;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+picker,
+.picker {
+    height: 88rpx;
+    width: 450rpx;
+    text-align: right;
+}

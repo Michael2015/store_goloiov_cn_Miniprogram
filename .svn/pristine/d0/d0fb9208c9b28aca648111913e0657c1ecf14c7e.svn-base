@@ -1,0 +1,48 @@
+<!--pages/partner/personal/index.wxml-->
+<view>
+<view class="header" bindtap="to" data-url="/pages/partner/personal/partner/index">
+  <view>
+    <view class="avatar"><image src="{{avatar}}" mode="widthFix"></image></view>
+    <view class="info">
+      <view class="name">{{name.length > 15 ? name.substr(0,15) : name}}</view>
+      <view class="num">伙伴{{num}}人</view>
+    </view>
+    <view class="right">
+      <image src="/assets/image/right-white.png" mode="widthFix"></image>
+    </view>
+  </view>
+  <view class="circle"></view>
+</view>
+<view class="tabs">
+  <view bindtap="to" data-url="/pages/partner/personal/visitor/index">
+    <image src="/assets/image/visitor.png" mode="widthFix" class="visitor"></image>
+    <text>访客</text>
+  </view>
+  <view class="partner-wrap" bindtap="to" data-url="/pages/partner/personal/partner/index">
+    <image src="/assets/image/partner.png" mode="widthFix" class="partner"></image>
+    <text>我的伙伴</text>
+  </view>
+</view>
+<view class="group">
+  <!-- <view class="nav" bindtap="to" data-url="/pages/partner/personal/wallet/index">
+    <view class="icon"><image src="/assets/image/wallet.png" mode="widthFix"></image></view>
+    <view class="name">我的钱包</view>
+    <view class="right-text">可提现金额  <text>365.00</text> 元</view>
+    <view class="right-icon"><image src="/assets/image/right.png" mode="widthFix"></image></view>
+  </view> -->
+  <view class="nav" bindtap="to" data-url="/pages/partner/shippingAddress/index">
+    <view class="icon"><image src="/assets/image/address.png" mode="widthFix" class="address"></image></view>
+    <view class="name">收货地址</view>
+    <view class="right-text"></view>
+    <view class="right-icon"><image src="/assets/image/right.png" mode="widthFix"></image></view>
+  </view>
+</view>
+<view class="group">
+  <view class="nav" bindtap="to" data-url="/pages/partner/personal/helper/index">
+    <view class="icon"><image src="/assets/image/demo.png" mode="widthFix"></image></view>
+    <view class="name">操作教程</view>
+    <view class="right-text"></view>
+    <view class="right-icon"><image src="/assets/image/right.png" mode="widthFix"></image></view>
+  </view>
+</view>
+</view>

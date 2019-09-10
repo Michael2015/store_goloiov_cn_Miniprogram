@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="content">
+          <view class="area">
+                <view class="section">
+                    <textarea placeholder="如遇到设备问题请提供图片或是留下手机号码" bindinput="doquestion" />
+                </view>
+            </view>
+            <view class="section phone">
+                <input placeholder="请输入联系手机号" type="number" bindinput="dophone"  fouse="{{fouse}}"/>
+            </view>
+             <view class="upUpoto">
+                <view class="selectPhoto" bindtap="selectPhoto">
+                    <image mode="widthFix" src='/assets/image/add.png' class="add_img"></image>
+                </view>
+                <view class="photo_view">
+                    <image wx:for="{{imgList}}" wx:key="{{index}}" src="{{item}}" mode="aspectFit" class="user_select_photo"></image>
+                </view>
+            </view>
+            <view>
+                <button class="submit" bindtap="save">提交反馈</button>     
+            </view>
+        </view>
+</view>

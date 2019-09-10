@@ -1,0 +1,101 @@
+page {
+  background: #fff;
+}
+
+.godetail {
+  width: 290rpx;
+  height: 290rpx;
+  margin: 89rpx auto 43rpx auto;
+  position: relative;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.godetail image {
+  width: 290rpx;
+  height: 290rpx;
+}
+
+.godetail view {
+  width: 290rpx;
+  height: 52rpx;
+  background: rgba(0, 0, 0, .5);
+  color: #fff;
+  text-align: center;
+  line-height: 52rpx;
+  font-size: 28rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.textView {
+  width: 541rpx;
+  margin: 30rpx auto 50rpx auto;
+  text-align: center;
+}
+
+.textView .title {
+  font-size: 36rpx;
+}
+
+.desc0 {
+  font-size: 30rpx;
+  margin-top: 13rpx;
+}
+
+.red {
+  color: #ee2828;
+}
+
+.desc1 {
+  margin-top: 30rpx;
+}
+
+.btnView {
+  display: flex;
+  justify-content: space-around;
+  width: 498rpx;
+  margin: 0 auto;
+}
+
+.btnView image {
+  width: 90rpx;
+  height: 90rpx;
+  margin-bottom: 30rpx;
+}
+
+.btnView .item {
+  font-size: 26rpx;
+  text-align: center;
+  color: #767575;
+  position: relative;
+}
+
+.line {
+  width: 626rpx;
+  height: 1rpx;
+  background: #ede9e9;
+  margin: 50rpx auto;
+}
+
+.btnView .item button {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.desc1 {
+  font-size: 26rpx;
+  color: #424242;
+}
+
+.desc1 image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-bottom: -5rpx;
+  margin-right: 15rpx;
+}

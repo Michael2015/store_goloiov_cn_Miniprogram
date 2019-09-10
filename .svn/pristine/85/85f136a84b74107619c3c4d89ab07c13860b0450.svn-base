@@ -1,0 +1,2 @@
+<!--components/no-data/index.wxml-->
+<view class="no-data">{{list.length > 0 ? '没有更多数据了': '暂无数据'}}</view>

@@ -1,0 +1,93 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/partner/index/index",
+    "pages/common/order/order",
+    "pages/common/order/detail",
+    "pages/partner/detail/detail",
+    "pages/partner/personal/index",
+    "pages/customer/detail/detail",
+    "pages/partner/personal/visitor/index",
+    "pages/partner/personal/partner/index",
+    "pages/partner/income/index",
+    "pages/partner/income/cash",
+    "pages/partner/income/cash-record",
+    "pages/customer/index/index",
+    "pages/partner/share/index",
+    "pages/partner/shippingAddress/index",
+    "pages/partner/addAddress/index",
+    "pages/partner/settlement/index",
+    "pages/customer/paysuccess/index",
+    "pages/customer/refund/index",
+    "pages/customer/share/index",
+    "pages/partner/personal/helper/index",
+    "pages/partner/personal/partner/invite",
+    "pages/partner/personal/helper/gongpai",
+    "pages/partner/register/index",
+    "pages/common/order/track",
+    "pages/partner/personal/helper/spec",
+    "pages/partner/personal/helper/income",
+    "pages/partner/personal/agree/index",
+    "pages/partner/income/add-bank-card",
+    "pages/partner/useDesc/index",
+    "pages/common/comments/index",
+    "pages/partner/comment/index",
+    "pages/partner/personal/feedback/index"
+  ],
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/customer/index/index",
+        "iconPath": "/assets/image/home_mall_sel.png",
+        "selectedIconPath": "/assets/image/home_mall.png",
+        "text": "商城"
+      },
+      {
+        "pagePath": "pages/partner/index/index",
+        "iconPath": "/assets/image/home_mall_sel.png",
+        "selectedIconPath": "/assets/image/home_mall.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/common/order/order",
+        "iconPath": "assets/image/home_Order_sel.png",
+        "selectedIconPath": "/assets/image/home_Order.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/partner/income/index",
+        "iconPath": "/assets/image/home_income_sel.png",
+        "selectedIconPath": "/assets/image/home_income.png",
+        "text": "收益"
+      },
+      {
+        "pagePath": "pages/partner/personal/index",
+        "iconPath": "/assets/image/home_mine_sel.png",
+        "selectedIconPath": "/assets/image/home_mine.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "no-data": "components/no-data/index"
+  },
+  "networkTimeout": {
+    "uploadFile": 600000,
+    "downloadFile": 10000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "万车品商城",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}
+
+

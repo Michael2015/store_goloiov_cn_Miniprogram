@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="content">
+        <image src="../../../assets/image/paysuccess.png" mode="widthFix" class="successPng"></image>
+        <view class="title">支付成功</view>
+        <view class="price">
+            <text class="min">￥</text>
+            <text>{{total_price}}</text>
+            <text class="min">元</text>
+        </view>
+        <view class="tips" wx:if="{{is_platoon == 1}}">
+            <view>如您选择加入免单奖励计划，该商品不适用7天无理由退货规则。</view>
+            <view wx:if="{{miandanma}}" class="extra">幸运码：{{miandanma}}</view>
+            <view wx:if="{{position}}" class="extra">待免单人数：{{position}}</view>
+            <view class="goDetail" bindtap="goDetail">了解免单奖励规则》</view>
+        </view>
+        <button class="goOrder" bindtap="goOrder">查看订单</button>
+        <button class="goIndex" bindtap="goIndex">返回首页</button>
+    </view>
+</view>

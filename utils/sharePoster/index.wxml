@@ -1,0 +1,5 @@
+<view wx:if="{{tempFilePath && show}}" class="content">
+  <image src="{{tempFilePath}}" class="cImg" mode="widthFix"></image>
+  <button class="save" bindtap="save">保存图片并分享到朋友圈</button>
+  <image src="/assets/image/closeTip.png" class="close" bindtap="hide"></image>
+</view>

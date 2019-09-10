@@ -1,0 +1,149 @@
+const app = getApp()
+var self;
+
+let upLoad = (filePath) => new Promise((resolve, reject) => {
+  console.log(filePath)
+  wx.uploadFile({
+    url: `${app.globalData.HOST}/api/customer/index/upload`,
+    filePath,
+    name: 'b068931cc450442b63f5b3d276ea4297',
+    formData: {
+       token: app.globalData.token
+      //token: '92f862c626264fdf7ec87b7b1b80c917'
+    },
+    success(res) {
+      res = JSON.parse(res.data);
+      if (res.code === 200)
+        resolve(res)
+      else
+        reject(res)
+    },
+    fail: reject
+  })
+})
+
+Page({
+  data: {
+    imgList: [],
+    reason: ['未收到', '损坏', '其它'],
+    reasonIndex: '',
+    order_id: '',
+    model_id: '',
+    refund_price: '',
+    refund_reason_wap: '',
+    refund_reason_wap_explain: '',
+    refund_reason_wap_img: []
+  },
+  selectPhoto() {
+    if (self.data.imgList.length < 3)
+      wx.chooseImage({
+        count: 3 - self.data.imgList.length,
+        success(res) {
+          let imgList = self.data.imgList.concat(res.tempFilePaths);
+          self.setData({
+            imgList
+          })
+        }
+      })
+    else
+      wx.showToast({
+        title: '最多上传三张',
+        icon: 'none'
+      })
+  },
+  bindPickerChange(e) {
+    this.setData({
+      reasonIndex: e.detail.value
+    })
+  },
+  setDescText(e) {
+    this.setData({
+      refund_reason_wap_explain: e.detail.value
+    })
+  },
+  refund() {
+    if (this.data.reasonIndex === '') {
+      wx.showToast({
+        title: '请选择退款原因',
+        icon: 'none'
+      })
+      return
+    }
+    app.http.post('/api/order/refund', {
+      order_id: this.data.order_id,
+      model_id: this.data.model_id,
+      refund_price: this.data.refund_price ? this.data.refund_price : this.data.pay_price,
+      refund_reason_wap: this.data.reason[this.data.reasonIndex],
+      refund_reason_wap_explain: this.data.refund_reason_wap_explain,
+      refund_reason_wap_img: this.data.refund_reason_wap_img
+    }).then(res => {
+      wx.showModal({
+        title: '提交成功',
+        content: '您的申请已提交',
+        showCancel: false,
+        success() {
+          wx.navigateBack({
+            delta: 1
+          })
+          app.varStorage.set('orderListReload', true)
+          // wx.switchTab({
+          //   url: '/pages/common/order/order'
+          // })
+        }
+      })
+    })
+  },
+  save() {
+    Promise.all(this.data.imgList.map(ele => {
+      return upLoad(ele)
+    })).then(res => {
+      // 如果上传的文件和选择的文件数相同 图片全部上传成功了
+      if (res.length === self.data.imgList.length) {
+        this.setData({
+          refund_reason_wap_img: res.map(ele => {
+            return `${app.globalData.HOST}/${ele.data.url}`
+          })
+        })
+        wx.showModal({
+          'title': '是否提交?',
+          'content': '在该页面填写的申请信息即将提交',
+          success(e) {
+            if (e.confirm) {
+              self.refund();
+            }
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '上传失败稍后再试',
+          icon: 'none'
+        })
+      }
+    }).catch(err => {
+      wx.showToast({
+        title: err.hasOwnProperty('msg') ? err.msg : '上传失败稍后再试',
+        icon: 'none'
+      })
+    })
+  },
+  verificationPrice() {
+    if (self.data.refund_price > Number(self.data.pay_price)) {
+      wx.showToast({
+        title: '超过最大退款金额',
+        icon: 'none'
+      })
+      this.setData({
+        refund_price: Number(self.data.pay_price)
+      })
+    }
+  },
+  setPriceText(e) {
+    this.setData({
+      refund_price: Number(e.detail.value)
+    })
+  },
+  onLoad: function (o) {
+    self = this;
+    this.setData(o)
+  }
+})

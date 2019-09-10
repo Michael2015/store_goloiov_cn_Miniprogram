@@ -1,0 +1,37 @@
+<view class="title-wrap">
+    <view class="content">
+        <view class="title">{{data.title}}</view>
+        <view class="p">￥{{data.price}}  <view class="col-1">{{data.sale}}份已售</view></view>
+        <view class="msg">下单可享免单</view>
+        <view class="msg">推荐购买即可享返利</view>
+        <view class="s">
+            <view class="col-1"></view>
+            <view class="col-2" bindtap="openPlatoonPopup" wx:if="{{data.is_platoon == 1}}">免单奖励介绍</view>
+        </view>
+        <view class="coupon" wx:if="{{data.coupon_id && data.coupon_title}}" bindtap="getCoupon">马上领券</view>
+    </view>
+    <view class="popup-platoon" wx:if="{{showPlatoonPopup}}">
+        <view class="mask" bindtap="closePlatoonPopup"></view>
+        <view class="main">
+            <view class="close" bindtap="closePlatoonPopup"></view>
+            <view class="title">
+                <!-- <view class="t">
+                    <view class="col-1"></view>
+                    <view class="col-2">商品名称</view>
+                    <view class="col-3"></view>
+                </view> -->
+                <view class="c">{{data.store_name}}</view>
+            </view>
+            <view class="rule">
+                <view class="t">免单规则</view>
+                <view class="d">
+                    <view class="item">排队免单规则: {{data.platoon_slow}}出1，即是在你下单后，如有新的{{data.platoon_slow}}笔订单，商家即全额返还你支付的订单金额作为奖励。</view>
+                    <view class="item">快速免单规则: {{data.platoon_fast}}出1，即是在你下单后，如你推荐了新的{{data.platoon_fast}}笔订单，商家即全额返还你支付的订单金额作为奖励。</view>
+                </view>
+            </view>
+            <view class="btn-wrap">
+                <view class="btn" bindtap="toGPDesc">免单奖励介绍</view>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,110 @@
+page {
+    background: #F9F9F9;
+}
+
+.search {
+    width: 702rpx;
+    height: 72rpx;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 36rpx;
+    margin: 24rpx auto;
+}
+
+.search .search_icon {
+    width: 48rpx;
+    height: 48rpx;
+    margin: 0 25rpx 0 33rpx;
+}
+
+.search input {
+    width: 570rpx;
+    height: 100%;
+    font-size: 24rpx;
+}
+
+.search_input_placeholder {
+    font-size: 24rpx;
+    color: #d5d5d5;
+}
+
+.address_list {
+    height: calc(100vh - 120rpx);
+}
+
+.address_list .item {
+    min-height: 176rpx;
+    background: #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 31rpx 24rpx 31rpx 24rpx;
+    width: 702rpx;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    margin: 0 auto 24rpx auto;
+    position: relative;
+}
+
+.address_list .item .location_icon {
+    width: 40rpx;
+    height: 52rpx;
+    margin: 0 58rpx 0 0;
+}
+
+.address_list .item .location_view {
+    width: 110rpx;
+}
+
+.address_list .item .textView {
+    width: 450rpx;
+}
+
+.address_list .item .address_name {
+    font-size: 28rpx;
+    color: #333333;
+    margin-bottom: 30rpx;
+}
+
+.address_list .item .address_text {
+    font-size: 24rpx;
+    color: #999999;
+    line-height: 37rpx;
+}
+
+.add_address_btn {
+    min-height: 96rpx;
+    height: calc(96rpx + constant(safe-area-inset-bottom));
+    height: calc(96rpx + env(safe-area-inset-bottom));
+    width: 100vw;
+    background-color: #e70002;
+    font-size: 36rpx;
+    color: #ffffff;
+    border-radius: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+
+.setView {
+    position: absolute;
+    top: 31rpx;
+    right: 24rpx;
+    width: 105rpx;
+    float: right;
+}
+
+.edit_icon {
+    margin-right: 30rpx;
+}
+
+.del_icon,
+.edit_icon {
+    width: 34rpx;
+}
+.del_icon {
+    width: 36rpx;
+}

@@ -1,0 +1,82 @@
+page {
+    background: #F9F9F9
+}
+
+.content {
+    width: 600rpx;
+    height: auto;
+    background: #fff;
+    margin: 152rpx auto 0 auto;
+    font-size: 26rpx;
+    text-align: center;
+    box-sizing: border-box;
+    padding-bottom: 34rpx;
+    padding-top: 83rpx;
+    position: relative;
+}
+
+.content .successPng {
+    width: 110rpx;
+    height: 110rpx;
+    position: absolute;
+    top: -55rpx;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.content .tips {
+    width: 560rpx;
+    min-height: 196rpx;
+    background-color: #f9f9f9;
+    border-radius: 36rpx;
+    margin: 0 auto 43rpx auto;
+}
+
+.content .tips {
+    padding: 33rpx 62rpx;
+    box-sizing: border-box;
+}
+
+.content .tips .goDetail {
+    font-size: 24rpx;
+    color: #e70002;
+    margin-top: 36rpx;
+    text-decoration: underline;
+}
+
+.content button {
+    width: 220rpx;
+    height: 72rpx;
+    border-radius: 36rpx;
+    font-size: 28rpx;
+    line-height: 70rpx;
+}
+
+.content button.goOrder {
+    margin-bottom: 36rpx;
+    background-color: #e70002;
+    color: #fff;
+}
+
+.content button.goIndex {
+    border: solid 1px #e4e4e4;
+    color: #666666;
+}
+
+.content .title {
+    margin-bottom: 35rpx;
+}
+
+.content .price {
+    margin-bottom: 43rpx;
+    font-size: 36rpx;
+    color: #e70002;
+}
+
+.content .price .min {
+    font-size: 26rpx;
+}
+.content .extra{
+    margin: 16rpx 0;
+}

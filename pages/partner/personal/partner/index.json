@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "contact-user": "/utils/contactUser/index"
+  },
+  "navigationBarTitleText": "我的伙伴",
+  "navigationBarBackgroundColor": "#ededed",
+  "disableScroll": true
+}

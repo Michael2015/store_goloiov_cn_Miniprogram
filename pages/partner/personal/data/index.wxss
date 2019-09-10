@@ -1,0 +1,162 @@
+/* pages/partner/personal/data/index.wxss */
+page{
+  height: 100%;
+}
+.warp{
+  width: 100%;
+  height: 100%;
+  background: #F3F3F3;
+}
+.warp .warp-item{
+  padding: 30rpx;
+  box-shadow:0px -1rpx 0px 0px rgba(221,221,221,1);
+  /* border-bottom: 1rpx solid rgba(221,221,221,1); */
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  background: #fff;
+}
+.warp-item .item-content{
+  color: #888888;
+  padding: 0;
+}
+.item-title{
+  color: #000;
+}
+.item-title .question{
+  width: 35rpx;
+  border-radius: 50%;
+  margin-left: 10rpx;
+  vertical-align:text-bottom;
+}
+.avatar{
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.item-content .add{
+  color:#999;
+}
+.item-content .call .phone{
+  width: 40rpx;
+  margin-left: 10rpx;
+  vertical-align:middle;
+}
+.avatar-title{
+  line-height: 68rpx;
+}
+.mask{
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.mask .phone-warp{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 630rpx;
+  height: 330rpx;
+  padding: 31rpx 53rpx;
+  box-sizing: border-box;
+  background: white;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.title-warp{
+  color: #999;
+  font-size: 29rpx;
+  text-align: center; 
+}
+.phone-warp .input-warp{
+  border-bottom: 1rpx solid #999;
+  height: 100rpx;
+  position: relative;
+}
+.phone-warp .phone-input{
+  width: 80%;
+  height: 50rpx;
+  position: absolute;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  font-size: 33rpx;
+  text-align: center;
+}
+.button-warp{
+  display: flex;
+  margin-top: 36rpx;
+}
+.button-warp .tabMask{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #E60000;
+  border-radius:12rpx;
+  color: #FFFFFF;
+  font-size: 30rpx;
+}
+.tabMask[disabled]:not([type]) {
+  color: #FFFFFF;
+  background-color: #DDDDDD;
+}
+.form-model{
+  width: 100%;
+  height: 100%;
+}
+.confirm-model{
+  width: 100%;
+  height: 100%;
+}
+.confirm-title{
+  font-size: 30rpx;
+  color: #333333;
+  width: 100%;
+  text-align: center;
+  margin-top: 60rpx;
+}
+.ChoiceBut{
+  width: 240rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  border-radius:12rpx;
+}
+.confirm-model .button-warp{
+  display: flex;
+  margin-top: 88rpx;
+}
+.yes{
+  background: #E60000;
+}
+.no{
+  background: #DDDDDD;
+}
+.clone{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #fff;
+  position: absolute;
+  right: 0;
+  top: -60rpx;
+}
+.clone image{
+  width: 20rpx;
+  height: 20rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}

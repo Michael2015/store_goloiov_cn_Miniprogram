@@ -1,0 +1,49 @@
+<!--pages/partner/personal/wallet/cash.wxml-->
+<view class="wrap">
+  <view class="top-tab">
+    <view class="{{tab===0?'active':''}}" bindtap="tab" data-i="{{0}}">提现到银行卡</view>
+    <view class="{{tab===1?'active':''}}" bindtap="tab" data-i="{{1}}">提现到微信</view>
+  </view>
+  <view class="bank-card" wx-if="{{tab===0}}">
+    <!-- <view class="t">提现至<text>银行卡</text></view> -->
+    <block wx:if="{{bank_code}}">
+      <view class="card">
+        <view>
+          <view class="bname">{{bank_name}}</view>
+          <view class="uname">储蓄卡 | {{real_name}}</view>
+          <view class="num"><text>****</text><text>****</text><text>****</text>{{bank_code}}</view>
+          <view class="btn-del" bindtap="delbank">删除</view>
+        </view>
+      </view>
+      <view class="btn-change" bindtap="goaddCard">更换银行卡</view>
+    </block>
+    <view class="add" bindtap="goaddCard" wx:if="{{!bank_code}}">
+      <view>
+        <view class="btn">
+          <text>+</text>
+        </view>
+      </view>
+    </view>
+    <view class="add-text"  wx:if="{{!bank_code}}">添加银行卡</view>
+  </view>
+  <view class="form">
+    <view class="title">提现金额</view>
+    <view class="input-wrap">
+      <view class="yuan">￥</view>
+      <input type="digit" bindinput="oninput" value="{{value}}"/>
+    </view>
+    <view class="bottom">
+      <text class="all">可提现金额 {{all}} 元</text>
+      <text class="set-all" bindtap="set">全部提现</text>
+    </view>
+  </view>
+  <view class="btn" bindtap="submit">提现</view>
+  <navigator url="cash-record" class="record">提现申请记录 >></navigator>
+  <view class="rule">
+    <view class="title">提现说明</view>
+    <view>1、每次提现不少于 <text class="light">10元</text>，平台会收取 <text class="light">1%</text> 提现手续费</view>
+    <view>2、每天可申请提现 <text class="light">3</text>次，每天提现不超过<text class="light">10,000</text>元 </view>
+    <view>3、平台会根据税法扣除相应个人所得税。</view>
+    <view>4、通过银行卡提现，需绑定本人银行卡。</view>
+  </view>
+</view>

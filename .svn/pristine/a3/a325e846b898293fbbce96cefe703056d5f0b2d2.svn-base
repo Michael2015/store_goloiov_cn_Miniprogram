@@ -1,0 +1,116 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": true,
+		"uglifyFileName": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.6.2",
+	"appid": "wx60b98db196fdfa62",
+	"projectname": "%E4%B8%87%E8%BD%A6%E5%93%81%E5%95%86%E5%9F%8E",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": 0,
+					"name": "订单列表",
+					"pathName": "pages/common/order/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "申请退款",
+					"pathName": "pages/customer/refund/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "合伙人详情",
+					"pathName": "pages/partner/detail/detail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "客户详情页",
+					"pathName": "pages/customer/detail/detail",
+					"query": "token=6fe1e9112fc458415fe7126ce2a8f253&product_id=8",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "物流信息页",
+					"pathName": "pages/common/order/track",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": "type=share&s=14&p=14&st=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "收益-我的公排",
+					"pathName": "pages/partner/income/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现",
+					"pathName": "pages/partner/income/cash",
+					"query": "type=share&s=14&p=14&st=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "测试页",
+					"pathName": "pages/test/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "添加银行卡",
+					"pathName": "pages/partner/income/add-bank-card",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,52 @@
+// pages/partner/personal/helper/index.js
+const app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    src: ''
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    wx.showLoading()
+    app.http.get('/api/partner/home/getresource').then(data => {
+      wx.hideLoading()
+      if (data && data.operation && data.operation.help) {
+        this.setData({
+          src: data.operation.help // 操作手册地址
+        })
+      } else {
+        wx.showToast({
+          title: '加载失败',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    wx.hideLoading()
+  }
+})

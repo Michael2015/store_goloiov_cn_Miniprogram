@@ -1,0 +1,357 @@
+const app = getApp()
+let text = '';
+let self;
+Page({
+  data: {
+    storelist: [],
+    isLoad: 0,
+    page: 1,
+    limit: 10,
+    getinfo: {},
+    keyword: '',
+    noviceShow: null,
+    isAllowLoad:true,
+    isAllowLoad2:true,
+    coupon_id:0,
+    coupon_date:'',
+    coupon_price:0,
+    coupon_title:'',
+    showModal:false,
+    pid:0,
+    timeList:[],
+    countDownList:[],
+    bannerList:[],
+    isShowCategory:0,//是否显示分类
+    categoryList1:[],
+    categoryList2:[],
+  },
+  getinfo() {
+    app.http.get('/api/partner/home/getinfo').then(res => {
+      wx.setNavigationBarTitle({
+        title: res.site_name
+      })
+      this.setData({
+        getinfo: res
+      })
+    })
+  },
+  storelist() {
+    this.data.isAllowLoad = false;
+    let timeList2 = [];
+    app.http.post('/api/partner/home/storelist', {
+      page: this.data.page,
+      limit: this.data.limit,
+      keyword: this.data.keyword
+    }).then(res => {
+      let storelist = this.data.storelist.concat(res);
+      //处理倒计时
+      for(let key in storelist)
+      {
+        if(storelist[key].seckill.status == 1)
+        {
+          timeList2[key] = storelist[key].seckill.data.stop_time;
+        }
+      }
+      if (res && res.length < this.data.limit) {
+        this.setData({
+          isLoad: 1
+        })
+      } else {
+        this.data.page++
+      }
+      this.setData({
+        storelist,
+        timeList:timeList2,
+      });
+      this.data.isAllowLoad = true;
+      wx.hideLoading();
+       //计算秒杀
+      //this.countDown();
+    })
+  },
+  //获取首页banner轮播图
+  getBanner()
+  {
+    app.http.post('/api/marketing/getbanner', {}).then(res => {
+      this.setData({
+        bannerList:res,
+      })
+    });
+  },
+//获取首页分类
+getCategory()
+{
+  app.http.post('/api/marketing/getCategory', {}).then(res => {
+    let categoryList = res;
+    let categoryList1 = categoryList.filter(function(item,index){
+      return index < 4;
+    });
+    let categoryList2 = categoryList.filter(function(item,index){
+      return index >= 4;
+    });
+    this.setData({
+      categoryList1:categoryList1,
+      categoryList2:categoryList2
+    })
+  });
+},
+//跳转分类列表页面
+goList(e)
+{
+  let cat_id = e.currentTarget.id;
+  wx.navigateTo({
+    "url": "/pages/common/list/index?cate_id="+cat_id,
+  });
+},
+
+  timeFormat(param){//小于10的格式化函数
+    return param < 10 ? '0' + param : param; 
+  },
+  countDown()
+  {
+        // 获取当前时间，同时得到活动结束时间数组
+        let newTime = new Date().getTime();
+        let endTimeList = this.data.timeList;
+        let countDownArr = [];
+        // 对结束时间进行处理渲染到页面
+        for(let key in endTimeList)
+        {
+          if(endTimeList[key])
+          {
+            let endTime = new Date(endTimeList[key]).getTime();
+            let obj = null;
+             // 如果活动未结束，对时间进行处理
+            if (endTime - newTime > 0){
+              let time = (endTime - newTime) / 1000;
+              // 获取天、时、分、秒
+              let day = parseInt(time / (60 * 60 * 24));
+              let hou = parseInt(time % (60 * 60 * 24) / 3600);
+              let min = parseInt(time % (60 * 60 * 24) % 3600 / 60);
+              let sec = parseInt(time % (60 * 60 * 24) % 3600 % 60);
+              obj = {
+                  day: this.timeFormat(day),
+                  hou: this.timeFormat(hou),
+                  min: this.timeFormat(min),
+                  sec: this.timeFormat(sec)
+              }
+            }else{//活动已结束，全部设置为'00'
+              obj = {
+                day: '00',
+                hou: '00',
+                min: '00',
+                sec: '00'
+            }
+          }
+            countDownArr[key] = obj;
+          }
+          }
+          // 渲染，然后每隔一秒执行一次倒计时函数
+          this.setData({ countDownList: countDownArr});
+          setTimeout(this.countDown,1000);
+  },
+  onLoad() {
+    this.getinfo()
+    self = this;
+    // let si = setInterval(() => {
+    //   this.setData({
+    //     page: this.data.page + 1
+    //   }, () => {
+    //     this.storelist()
+    //     if (this.data.page === 5) {
+    //       clearInterval(si)
+    //     }
+    //   })
+    // }, 2000)
+    wx.getStorage({
+      key: 'noviceShow',
+      success(e) {
+        self.setData({
+          noviceShow: 0
+        })
+      },
+      fail(e) {
+        self.setData({
+          noviceShow: 1
+        })
+      }
+    })
+  },
+  goDetails(e) {
+    let storelistItem = this.data.storelist.filter(ele => {
+      return ele.id == e.currentTarget.id
+    })
+    app.varStorage.set('storeDetail', storelistItem[0])
+    wx.navigateTo({
+      //由之前的跳转到分享页面，现在直接跳转到商品详情页面
+      "url": "/pages/partner/detail/detail?id="+e.currentTarget.id,
+      //"url": "/pages/partner/share/index"
+    });
+  },
+  //领取优惠券
+  show_modal(e)
+  {
+    let pid = e.currentTarget.dataset.pid;
+    app.http.post('/api/coupon/getCouponByPid', {
+      product_id:pid
+    }).then(res => {
+      if(res.status == 0)
+      {
+        wx.showToast({
+          title: '您已经领过优惠券啦',
+          icon: 'none',
+        })
+      }else{
+        this.setData({
+          coupon_id: res.data.id,
+          coupon_price:res.data.price,
+          coupon_date:res.data.date,
+          showModal:true,
+          pid:pid
+        })
+      }
+    })
+  },
+  hide_modal()
+  {
+    this.setData({
+      showModal:false,
+    })
+  },
+  //展开分类
+  showCategory()
+  {
+    let isShowCategory = this.data.isShowCategory;
+    isShowCategory = isShowCategory ? false :true;
+    this.setData({isShowCategory:isShowCategory});
+  },
+
+   //领取优惠券
+   get_coupon()
+   {
+    app.http.post('/api/coupon/setcoupon', {
+      coupon_id: this.data.coupon_id,
+    }).then(res => {
+      wx.showToast({
+        title: '领取成功',
+        icon: 'none',
+      })
+     
+      //隐藏成功领取的优惠券 
+      let  storelist = this.data.storelist;
+      let index = 0;
+      for (let item of storelist) {
+        if (item.id == this.data.pid) {
+          storelist[index].coupon.status = 0;//已经领取
+        }
+        index++;
+      }
+      this.setData({
+        showModal:false,
+        storelist:storelist,
+      })
+    })
+   },
+  setSearchText(e) {
+    let detail_val = e.detail.value.trim()
+
+    if(!this.data.isAllowLoad || !this.data.isAllowLoad2) return;
+
+    this.data.isAllowLoad2 = false;
+    if (detail_val != text) {
+      text = detail_val
+      this.setData({
+        page: 1,
+        storelist: [],
+        keyword: detail_val, // 不搜索空串
+      }, () => {
+        this.storelist()
+      })
+
+    }
+    this.data.isAllowLoad2 = true;
+  },
+  searchCommodity() {
+    // this.setData({
+    //   page: 1,
+    //   storelist: []
+    // }, () => {
+    //   this.storelist()
+    // })
+  },
+  clearText() {
+    this.setData({
+      page: 1,
+      storelist: [],
+      keyword: '', // 不搜索空串
+    }, () => {
+      this.storelist()
+    })
+  },
+  loadmore() {
+    if (this.data.isLoad || !this.data.isAllowLoad) return
+    wx.showLoading({
+      title: '加载中',
+      mask: true,
+    })
+    this.storelist()
+  },
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
+    console.log(app.varStorage.get('isShareBack'))
+    if (app.varStorage.get('isShareBack') === undefined) {
+      wx.showLoading({
+        title: '加载中',
+      })
+      this.setData({
+        page: 1,
+        storelist: [],
+        keyword: '', // 不搜索空串
+        isLoad:0,
+      })
+      this.storelist();
+    } else {
+      app.varStorage.del('isShareBack')
+    }
+    //获取banner轮播广告
+    this.getBanner();
+    //获取分类
+    this.getCategory();
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '邀请你成为业务合伙人！',
+      path: '/pages/index/index?share_id=' + app.globalData.userInfo.uid + '&type=invite',
+      imageUrl: '/assets/image/partner_share_poster.png'
+    }
+  },
+  touchMove() {
+    return
+  },
+  goHelper() {
+    this.closeNovice();
+    wx.navigateTo({
+      "url": "/pages/partner/personal/helper/index"
+    })
+  },
+  goHelperAll() {
+    wx.navigateTo({
+      "url": "/pages/partner/useDesc/index"
+    })
+  },
+  closeNovice() {
+    wx.setStorage({
+      key: 'noviceShow',
+      data: 1,
+      success() {
+        self.setData({
+          noviceShow: 0
+        })
+      }
+    })
+  }
+})

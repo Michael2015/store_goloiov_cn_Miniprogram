@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="item" bindtap='goPage' data-url="/pages/partner/personal/helper/spec">
+        合伙人及访客介绍
+        <image src="/assets/image/right_ccc.png" mode="widthFix"></image>
+    </view>
+    <view class="item" bindtap='goPage' data-url="/pages/partner/personal/helper/gongpai">
+        免单奖励介绍
+        <image src="/assets/image/right_ccc.png" mode="widthFix"></image>
+    </view>
+    <view class="item" bindtap='goPage' data-url="/pages/partner/personal/helper/income">
+        收益及提现介绍
+        <image src="/assets/image/right_ccc.png" mode="widthFix"></image>
+    </view>
+    <view class="disclaimer">
+        <view bindtap='goPage' data-url="/pages/partner/personal/agree/index">《用户协议及免责说明》</view>
+        <view>版权所有 深圳市轱辘汽车维修技术有限公司</view>
+        <view>技术支持 深圳市轱辘汽车维修技术有限公司</view>
+        <view>法律支持  广东律叁律师事务所</view>
+    </view>
+    <view class="item" bindtap='goPage' data-url="/pages/partner/personal/helper/index">
+        操作教程
+        <image src="/assets/image/right_ccc.png" mode="widthFix"></image>
+    </view>
+</view>

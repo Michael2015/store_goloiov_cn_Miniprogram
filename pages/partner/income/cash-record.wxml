@@ -1,0 +1,16 @@
+<!--pages/partner/personal/wallet/cash-record.wxml-->
+<scroll-view scroll-y bindscrolltolower="loadmore">
+<view class="wrap">
+  <view class="item border-bottom" wx:for="{{list}}" wx:key="index">
+    <view>
+      <view class="left"><text class="type">提现</text></view>
+      <view class="right"><text class="num">￥{{item.extract_price}}</text></view>
+    </view>
+    <view>
+      <view class="left"><text class="time">{{item.add_time}}</text></view>
+      <view class="right"><text class="{{'status' + (item.status == 2 ||  item.status == 0 ? ' light' : '')}}">{{item.state}}</text></view>
+    </view>
+  </view>
+  <no-data wx:if="(list&&list.length===0) || loaded" list="{{list}}"></no-data>
+</view>
+</scroll-view>

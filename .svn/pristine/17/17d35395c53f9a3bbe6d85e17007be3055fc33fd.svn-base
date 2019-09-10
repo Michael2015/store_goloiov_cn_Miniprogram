@@ -1,0 +1,273 @@
+page{
+  background-color: #f9f9f9;
+  width: 100%;
+}
+.order{
+  width: 100%;
+}
+view{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+image{
+  vertical-align: middle;
+}
+.top{
+  width: 100%;
+  height: 230rpx;
+  background-color: #e70002;
+  padding: 0 24rpx;
+  font-size: 30rpx;
+  color: #fff;
+  position: relative;
+}
+.top .search{
+  margin: 0;
+  padding: 0;
+  height: 132rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.top .search > view{
+  width: 100%;
+  height: 72rpx;
+  background-color: #fff;
+  border-radius: 72rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  color: #333;
+}
+.top .search .icon{
+  width: 96rpx;
+  height: 72rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.top .search .icon > image{
+  width: 50rpx;
+}
+.top .search .icon-clear{
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.top .search .icon-clear > view{
+  width: 40rpx;
+  height: 40rpx;
+  opacity: .4;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAADsElEQVRoQ+2ZWaiNURTHf5eSKfOUPCiSiAcvJJmFhAwZkjIk8iAJyZAhkpBEoQwvkvEBDx7MkSGFJCUyJhkSMs/9a586Hef79tr7fPfq6qy63TpnDf//XnuvtfY+FVRzqajm+CkT+NcZLGfgf8pADaA7MABoCTQBmgK/gDfu7xmwH3icFfEstlBHYB4wCmhmAPYbOAfsAg4B3ww2iSqlEGgILAfmADUjQTwF1gC7ge8xPmIJDAT2Ac1jghaxeQKMBG6G+gsloH2+ElgCmfeQT8BY4EQIiVACR4ERIQECdXXgZwI7rXYhBBa7/Wr1HasnEkOAkxYHVgK9gbOAtlBVyEegJ3DLF8xCoLar2y18zjL+/i7QyfWRksroImBtxuCs7mb4zoMvA+qmD4EG1ogZ670A2gJfkvz6CMwFNhlAtQdmAfMNulL54UpmLeCgx2YysDeWgFp+HwOoG4AOugioO6eJOq6a1j3gAtDKo3/EkS2qlpYBDWKvAhrWVUAdWplYnwDqKzDMFQULeLn5DDRKmpnSCIwGxD5ERKI/MA3YUmAoIIOB58aVzzfvC5wvBiSNgIa0zSHone5FBzSfxHv32esI8HI7yc1ef8FJI6DSqRIaIyIxCNABXAdoBTXrWLdNYUydrY2hGdgDTIlB72zOAEOBuu6eEAte7gS+aIVLy8B2N1jFctBFRRXsCrDQZSLW12pgWWgGVhhKYhIggVepfAlscLc1bcfYLTkb2BZKQGOtshAq+eC1jXRzU5/o5wjEkNBiHAsloJE26HLhanVu5XPgc3FzJJRZdfgQaQc8CCWgNv8WqGOMlFt5vTzowGrlCyWGxB2gcxIG3yx0GBhjIJAPXg2ncYpNKAld+pfGEpiY1EDyHOoGpWumLuY+8IXbaZV71Uhboy7A7VgCei6570baJB9651Gdnu5Z+UL76873uBT0B4AJaex8W0i22kLaSlUtmlo7AI9KJSD7y0CPKmag/rHAF9OSAfloA1wzzO6+eNbv1b17AT99BlYC8tMVuATU8zkt8Xt1bx1c/fdKCAE506yvx636Xs9xCuohw13nNnkIJSCneurQo1NrUwS70ilgvHuGN1vFEJBzvf/vcAObOViC4js3aW4FVJKDJJZALkg3QLON0h4qaoD6jUDDnX4AiZJSCeSCql7r8jPVU6l0Lz4NHHdnSe8+JUlWBHIg1LnVL/RUonlIv9h8cB1XHV1NSW9CmUnWBDIDZnVUJmBdqcrSK2egslbW6rfaZ+AP5TKpMXkR4pEAAAAASUVORK5CYII=');
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+.top .search .input{
+  width: calc(100% - 168rpx);
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  height: 72rpx;
+  justify-content: flex-start;
+}
+.top .search .input input{
+  width: 100%;
+  font-size: 32rpx;
+}
+.top .search .input .placeholder{
+  font-size: 32rpx;
+  color: #d5d5d5;
+}
+.top .tab{
+  width: 100%;
+  height: 60rpx;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  z-index: 2;
+}
+.top .tab > view{
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.top .tab > view.active:after{
+  content: ' ';
+  display: block;
+  position: absolute;
+  bottom: -16rpx;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid #fff;
+  transform: scaleX(.4);
+}
+.top .other {
+  z-index: 1;
+  width: 496rpx;
+  height: 496rpx;
+  background-color: #ffffff;
+  opacity: 0.2;
+  border-radius: 50%;
+  position: absolute;
+  right: -282rpx;
+  top: 100rpx;
+}
+
+.list {
+  width: 100%;
+  padding: 0 24rpx 132rpx;
+}
+.list .item{
+  height: 348rpx;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-top: 24rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+}
+.list .item .header{
+  height: 88rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.list .item .header:after{
+  content: ' ';
+  display: block;
+  position:absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  transform:scaleY(0.5);
+  -webkit-transform:scaleY(0.5);
+  background:#eee;
+}
+.list .item .header .col-1 image{
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 60rpx;
+  vertical-align: middle;
+}
+.list .item .header .col-1 text{
+  color: #666;
+  margin-left: 32rpx;
+}
+.list .item .header .col-2{
+  font-size: 24rpx;
+  color: #999999;
+}
+.list .item .body{
+  height: 170rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.list .item .body .col-1{
+  width: 120rpx;
+  height: 120rpx;
+}
+.list .item .body .col-1 image{
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+.list .item .body .col-2{
+  width: calc(100% - 200rpx);
+  height: 120rpx;
+  padding-left: 26rpx;
+}
+.list .item .body .col-2 .t{
+  width: 100%;
+  font-size: 28rpx;
+  font-weight: 900;
+  color: #333;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.list .item .body .col-2 .d{
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 10rpx;
+}
+.list .item .body .col-3{
+  color: #f22933;
+  font-size: 28rpx;
+  height: 120rpx;
+  width: 80rpx;
+  text-align: right;
+}
+.list .item .body .btn-track{
+  position: absolute;
+  bottom: 25rpx;
+  right: 0;
+  font-size: 24rpx;
+  color: #666666;
+  padding: 14rpx 30rpx;
+  border-radius: 30rpx;
+  border: 1px solid #e4e4e4;
+}
+.list .item .footer{
+  width: 100%;
+  margin-top: 20rpx;
+  font-size: 25rpx;
+  color: #666;
+  display: block;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.list .item .footer > view{
+  flex: 1;
+}
+.list .item .footer .left{
+  float: left;
+}
+.list .item .footer .right{
+  text-align: right;
+  float: right;
+  /* color: #f22933; */
+}
+.list .item .footer text{
+  color: #f22933;
+}
+.list-swiper{
+  height: calc(100vh - 230rpx);
+  position: relative;
+  z-index: 9;
+}
+.list-scroll-view{
+  height: 100%;
+}
+.no-more{
+  width: 100%;
+  font-size: 24rpx;
+  color: #aaa;
+  text-align: center;
+  margin-top: 20rpx;
+}

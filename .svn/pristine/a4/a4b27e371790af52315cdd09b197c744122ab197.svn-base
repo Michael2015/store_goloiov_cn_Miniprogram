@@ -1,0 +1,29 @@
+.tab-wrap{
+  height: 70rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.tab-item{
+  font-size: 30rpx;
+  padding:0 15rpx;
+  position: relative;
+  height: 100%;
+  line-height: 70rpx;
+}
+.tab-item.active{
+  font-weight: 900;
+}
+.tab-item.active:after{
+  content: ' ';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 2px solid #e70002;
+  transform: scaleX(.4);
+}

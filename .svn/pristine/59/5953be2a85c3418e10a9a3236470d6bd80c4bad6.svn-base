@@ -1,0 +1,23 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="content">
+        <viwe class="item">
+            <view class="title">收货人姓名</view>
+            <input placeholder="请输入收货人名称" placeholder-class="search_input_placeholder" bindinput="setname" value="{{real_name}}"/>
+        </viwe>
+        <viwe class="item">
+            <view class="title">收货人电话</view>
+            <input placeholder="请输入收货人电话" placeholder-class="search_input_placeholder" bindinput="setphone" type="number" value="{{phone}}"/>
+        </viwe>
+        <viwe class="item">
+            <view class="title">选择地区</view>
+            <picker mode="region" value="{{areaList}}" bindchange="areaSelect"><view class="picker" style="{{region.length?'color:#666':''}}">{{region.length?region[0]+' '+region[1]+' '+region[2]:'点击选择地区'}}</view></picker>
+        </viwe>
+        <viwe class="item textarea">
+            <view class="title">详细地址</view>
+            <textarea placeholder="请输入详细地址" placeholder-class="search_input_placeholder" maxlength='256' value="{{detail}}" bindinput="setdetail"/>
+        </viwe>
+        <button class="openMap" bindtap="goAddAddress">地图定位</button>
+    </view>
+    <button class="add_address_btn" bindtap="save">保存</button>
+</view>

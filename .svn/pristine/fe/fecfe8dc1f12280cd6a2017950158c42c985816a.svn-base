@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="search_nav">
+        <view class="head">
+            <view class="headImg_call" bindtap="contact">
+                <image src="{{getPartnerInfo.avatar}}" mode="aspectFit" class='user_head'></image>
+                <image src="../../../assets/image/contact.png" mode="widthFix" class="contactIcon"></image>
+            </view>
+            <view class="title_swiper">
+                <view class="title">{{getinfo.site_name}}</view>
+                <swiper vertical duration='800' interval='2000' autoplay circular class="index_search_swiper">
+                    <swiper-item wx:for="{{getnotice}}" wx:key="{{index}}">{{item.content}}</swiper-item>
+                </swiper>
+            </view>
+        </view>
+        <view class="goPartner" bindtap="register">成为合伙人</view>
+        <view class="other"></view>
+    </view>
+    <scroll-view scroll-y class="commodity_list" bindscrolltolower="nextPage">
+        <view class="commodity_item" wx:for="{{getProductList}}" wx:key="{{index}}">
+            <view catchtap="goDetails" id="{{item.id}}" style="width:100%;height:100%;overflow: hidden;">
+                <image src="{{item.image}}" mode="widthFix"></image>
+                <view class="title_volume">
+                    <view class="title">{{item.store_name}}</view>
+                    <!--<view class="volume">{{item.sales}}已售</view>-->
+                    <view class="price">价格:￥{{item.price}} / <small class="small">销量:{{item.sales}} </small></view>
+                </view>
+            </view>
+        </view>
+        <no-data list="{{getProductList}}" wx:if="{{(getProductList&&getProductList.length===0)|| loaded}}"></no-data>
+        <view style="height:70px"></view>
+    </scroll-view>
+    <contact-user id="contact-view"></contact-user>
+    <image src="/assets/image/seeTutorial.png" mode="widthFix" class="seeTutorial" catchtap="goHelperAll"></image>
+    <view class="novice" catchtouchmove="touchMove" wx:if="{{noviceShow}}">
+        <view class="novice_body">
+            <image src="/assets/image/white_close.png" mode="widthFix" class="red_close" catchtap="closeNovice"></image>
+            <image src="/assets/image/novice_poster.png" mode="widthFix" class="poster"></image>
+            <view class="content">
+                <view class="t">教程</view>
+                <view class="t-s">手把手教你打开教程</view>
+                <image src="/assets/image/btn-cha.png" mode="widthFix" class="btn-cha" catchtap="goHelper"></image>
+            </view>
+        </view>
+    </view>
+</view>

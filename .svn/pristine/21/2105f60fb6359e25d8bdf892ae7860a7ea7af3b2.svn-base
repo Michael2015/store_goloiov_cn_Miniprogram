@@ -1,0 +1,5 @@
+@import '/assets/wxss/share.wxss';
+
+.desc {
+    margin-bottom: 20rpx;
+}

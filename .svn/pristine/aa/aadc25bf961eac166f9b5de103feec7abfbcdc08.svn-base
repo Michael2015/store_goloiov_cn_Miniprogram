@@ -1,0 +1,268 @@
+@import '/assets/wxss/search.wxss';
+@import '/assets/wxss/tutorial.wxss';
+
+page {
+  background: #f9f9f9;
+}
+
+.page_set {
+  height: 70rpx;
+  padding: 0 19rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.commodity_list .commodity_item .title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  word-break: break-all;
+  margin-top: -5rpx;
+  height: 91rpx;
+  line-height: 40rpx;
+}
+
+.commodity_list .commodity_item  em.text-u
+{
+  text-decoration: line-through;
+  font-size: 20rpx;
+}
+.share_btn {
+  width:25%;
+  height: 60rpx;
+  border: 1rpx solid #fff;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 60rpx;
+  padding: 0;
+  background: #e70002;
+  color: #fff;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 30rpx 19rpx 29rpx 0;
+}
+.index_search_swiper {
+  font-size: 26rpx;
+  width: 542rpx;
+  height: 60rpx;
+  color: #e70002;
+}
+
+.commodity_list {
+  height: calc(100vh - 235rpx);
+  margin-top: 0rpx;
+}
+
+
+.clear_icon {
+  width: 35rpx;
+}
+
+.show {
+  visibility: visible;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+/* .min {
+    animation: min 600ms ease forwards;
+}
+
+@keyframes min {
+    to {
+        height: 230rpx;
+    }
+} */
+.commodity_list .commodity_item .volume {
+  font-size: 24rpx;
+  color: #999;
+}
+.commodity_list .commodity_item .volume .bold
+{
+  color: #e70002;
+  font-weight: bold;
+}
+.commodity_list .commodity_item .volume .small{
+  color: #999;
+}
+.commodity_list .commodity_item .coupon
+{
+  position: absolute;
+}
+.commodity_list .commodity_item text.coupon3
+{
+  color: #fff;
+  background: #e70002;  
+  display: block;
+  font-size: 20rpx; 
+  width: 120rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+}
+.commodity_list .commodity_item .coupon4
+{
+  background: #fff;
+  width: 128rpx;
+  border: 1rpx solid #e70002;
+  color: #999;
+}
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+.modal-dialog {
+  width: 638rpx;
+  position: fixed;
+  top: 6%;
+  left: 6%;
+  z-index: 9999;
+}
+.modal-dialog image
+{
+  width:638rpx;
+  height: 826rpx;
+}
+.modal-title {
+  color: #030303;
+  text-align: center;
+  padding: 15rpx 0;
+}
+.modal-content {
+  position: absolute;
+  width: 638rpx;
+  text-align: center;
+  top: 55%;
+  color: #fff;
+  font-weight: bold;
+  height: 160rpx;
+}
+.modal-content .nav{
+    width: 60%;
+    margin: 0 auto;
+}
+.modal-content .head
+{
+    font-size: 50rpx;
+    color: #AA0000;
+}
+.modal-content .title
+{
+    text-align: left;
+    color:#555;
+    font-size: 25rpx;
+    font-weight: normal;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.modal-dialog .close
+{
+  width: 638rpx;
+  text-align: right;
+  position: fixed;
+  top: 2%;
+  left: 6%;
+}
+.modal-dialog .close image{
+    width: 50rpx;
+    height: 50rpx;
+}
+.banner swiper
+{
+  height: 300rpx;
+}
+.banner image
+{
+  width: 100%;
+  height: 300rpx;
+}
+.btn-area-nav
+{
+  position: relative;
+}
+.btn-area-nav .category
+{
+  margin-top: 119rpx;
+  display: flex;
+  background: #e70002;
+  overflow: hidden;
+}
+.btn-area-nav  button
+{
+  padding: 0;
+  background: #e70002;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 0;
+  text-align: center;
+}
+.btn-area-nav  button span
+{
+  background: #fd5458;
+  padding: 3rpx 8rpx;
+  border-radius: 5rpx;
+  font-weight: bold;
+}
+.btn-area-nav  button.active
+{
+  font-weight: bold;
+}
+.btn-area-nav .category button image
+{
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.btn-area-nav .more
+{
+  position: absolute;
+  width: 16.6%;
+  right: 0;
+  top: 65rpx;
+  z-index: 1;
+}
+.activity_entry
+{
+  display: flex;
+}
+.activity_entry>view
+{
+  text-align: center;
+  width: 100%;
+  height: 120rpx;
+  background: #f9e8d4;
+  padding: 19rpx;
+  margin-left: 19rpx;
+}
+.activity_entry>view:nth-child(3n)
+{
+  margin-right: 19rpx;
+}
+.activity_entry>view>p{
+  display: inline-block;
+  color: #e70002;
+  font-size: 26rpx;
+  font-weight: bold;
+  width: 100%;
+}
+.activity_entry>view>image
+{
+  width: 70rpx;
+  height: 70rpx;
+}

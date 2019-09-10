@@ -1,0 +1,7 @@
+<!--pages/partner/personal/helper/index.wxml-->
+<!-- 操作手册页面 -->
+<view>
+  <scroll-view scroll-y="{{true}}">
+    <image mode="widthFix" src="{{src}}"></image>
+  </scroll-view>
+</view>

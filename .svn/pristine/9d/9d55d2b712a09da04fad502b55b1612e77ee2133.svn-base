@@ -1,0 +1,9 @@
+<!-- 秒杀活动 -->
+<view wx-if="{{ref.status == 1}}" class="seckill">
+  <image src="/assets/image/seckill_bg.png"></image>
+  <text class="count_back">{{time.day}}:{{time.hou}}:{{time.min}}:{{time.sec}}</text>
+</view>
+<view wx-if="{{ref.status == -1}}" class="seckill">
+  <image src="/assets/image/seckill_bg2.png"></image>
+  <text class="count_back">{{time.day}}:{{time.hou}}:{{time.min}}:{{time.sec}}</text>
+</view>

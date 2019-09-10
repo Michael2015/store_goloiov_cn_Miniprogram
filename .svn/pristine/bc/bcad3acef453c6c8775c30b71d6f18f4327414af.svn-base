@@ -1,0 +1,49 @@
+
+.seeTutorial {
+    position: fixed;
+    right: 2vw;
+    bottom: 12vh;
+    width: 120rpx;
+  }
+  
+  .novice {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+  }
+  
+  .novice .novice_body {
+    width: 472rpx;
+    height: 529rpx;
+    margin: 347rpx auto 0 auto;
+    background: #fff;
+    box-shadow: 4rpx 4rpx 20rpx 4rpx #ccc;
+    border-radius: 12rpx;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .novice .novice_body .poster {
+    width: 100%;
+  }
+  
+  .novice .novice_body button {
+    width: 472rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    background: #e70002;
+    color: #fff;
+    border-radius: 0 0 12rpx 12rpx;
+  }
+  
+  .novice .novice_body .red_close {
+    width: 60rpx;
+    position: absolute;
+    right: 206rpx;
+    bottom: -140rpx;
+  }

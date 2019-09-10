@@ -1,0 +1,7 @@
+<view class="title-wrap">
+    <view>
+        <view class="title">{{data.title}}</view>
+        <view class="p">￥{{data.price}}</view>
+        <view class="s">{{data.sale}}份已售</view>
+    </view>
+</view>

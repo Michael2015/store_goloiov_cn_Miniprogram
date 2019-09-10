@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="view">
+    <image src="{{info.image}}" mode="aspectFit" class="cimg"></image>
+    <view class="textView">
+        <view class="title">{{info.store_name}}</view>
+        <view class="desc">{{msg}}</view>
+        <view class="desc" bindtap="godetail">查看商品详情>></view>
+    </view>
+    <view class="btnView">
+        <view class="item">
+            <button open-type="share" class="share"></button>
+            <image src="../../../assets/image/contactIcon.png" mode="widthFix"></image>
+            <view>转发客户</view>
+        </view>
+        <view class="item" bindtap="goSettlement">
+            <image src="../../../assets/image/orderIcon.png" mode="widthFix"></image>
+            <view>下单</view>
+        </view>
+        <view class="item" bindtap="getShareImg">
+            <image src="../../../assets/image/posterIcon.png" mode="widthFix"></image>
+            <view>超级海报</view>
+        </view>
+    </view>
+</view>
+<canvas canvas-id='posterCanvas' style='width:560px;height:800px;'></canvas>
+<composite-poster id="compositePoster-view"></composite-poster>

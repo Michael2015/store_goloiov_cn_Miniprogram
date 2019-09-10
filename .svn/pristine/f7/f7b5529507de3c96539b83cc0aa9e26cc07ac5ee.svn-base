@@ -1,0 +1,88 @@
+page {
+  background: #F9F9F9;
+}
+
+.content {
+  width: 702rpx;
+  padding: 24rpx 0;
+  box-sizing: border-box;
+  background: #fff;
+  margin: 0 auto;
+  margin-top: 24rpx;
+  height: auto;
+}
+
+.content .area textarea
+{
+  color:#000;
+  background:#eee;
+  padding:2%;
+  width:96%;
+  font-size: 30rpx;
+}
+.upUpoto .photo_title {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+
+.upUpoto .photo_title .min {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.add_img {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.selectPhoto {
+  width: 120rpx;
+  height: 120rpx;
+  border: solid 1rpx #e4e4e4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user_select_photo {
+  width: 120rpx;
+  height: 120rpx;
+  border: solid 1rpx #e4e4e4;
+  margin-right: 15rpx;
+}
+
+.photo_view {
+  margin-top:-122rpx;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-left:135rpx;
+}
+.submit
+{
+min-height:96rpx;
+height:calc(96rpx + env(safe-area-inset-bottom));
+height:calc(96rpx + env(safe-area-inset-bottom));
+width:100vw;
+background-color:#e70002;
+font-size:36rpx;
+color:#fff;
+border-radius:0;
+position:fixed;
+bottom:0;
+left:0;
+
+}
+.phone input
+{
+  margin: 25rpx 0;
+  border: 1px solid lightgray;
+  font-size: 30rpx;
+  padding: 14rpx;
+}
+
+

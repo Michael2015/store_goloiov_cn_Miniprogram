@@ -1,0 +1,153 @@
+<view class="detail">
+    <scroll-view scroll-y bindscrolltolower="handleScrollToLower" class="scroll-view">
+        <detail-swiper imgUrls="{{imgUrls}}"/>
+        <view wx-if="{{seckill.status == 1}}" class="seckill">
+            <image src="/assets/image/seckill_bg.png"></image>
+            <text class="count_back">{{time_backward[0].day}}:{{time_backward[0].hou}}:{{time_backward[0].min}}:{{time_backward[0].sec}}</text>
+        </view>  
+        <view wx-if="{{seckill.status == -1}}" class="seckill">
+            <image src="/assets/image/seckill_bg2.png"></image>
+            <text class="count_back">{{time_backward[0].day}}:{{time_backward[0].hou}}:{{time_backward[0].min}}:{{time_backward[0].sec}}</text>
+        </view>  
+
+        <detail-title data="{{title}}"/>
+        <!-- 非虚拟商品并且没有参加公排的不显示任何提示 -->
+        <view style="background:#FFF9AA;color:#717171;text-align:center;font-size:24rpx;line-height:1.7;{{(info.cate_id!=11&&info.is_platoon!=1)?'height:0;overflow:hidden;':''}}">{{!info?' ':(info.cate_id == 11)?'虚拟商品一经售出概不退货':'适用免单奖励计划的商品不适用7天无理由退货'}}</view>
+        <detail-tab data="{{tabs}}" activeIndex="{{currentTab}}" bind:change="handleTabChange"/>
+        <view class="content-wrap" id="content">
+            <swiper
+                    indicator-dots="{{false}}"
+                    autoplay="{{false}}"
+                    interval="5000"
+                    duration="500"
+                    class="content-swiper"
+                    bindchange="tabPageChange"
+                    current="{{currentTab}}"
+                    style="height: {{contentSwiperHeight}}px"
+            >
+                <swiper-item class="content-swiper-item">
+                    <view class="price-wrap" id="item-wrap0">
+                        <!-- <view class="title">规格</view> -->
+                        <view class="table">
+                            <view class="row row1">
+                                <view class="col">规格</view>
+                                <view class="col">商品零售价</view>
+                                <view class="col">销售单品返利</view>
+                            </view>
+                            <view class="row row2">
+                                <view class="col">{{price.attr}}</view>
+                                <view class="col">{{price.price}}</view>
+                                <view class="col">{{price.rebate}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </swiper-item>
+                <swiper-item class="content-swiper-item">
+                    <view class="desc-wrap" id="item-wrap1" bindtouchstart="descTouch">
+                        <import src="../../../utils/wxParse/wxParse.wxml"/>
+                        <template is="wxParse" data="{{wxParseData:description.nodes}}"/>
+                        <!--<rich-text nodes="{{description}}" type="text"></rich-text>-->
+                    </view>
+                </swiper-item>
+                <swiper-item class="content-swiper-item">
+                    <view class="sale-record" id="item-wrap2">
+                        <block wx:for="{{buyRecordList}}" wx:key="{{index}}">
+                            <view class="item">
+                                <view class="col col-1">
+                                    <view class="avatar">
+                                        <image class="avatar-image" src="{{item.avatar}}" lazy-load="{{true}}"></image>
+                                    </view>
+                                </view>
+                                <view class="col col-2">
+                                    <view class="t">{{item.nickname}}</view>
+                                    <view class="d">{{title.title}}</view>
+                                </view>
+                                <view class="col col-3">
+                                    <view class="f">{{item.pay_time}}</view>
+                                    <text class="s">+1</text>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="no-more {{!buyRecordMore? 'no-more-show': ''}}">没有更多数据</view>
+                    </view>
+                </swiper-item>
+                <swiper-item class="content-swiper-item">
+                    <view class="visitor-wrap" id="item-wrap3">
+                        <view class="row">
+                            <block wx:for="{{visitorList}}" wx:key="index">
+                                <view class="item">
+                                    <view class="item-content">
+                                        <view class="avatar">
+                                            <image src="{{item.avatar}}" class="image"></image>
+                                        </view>
+                                        <view class="name">{{item.nickname}}</view>
+                                    </view>
+                                </view>
+                            </block>
+                            <view class="item item-empty"></view>
+                            <view class="item item-empty"></view>
+                            <view class="item item-empty"></view>
+                            <view class="item item-empty"></view>
+                            <view class="item item-empty"></view>
+                        </view>
+                        <view class="no-more {{!visitorMore? 'no-more-show': ''}}">没有更多数据</view>
+                    </view>
+                </swiper-item>
+
+                <swiper-item class="content-swiper-item">
+                    <view class="sale-record comment-record" id="item-wrap4">
+                        <block wx:for="{{commentRecordList}}" wx:key="{{index}}">
+                            <view class="item">
+                                <view class="col">
+                                    <view class="t1">
+                                        <image class="avatar-image" src="{{item.avatar}}" lazy-load="{{true}}"></image>
+                                    </view>
+                                    <view class="t2">{{item.nickname}}</view>
+                                    <view class="t3">
+                                         <view wx:for="{{item.imgs}}" wx:for-index="index">
+                                            <image src="{{item}}" data-index="{{index}}"  class="contactIcon"></image>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="col col-h">
+                                    <view class="s">
+                                    {{item.comment}}
+                                    </view>
+                                </view>
+                                 <view class="col col-h">
+                                    <view class="s">
+                                      <view wx:for="{{item.pics}}" wx:for-index="index" wx:for-item="it">
+                                            <image src="{{it}}" data-index="{{index}}"  bindtap="preview"  data-src="{{it}}" data-list="{{item.pics}}" class="avatar-image"></image>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="col col-h">
+                                    <view class="time">{{item.add_time}}</view>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="no-more {{!commentRecordMore? 'no-more-show': ''}}">没有更多评论数据</view>
+                    </view>
+                </swiper-item>
+
+            </swiper>
+        </view>
+        <view class="action-bar">
+            <view class="item">
+                <button open-type="share" class="share"></button>
+                <view class="icon icon1"></view>
+                <view class="text">转发客户</view>
+            </view>
+            <view class="item" bindtap="goSettlement">
+                <view class="icon icon2"></view>
+                <view class="text">下单</view>
+            </view>
+            <view class="item" bindtap="getShareImg">
+                <view class="icon icon3"></view>
+                <view class="text">超级海报</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<canvas canvas-id='posterCanvas' style='width:560px;height:800px;'></canvas>
+<composite-poster id="compositePoster-view"></composite-poster>

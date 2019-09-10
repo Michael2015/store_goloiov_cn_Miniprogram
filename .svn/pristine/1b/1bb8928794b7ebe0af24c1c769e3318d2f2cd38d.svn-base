@@ -1,0 +1,34 @@
+<view class="title-wrap">
+    <view class="content">
+        <view class="title">{{data.title}}</view>
+        <view class="p">￥{{data.price}}</view>
+        <view class="s">
+            <view class="col-1">{{data.sale}}份已售</view>
+            <view class="col-2" bindtap="openPlatoonPopup">免单奖励介绍</view>
+        </view>
+    </view>
+    <view class="popup-platoon" wx:if="{{showPlatoonPopup}}">
+        <view class="mask" bindtap="closePlatoonPopup"></view>
+        <view class="main">
+            <view class="close" bindtap="closePlatoonPopup"></view>
+            <view class="title">
+                <view class="t">
+                    <view class="col-1"></view>
+                    <view class="col-2">商品名称</view>
+                    <view class="col-3"></view>
+                </view>
+                <view class="c">golo技师盒子</view>
+            </view>
+            <view class="rule">
+                <view class="t">免单规则</view>
+                <view class="d">
+                    <view class="item">1.排队免单规则: {{data.platoon_slow}}进1</view>
+                    <view class="item">2.快速免单规则: {{data.platoon_fast}}进1</view>
+                </view>
+            </view>
+            <view class="btn-wrap">
+                <view class="btn" bindtap="toGPDesc">免单奖励介绍</view>
+            </view>
+        </view>
+    </view>
+</view>

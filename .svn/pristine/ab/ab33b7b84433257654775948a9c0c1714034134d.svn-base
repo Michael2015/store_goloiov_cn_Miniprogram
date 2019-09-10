@@ -1,0 +1,75 @@
+<!--pages/partner/personal/wallet/index.wxml-->
+<view class="wrap">
+  <view>
+    <view class="banner">
+      <view class="circle"></view>
+      <view class="content">
+        <view class="title">可提现金额</view>
+        <view class="all"><text>￥</text>{{cash}}</view>
+        <view class="detail">待结算　　¥ <text>{{uncash}}</text>　　|　　总收入　　¥ <text>{{all}}</text></view>
+        <view class="btn" bindtap="to" data-url="cash">提现</view>
+      </view>
+    </view>
+    <view class="in-title">
+      <text class="{{index === 0 ? 'active':''}}" bindtap="setIndex" data-index="0">我的公排</text>
+      <text class="{{index === 1 ? 'active':''}}" bindtap="setIndex" data-index="1">收益</text>
+    </view>
+  </view>
+  <swiper class="swiper" bindchange="change" current="{{index}}">
+    <swiper-item>
+      <scroll-view scroll-y bindscrolltolower="gongPaiLoadmore">
+        <navigator class="help" url="/pages/partner/personal/helper/gongpai">如何免单，查看公排介绍>></navigator>
+        <view class="pub-list">
+          <view class="item" wx:for="{{list}}">
+            <view class="header border-bottom">
+              <view class="img-wrap">
+                <image src="" mode="widthFix"></image>
+              </view>
+              <view class="desc">
+                <view class="name">3M 燃油宝汽油添加剂加xxxxxxxxxxxxxxxxxxxxxxxx</view>
+                <view class="order-num">订单号：485454545</view>
+              </view>
+            </view>
+            <view class="footer">
+              <view class="left">
+                快速通道>>
+              </view>
+              <view class="right">
+                <text class="light">再邀请2人即可免单</text>
+              </view>
+            </view>
+          </view>
+          <no-data list="{{list}}" wx:if="{{(list&&list.length===0) || loaded}}"></no-data>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y bindscrolltolower="shouYiLoadmore">
+        <navigator class="help" url="/pages/partner/personal/helper/index">收益及操作手册>></navigator>
+        <view class="in-record">
+          <view class="item border-bottom" wx:for="{{list1}}" wx:key="index">
+            <view class="left">
+              <view class="name">{{item.type_text}} <text>{{item.add_time}}</text></view>
+              <view class="reason">{{item.title}}</view>
+            </view>
+            <view class="right">
+              +  ¥ {{item.number}}
+            </view>
+          </view>
+          <no-data list="{{list1}}" wx:if="{{(list1&&list1.length===0) || loaded1}}"></no-data>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+  <!-- <view>
+    <view class="item border-bottom">
+      <view class="left">
+        <view class="name">佣金收入 <text>2018-3-12 12:12:12</text></view>
+        <view class="reason">3M 燃油宝汽油添加剂除积碳高效养xxxxxxxxxxxx</view>
+      </view>
+      <view class="right">
+        +  ¥ 200.25
+      </view>
+    </view>
+  </view> -->
+</view>

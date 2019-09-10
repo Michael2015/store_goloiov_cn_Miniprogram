@@ -1,0 +1,109 @@
+<view class="detail">
+    <scroll-view scroll-y bindscrolltolower="handleScrollToLower" class="scroll-view">
+        <detail-swiper imgUrls="{{imgUrls}}"/>
+        <detail-title data="{{title}}"/>
+        <!-- 非虚拟商品并且没有参加公排的不显示任何提示 -->
+        <view style="background:#FFF9AA;color:#717171;text-align:center;font-size:24rpx;line-height:1.7;{{(allInfo.cate_id!=11&&allInfo.is_platoon!=1)?'height:0;overflow:hidden;':''}}">{{!allInfo?' ':(allInfo.cate_id == 11)?'虚拟商品一经售出概不退货':'适用免单奖励计划的商品不适用7天无理由退货'}}</view>
+        <detail-tab data="{{tabs}}" activeIndex="{{currentTab}}" bind:change="handleTabChange"/>
+        <view class="content-wrap" id="content">
+            <swiper
+                    indicator-dots="{{false}}"
+                    autoplay="{{false}}"
+                    interval="5000"
+                    duration="500"
+                    class="content-swiper"
+                    bindchange="tabPageChange"
+                    current="{{currentTab}}"
+                    style="height: {{contentSwiperHeight}}px"
+            >
+                <swiper-item class="content-swiper-item">
+                    <view class="desc-wrap" id="item-wrap0" bindtouchstart="descTouch">
+                        <import src="../../../utils/wxParse/wxParse.wxml"/>
+                        <template is="wxParse" data="{{wxParseData:description.nodes}}"/>
+                        <!--<rich-text nodes="{{description}}"></rich-text>-->
+                    </view>
+                </swiper-item>
+                <swiper-item class="content-swiper-item">
+                    <view class="sale-record" id="item-wrap1">
+                        <block wx:for="{{buyRecordList}}" wx:key="{{index}}">
+                            <view class="item">
+                                <view class="col col-1">
+                                    <view class="avatar">
+                                        <image class="avatar-image" src="{{item.avatar}}" lazy-load="{{true}}"></image>
+                                    </view>
+                                </view>
+                                <view class="col col-2">
+                                    <view class="t">{{item.nickname}}</view>
+                                    <view class="d">{{title.title}}</view>
+                                </view>
+                                <view class="col col-3">
+                                    <view class="f">{{item.pay_time}}</view>
+                                    <text class="s">+1</text>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="no-more {{!buyRecordMore? 'no-more-show': ''}}">没有更多购买记录</view>
+                    </view>
+                </swiper-item>
+                <swiper-item class="content-swiper-item">
+                    <view class="sale-record comment-record" id="item-wrap2">
+                        <block wx:for="{{commentRecordList}}" wx:key="{{index}}">
+                            <view class="item">
+                                <view class="col">
+                                    <view class="t1">
+                                        <image class="avatar-image" src="{{item.avatar}}" lazy-load="{{true}}"></image>
+                                    </view>
+                                    <view class="t2">{{item.nickname}}</view>
+                                    <view class="t3">
+                                         <view wx:for="{{item.imgs}}" wx:for-index="index">
+                                            <image src="{{item}}" data-index="{{index}}"  class="contactIcon"></image>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="col col-h">
+                                    <view class="s">
+                                    {{item.comment}}
+                                    </view>
+                                </view>
+                                 <view class="col col-h">
+                                    <view class="s">
+                                      <view wx:for="{{item.pics}}" wx:for-index="index" wx:for-item="it">
+                                            <image src="{{it}}" data-index="{{index}}"  class="avatar-image"></image>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="col col-h">
+                                    <view class="time">{{item.add_time}}</view>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="no-more {{!commentRecordMore? 'no-more-show': ''}}">没有更多评论数据</view>
+                    </view>
+                </swiper-item>
+
+
+            </swiper>
+        </view>
+    </scroll-view>
+    <view class="action-bar">
+        <view class="col-1">
+            <view class="shop" bindtap="toList">
+                <view class="icon">
+                    <image src="/assets/image/icon_shop.png" class="image"></image>
+                </view>
+                <view class="text">店铺</view>
+            </view>
+            <view class="contact" bindtap="contact">
+                <view class="icon">
+                    <image class="image" src="{{partner.avatar}}"></image>
+                </view>
+                <view class="text">联系</view>
+            </view>
+        </view>
+        <view class="buy">
+            <view class="r" bindtap="goSettlement">立即购买</view>
+        </view>
+    </view>
+    <view class="zhuan" bindtap="toShare">赚</view>
+    <contact-user id="contact-view"></contact-user>
+</view>

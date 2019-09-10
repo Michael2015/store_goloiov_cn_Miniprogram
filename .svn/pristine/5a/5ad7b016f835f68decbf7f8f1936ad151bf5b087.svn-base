@@ -1,0 +1,20 @@
+const app = getApp()
+
+Page({
+  data: {},
+  goIndex() {
+    if (app.globalData.role === 0)
+      wx.switchTab({
+        url: '/pages/customer/index/index',
+      })
+    else
+      wx.switchTab({
+        url: '/pages/partner/index/index',
+      })
+  },
+  goOrder() {
+    wx.switchTab({
+      url: '/pages/common/order/order',
+    })
+  }
+})

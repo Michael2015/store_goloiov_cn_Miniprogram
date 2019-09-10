@@ -1,0 +1,46 @@
+.coupon-list{width: 710rpx; margin:  0 auto}
+.coupon-list .item{width: 710rpx; height: 200rpx; margin-bottom: 20rpx;display: flex;}
+.coupon-list .item .float-li{width: 450rpx; height: 100%; border-right: 2rpx dashed rgba(255,255,255,.3)}
+.coupon-list .item .float-li-rig{width: 260rpx;  height:100%; color: #fff}
+ 
+ 
+.coupon-left{position: relative}
+.coupon-left .t{position: absolute; color: #fff}
+.coupon-left .t1{left: 10rpx; top: 85rpx}
+.coupon-left .t2{left: 44rpx; top: 54rpx; font-size: 70rpx; font-weight: bold }
+.coupon-left .t3{
+  left: 180rpx; 
+  top: 59rpx; 
+  width: 261rpx; 
+  font-size: 29rpx;
+}
+.coupon-left .t4{left: 10rpx; top:90rpx}
+ 
+.coupon-rig .t{text-align: center}
+.coupon-rig .t1{font-size: 35rpx; padding: 15rpx 0 10rpx 0;}
+.coupon-rig .t2{font-size: 25rpx;}
+.coupon-rig .t3 text{background: red; color: #fff; padding: 3rpx 30rpx;font-size: 30rpx;height:35rpx;line-height: 35rpx;padding-bottom: 5rpx;}
+.coupon-rig .t3 text.used{
+  background: #e6e6e6;
+  color: #999;
+}
+
+.note{background: #faeab7}
+ 
+ 
+.stamp{width:700rpx; height: 250rpx;margin-bottom:50rpx;position:relative;overflow:hidden}
+.stamp i{position: absolute;left: 20%;top: 90rpx;height: 500rpx;width: 700rpx;background-color: rgba(255,255,255,.15);transform: rotate(-30deg);
+}
+.stamp01{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #F39B00 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #F39B00}
+.stamp02{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #D24161}
+.stamp03{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #7EAB1E }
+.stamp04{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #50ADD3 }
+.stamp05{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #f0229b}
+.stamp05{background:radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 30rpx, #D24161 30rpx);background-size:10rpx 10rpx;background-position:9rpx 3rpx; background: #f0229b}
+.no-more {
+  text-align: center;
+  color: #aaa;
+  font-size: 24rpx;
+  box-sizing: border-box;
+  visibility:visible;
+}

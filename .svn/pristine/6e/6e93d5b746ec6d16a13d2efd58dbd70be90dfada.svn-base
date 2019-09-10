@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="content">
+        <view class="head">全部评论</view>
+        <view class="item"  wx:for="{{commentRecordList}}" wx:key="{{index}}">
+            <view class="md-col-12 h">
+                <view class="md-col-4 left">
+                    <image class="avatar-image" src="{{item.avatar}}" lazy-load="{{true}}"></image>
+                </view>
+                <view class="md-col-4 left">{{item.nickname}}</view>
+                <view class="md-col-4 right">{{item.add_time}}</view>
+            </view>
+            <view class="md-col-12 c">
+               {{item.comment}}
+            </view>
+            <view class="swiper-wrap">
+                <swiper
+                    indicator-dots="{{false}}"
+                    autoplay="true"
+                    interval="5000"
+                    duration="500"
+                    circular="{{true}}"
+                    class="swiper"
+                    bindchange="handleChange"
+                >
+                <block wx:for="{{item.pics}}" wx:key="{{item}}">
+                    <swiper-item>
+                        <image src="{{item}}" class="slide-image" data-index="{{index}}" bindtap='previewImg'/>
+                    </swiper-item>
+                   
+                </block>
+                </swiper>
+                <!--<view class="indicator">{{currentIndex}}/{{item.pics.length}}</view>-->
+            </view>
+        </view>
+
+         <view class="no-more">没有更多数据</view>
+    </view>
+</view>

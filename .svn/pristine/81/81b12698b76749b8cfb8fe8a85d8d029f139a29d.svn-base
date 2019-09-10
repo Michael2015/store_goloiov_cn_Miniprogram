@@ -1,0 +1,55 @@
+import compositePoster from '../../../utils/compositePoster/compositePoster'
+const app = getApp()
+var self;
+Page({
+  data: {
+    info: {},
+    getinfo: {}
+  },
+  getinfo() {
+    app.http.post('/api/partner/store/getinfo', {
+      product_id: self.data.info.id
+    }).then(res => {
+      this.setData({
+        getinfo: res
+      })
+      wx.hideLoading()
+    })
+  },
+  onLoad(e) {
+    wx.showLoading({
+      mask: true
+    })
+    self = this;
+    this.setData({
+      info: app.varStorage.get('storeDetail')
+    })
+    this.getinfo();
+    app.varStorage.set('isShareBack', 1)
+  },
+  getShareImg() {
+    compositePoster.createPoster({
+      data: Object.assign(self.data.info, {
+        uid: app.globalData.userInfo.uid,
+        pid: app.globalData.userInfo.uid
+      })
+    })
+  },
+  goSettlement() {
+    wx.navigateTo({
+      url: `/pages/partner/settlement/index?id=${self.data.info.id}`
+    })
+  },
+  godetail() {
+    wx.navigateTo({
+      url: '/pages/partner/detail/detail?id=' + self.data.info.id
+    })
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: '发现一个好产品【' + self.data.info.store_name + '】推荐给你！',
+      path: `pages/index/index?type=share&s=${app.globalData.userInfo.uid}&p=${app.globalData.userInfo.uid}&st=${self.data.info.id}`,
+      imageUrl: self.data.info.image
+    }
+  },
+})

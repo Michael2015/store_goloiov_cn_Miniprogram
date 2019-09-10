@@ -1,0 +1,96 @@
+@import '/assets/wxss/search.wxss';
+@import '/assets/wxss/tutorial.wxss';
+
+page {
+    background: #F9F9F9
+}
+
+.search_nav {
+    height: 164rpx;
+}
+
+.headImg_call image.user_head {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 25rpx;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.search_nav .head {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.head {
+    padding: 8rpx 24rpx 0 24rpx;
+    color: #fff;
+}
+
+.goPartner {
+    width: 175rpx;
+    height: 44rpx;
+    line-height: 40rpx;
+    background-color: #ffffff;
+    border-radius: 19px 0px 0px 19px;
+    opacity: 0.84;
+    position: absolute;
+    right: 0;
+    top: 26rpx;
+    font-size: 30rpx;
+    color: #e80608;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.price {
+    font-size: 24rpx;
+    color: #c01f1f;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.commodity_list {
+    height: calc(100vh - 164rpx);
+    margin-top: 164rpx
+}
+
+.commodity_list .commodity_item .title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 1;
+    height: 32rpx;
+}
+
+.title_swiper {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title_swiper .title {
+    font-size: 40rpx;
+}
+
+.headImg_call {
+    position: relative;
+}
+
+.headImg_call .contactIcon {
+    width: 44rpx;
+    height: 44rpx;
+    position: absolute;
+    right: 12rpx;
+    bottom: 5rpx;
+}
+
+.no-data {
+    color: #999;
+    font-size: 24rpx;
+    text-align: center;
+    padding: 32rpx 0;
+
+}

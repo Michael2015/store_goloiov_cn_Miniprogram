@@ -1,0 +1,59 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="item address">
+        <view class="location_view">
+            <image mode="widthFix" src='/assets/image/location.png' class="location_icon"></image>
+        </view>
+        <view class="textView">
+            <view class="address_name">收货人： {{real_name}} {{user_phone}}</view>
+            <view class="address_text">{{user_address}}</view>
+        </view>
+    </view>
+    <view class="commodity">
+        <view class="commodity_info">
+            <image src="{{image}}" mode="widthFix" class="commodity_image"></image>
+            <view>
+                <view class="commodity_name">
+                    <view class="name">{{store_name}}</view>
+                    <view class="price">￥{{pay_price}}</view>
+                </view>
+                <view class="commodity_num">
+                    <view class="spec">{{suk}}</view>
+                    <view class="num">× 1</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <scroll-view scroll-y style="height:640rpx">
+        <view class="from">
+            <view class="item">
+                <view>原因</view>
+                <view class="select">
+                    <picker bindchange="bindPickerChange" value="reasonIndex" range="{{reason}}">
+                        <view class="picker">{{reason[reasonIndex]}}</view>
+                    </picker>
+                    <image src="/assets/image/right_ccc.png" mode="widthFix" class="right"></image>
+                </view>
+            </view>
+            <view class="item">
+                <view>详情</view>
+                <view><input placeholder="描述一下情况" placeholder-class="desc_input_placeholder" type='text' bindinput="setDescText" class="big"/></view>
+            </view>
+            <view class="item">
+                <view>金额</view>
+                <view class="money"><text>不超过</text> <input placeholder="{{pay_price}}" placeholder-class="color_red" type='digit' bindinput="setPriceText" class="color_red" value="{{refund_price}}" bindblur="verificationPrice" focus/> <text>元</text></view>
+            </view>
+            <view class="upUpoto">
+                <text class="photo_title">照片<text class="min">（ 可作为售后依据 ）</text></text>
+                <view class="selectPhoto" bindtap="selectPhoto">
+                    <image mode="widthFix" src='/assets/image/add.png' class="add_img"></image>
+                </view>
+
+                <view class="photo_view">
+                    <image wx:for="{{imgList}}" wx:key="{{index}}" src="{{item}}" mode="aspectFit" class="user_select_photo"></image>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+    <button class="submit" bindtap="save">提交申请</button>     
+</view>

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#e70002",
+  "usingComponents": {
+    "contact-user": "/utils/contactUser/index"
+  }
+}

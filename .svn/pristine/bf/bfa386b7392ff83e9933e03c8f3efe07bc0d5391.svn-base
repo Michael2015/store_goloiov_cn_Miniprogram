@@ -1,0 +1,112 @@
+import compositePoster from '../../../utils/compositePoster/compositePoster'
+const app = getApp()
+var self;
+Page({
+  data: {
+    info: {},
+    getinfo: {},
+    product_rebate_amount: '',
+    invite_user_count: '',
+    coupon_id:0,
+    coupon_date:'',
+    coupon_price:0,
+    coupon_title:'',
+    showModal:false,
+  },
+  getinfo() {
+    app.http.post('/api/partner/store/getinfo', {
+      product_id: self.data.info.id
+    }).then(res => {
+      this.setData({
+        getinfo: res,
+        coupon_id:res.coupon.data.id,
+        coupon_title:res.coupon.data.title,
+        coupon_price:res.coupon.data.price,
+        coupon_date:res.coupon.data.date,
+      })
+      wx.hideLoading()
+    })
+  },
+  share() {
+    app.http.post('/api/customer/product/share', {
+      product_id: this.data.info.id
+    }).then(res => {
+      this.setData({
+        product_rebate_amount: res.profit.product_rebate_amount || null,
+        invite_user_count: res.profit.invite_user_count || null
+      })
+    })
+  },
+  onLoad(e) {
+    wx.showLoading({
+      mask: true
+    })
+    self = this;
+    this.setData({
+      info: app.varStorage.get('storeDetail')
+    })
+    this.getinfo();
+    this.share();
+    app.varStorage.set('isShareBack', 1)
+  },
+  getShareImg() {
+    compositePoster.createPoster({
+      data: Object.assign(self.data.info, {
+        uid: app.globalData.userInfo.uid,
+        pid: app.globalData.userInfo.uid
+      })
+    })
+  },
+  goSettlement() {
+    wx.navigateTo({
+      url: `/pages/partner/settlement/index?id=${self.data.info.id}`
+    })
+  },
+//领取优惠券
+show_modal()
+{
+  let coupon_id = this.data.coupon_id;
+  let coupon_price = this.data.coupon_price;
+  let coupon_date = this.data.coupon_date;
+  this.setData({
+    showModal:true,
+    coupon_id:coupon_id,
+    coupon_price:coupon_price,
+    coupon_date:coupon_date
+   });
+},
+hide_modal()
+{
+  this.setData({
+    showModal:false,
+  })
+},
+ //领取优惠券
+ get_coupon(e)
+ {
+  app.http.post('/api/coupon/setcoupon', {
+    coupon_id: this.data.coupon_id,
+  }).then(res => {
+    wx.showToast({
+      title: '领取成功',
+      icon: 'none',
+    })
+    this.setData({
+      showModal:false,
+      coupon_id:0,
+    })
+  })
+ },
+  godetail() {
+    wx.navigateTo({
+      url: '/pages/partner/detail/detail?id=' + self.data.info.id
+    })
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: '发现一个好商品【' + self.data.info.store_name + '】推荐给你！',
+      path: `pages/index/index?type=share&s=${app.globalData.userInfo.uid}&p=${app.globalData.userInfo.uid}&st=${self.data.info.id}`,
+      imageUrl: self.data.info.image
+    }
+  },
+})

@@ -1,0 +1,122 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="search_nav">
+        <view class="search_input">
+            <image mode="widthFix" src='/assets/image/search.png' class="search_icon"></image>
+            <input placeholder="搜索" placeholder-class="search_input_placeholder" type='text' confirm-type="search" bindconfirm="setSearchText" value="{{keyword}}"/>
+            <!--
+            <image mode="widthFix" src='/assets/image/closeTip.png' class="{{keyword?'clear_icon show':'clear_icon hide'}}" bindtouchstart="clearText"></image>
+            -->
+        </view>
+         <button class="share_btn" open-type="share">邀请合伙人</button>
+    </view>
+    <!-- 导航 -->
+    <view class="btn-area-nav">
+        <view class="category">
+            <button class="active">首页</button>
+            <button  wx:for="{{categoryList1}}">{{item.cate_name}}</button>
+            <button bindtap="showCategory"><span><image src="/assets/image/menu_category.png"></image> 更多</span></button>
+        </view>
+         <view class="more" wx:if="{{isShowCategory}}">
+            <button  wx:for="{{categoryList2}}">{{item.cate_name}}</button>
+        </view>
+    </view>
+    <!-- 导航 -->
+
+    <!--  banner 轮播图  -->
+    <view class='banner'>
+    <swiper indicator-dots="true" indicator-color="#fff" indicator-active-color="#e70002" autoplay="true" interval="5000" duration="500">
+        <block wx:for="{{bannerList}}" wx:key="{{index}}">
+        <swiper-item>
+            <navigator  url="{{item.url}}">
+                <image src="{{item.pic}}" class="slide-image" mode="aspectFill" />
+            </navigator>
+        </swiper-item>
+        </block>
+    </swiper>
+    </view>
+    <!--  banner 轮播图  -->
+    <view>
+       <view class="page_set">
+            <swiper vertical duration='800' interval='2000' autoplay circular class="index_search_swiper">
+                <swiper-item wx:for="{{getinfo.content}}" wx:key="{{index}}">{{item}}</swiper-item>
+            </swiper>
+        </view>
+    </view>
+
+    <!--  活动专区 -->
+    <view class="activity_entry">
+        <view>
+            <image src="/assets/image/activiy_entry_1.png"></image>
+            <p>工具特惠</p>
+        </view>
+        <view>
+            <image src="/assets/image/activiy_entry_2.png"></image>
+            <p>配件专区</p>
+        </view>
+        <view>
+            <image src="/assets/image/activiy_entry_3.png"></image>
+            <p>汽车用品</p>
+        </view>
+    </view>
+    <!--  活动专区 -->
+
+    <scroll-view scroll-y class="commodity_list" bindscrolltolower="loadmore">
+        <view class="commodity_item" wx:for="{{storelist}}" wx:key="{{index}}">
+            <view  style="width:100%;height:100%;overflow: hidden;" catchtap="goDetails" id="{{item.id}}" >
+                <image src="{{item.image}}" mode="widthFix"></image>
+                <view class="title_volume">
+                    <view class="title">
+                         <text>{{item.store_name}}</text>
+                         <!--
+                         <text bindtap="show_modal" data-id="{{item.coupon.data.id}}" data-pid="{{item.id}}" wx:if="{{item.coupon.status}}">
+                            <text  class="coupon3"> 马上领券/立减{{item.coupon.data.price}}元 </text>
+                         </text>
+                         <text wx:if="{{item.seckill.status == 1}}" class="coupon3"> 限时秒杀/立减{{item.seckill.data.save_money}}元 </text>
+                         <text wx:if="{{item.seckill.status == -1}}" class="coupon3"> {{item.seckill.msg}}/{{item.seckill.data.title}} </text>
+                         -->
+                    </view>
+                    <!--<view class="volume">{{item.sales}}已售</view>-->
+                    <view class="volume">价格:
+                    <block wx:if="{{item.seckill.status == 0 || item.seckill.status == -1}}">￥{{item.price}}</block> 
+                    <block wx:elif="{{item.seckill.status == 1}}"><em>￥{{item.seckill.data.price}}</em> <em class="text-u">￥{{item.price}}</em></block> / <small class="small">销量:{{item.sales}} </small>
+                    </view>
+                </view>
+                <view class="coupon">
+                    <text wx:if="{{item.coupon.status == 1}}" class="coupon3">马上领券</text>
+                    <text wx:if="{{item.seckill.status == 1}}" class="coupon3">限时秒杀</text>
+                    <text wx:if="{{item.seckill.status == -1}}" class="coupon3">即将秒杀</text>
+                </view>
+            </view>
+        </view>
+        <no-data list="{{storelist}}" wx:if="(storelist&&storelist.length===0)||isLoad"></no-data>
+        <view style="height:50px"></view>
+    </scroll-view>
+    <image src="/assets/image/seeTutorial.png" mode="widthFix" class="seeTutorial" catchtap="goHelperAll"></image>
+    <view class="novice" catchtouchmove="touchMove" wx:if="{{noviceShow}}">
+        <view class="novice_body">
+            <image src="/assets/image/white_close.png" mode="widthFix" class="red_close" catchtap="closeNovice"></image>
+            <image src="/assets/image/novice_poster.png" mode="widthFix" class="poster"></image>
+            <view class="content">
+                <view class="t">教程</view>
+                <view class="t-s">手把手教你打开教程</view>
+                <image src="/assets/image/btn-cha.png" mode="widthFix" class="btn-cha" catchtap="goHelper"></image>
+            </view>
+        </view>
+    </view>
+
+     <view class="modal-mask"  catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+        <view class="modal-dialog" wx:if="{{showModal}}">
+            <image src="/assets/image/coupon_bg.png" bindtap="get_coupon"></image>
+            <view class="modal-content">
+                <view class="nav">
+                    <view class="head">¥{{coupon_price}}元</view>
+                    <view class="title">有效期：{{coupon_date}}</view>
+                    <view class="title">温馨提示：每件商品只能领一张券，请务必在有效期内使用</view>
+                </view>
+            </view>
+            <view class="close" bindtap="hide_modal">
+                    <image src="/assets/image/closeTip.png"></image>
+            </view>
+        </view>
+</view>

@@ -1,0 +1,68 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="search_nav">
+        <view class="search_input">
+            <image mode="widthFix" src='/assets/image/search.png' class="search_icon"></image>
+            <input placeholder="搜索" placeholder-class="search_input_placeholder" type='text' confirm-type="search" bindconfirm="setSearchText" value="{{keyword}}"/>
+            <image mode="widthFix" src='/assets/image/closeTip.png' class="{{keyword?'clear_icon show':'clear_icon hide'}}" bindtouchstart="clearText"></image>
+        </view>
+        <view class="other"></view>
+        <view class="page_set">
+            <swiper vertical duration='800' interval='2000' autoplay circular class="index_search_swiper">
+                <swiper-item wx:for="{{getinfo.content}}" wx:key="{{index}}">{{item}}</swiper-item>
+            </swiper>
+            <button class="share_btn" open-type="share">邀请合伙人</button>
+        </view>
+    </view>
+    <scroll-view scroll-y class="commodity_list" bindscrolltolower="loadmore">
+        <view class="commodity_item" wx:for="{{storelist}}" wx:key="{{index}}">
+            <view  style="width:100%;height:100%;overflow: hidden;">
+                <image src="{{item.image}}" catchtap="goDetails" id="{{item.id}}" mode="widthFix"></image>
+                <view class="title_volume">
+                    <view class="title" catchtap="goDetails" id="{{item.id}}">{{item.store_name}}</view>
+                    <!--<view class="volume">{{item.sales}}已售</view>-->
+                    <view class="volume">价格:￥{{item.price}} / <small class="small">销量:{{item.sales}} </small>
+                    <div wx:if="{{item.coupon.status}}">   
+                    <!--    
+                     <image src="/assets/image/coupon2.png" mode="widthFix" class="coupon" bindtap="get_coupon" data-id="{{item.coupon.data.id}}" data-title="{{item.coupon.data.title}}"></image>
+                    -->
+                    <view bindtap="show_modal" data-id="{{item.coupon.data.id}}" data-pid="{{item.id}}">
+                       <view  class="coupon2">马上领券</view>
+                       <view  class="coupon3">立减{{item.coupon.data.price}}元</view>
+                    </view>
+                    </div>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <no-data list="{{storelist}}" wx:if="(storelist&&storelist.length===0)||isLoad"></no-data>
+        <view style="height:50px"></view>
+    </scroll-view>
+    <image src="/assets/image/seeTutorial.png" mode="widthFix" class="seeTutorial" catchtap="goHelperAll"></image>
+    <view class="novice" catchtouchmove="touchMove" wx:if="{{noviceShow}}">
+        <view class="novice_body">
+            <image src="/assets/image/white_close.png" mode="widthFix" class="red_close" catchtap="closeNovice"></image>
+            <image src="/assets/image/novice_poster.png" mode="widthFix" class="poster"></image>
+            <view class="content">
+                <view class="t">教程</view>
+                <view class="t-s">手把手教你打开教程</view>
+                <image src="/assets/image/btn-cha.png" mode="widthFix" class="btn-cha" catchtap="goHelper"></image>
+            </view>
+        </view>
+    </view>
+
+     <view class="modal-mask"  catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+        <view class="modal-dialog" wx:if="{{showModal}}">
+            <image src="/assets/image/coupon_bg.png" bindtap="get_coupon"></image>
+            <view class="modal-content">
+                <view class="nav">
+                    <view class="head">¥{{coupon_price}}元</view>
+                    <view class="title">有效期：{{coupon_date}}</view>
+                    <view class="title">温馨提示：每件商品只能领一张券，请务必在有效期内使用</view>
+                </view>
+            </view>
+            <view class="close" bindtap="hide_modal">
+                    <image src="/assets/image/closeTip.png"></image>
+            </view>
+        </view>
+</view>

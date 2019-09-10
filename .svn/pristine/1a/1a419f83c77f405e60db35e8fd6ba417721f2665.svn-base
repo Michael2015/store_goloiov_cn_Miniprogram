@@ -1,0 +1,81 @@
+<!--pages/partner/personal/wallet/index.wxml-->
+<view class="wrap">
+  <view id="topbox">
+    <view class="banner">
+      <view class="circle"></view>
+      <view class="content">
+        <view class="title">可提现金额</view>
+        <view class="all"><text>￥</text>{{cash}}</view>
+        <view class="detail">待结算　　¥ <text>{{uncash}}</text>　　|　　总收入　　¥ <text>{{all}}</text></view>
+        <view class="btn" bindtap="toCash" data-url="cash">提现</view>
+      </view>
+    </view>
+    <view class="in-title">
+      <text class="{{index === 0 ? 'active':''}}" bindtap="setIndex" data-index="0">我的免单</text>
+      <text class="{{index === 1 ? 'active':''}}" bindtap="setIndex" data-index="1">收益</text>
+    </view>
+  </view>
+  <swiper class="swiper" bindchange="change" current="{{index}}" style="{{hack}}">
+    <swiper-item>
+      <scroll-view scroll-y bindscrolltolower="gongPaiLoadmore" style="{{hack}}">
+        <navigator class="help" url="/pages/partner/personal/helper/gongpai">如何免单，查看介绍>></navigator>
+        <view class="pub-list">
+          <view class="item" wx:for="{{list}}" wx:key="index">
+            <view class="header border-bottom" bindtap="toOrderDetail" data-id="{{item.order_sn}}">
+              <view class="img-wrap">
+                <image src="{{item.image}}" mode="widthFix"></image>
+              </view>
+              <view class="desc">
+                <view class="name">{{item.store_name}}</view>
+                <view class="order-num">订单尾号：{{tailSix(item.order_sn)}}</view>
+              </view>
+            </view>
+            <view class="footer">
+              <view class="left">
+                <text class="light">{{item.left}}</text>
+              </view>
+              <view class="right">
+                <text>{{item.right}}</text>
+              </view>
+            </view>
+          </view>
+          <no-data list="{{list}}" wx:if="{{(list&&list.length===0) || loaded}}"></no-data>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item>
+      <scroll-view scroll-y bindscrolltolower="shouYiLoadmore" style="{{hack}}">
+        <navigator class="help" url="/pages/partner/personal/helper/index">收益及操作手册>></navigator>
+        <view class="in-record">
+          <view class="item border-bottom" wx:for="{{list1}}" wx:key="index">
+            <view class="left">
+              <view class="name">{{item.type_text}}　<text>{{item.add_time}}</text></view>
+              <view class="reason">{{item.title}}</view>
+            </view>
+            <view class="right">
+              {{item.pm?'+':'-'}}  ¥ {{item.number}}
+            </view>
+          </view>
+          <no-data list="{{list1}}" wx:if="{{(list1&&list1.length===0) || loaded1}}"></no-data>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+  <!-- <view>
+    <view class="item border-bottom">
+      <view class="left">
+        <view class="name">佣金收入 <text>2018-3-12 12:12:12</text></view>
+        <view class="reason">3M 燃油宝汽油添加剂除积碳高效养xxxxxxxxxxxx</view>
+      </view>
+      <view class="right">
+        +  ¥ 200.25
+      </view>
+    </view>
+  </view> -->
+</view>
+<wxs module="tailSix">
+  module.exports = function(str) {
+    var s = str + ''
+    return s[s.length-1] + s[s.length-2] + s[s.length-3] + s[s.length-4] + s[s.length-5] + s[s.length-5] 
+  }
+</wxs>

@@ -1,0 +1,26 @@
+/* pages/partner/personal/agree/index.wxss */
+scroll-view{
+  height: 100vh;
+}
+.title{
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 800;
+  line-height: 1.6;
+  margin: 30rpx 0;
+
+}
+.wrap{
+  padding: 0 32rpx;
+  font-size: 28rpx;
+}
+.p{
+  font-size: 28rpx;
+  margin: 20rpx 0;
+  /* text-indent: 56rpx; */
+}
+.sub{
+  font-size: 28rpx;
+  font-weight: 800;
+  margin: 16rpx 0;
+}

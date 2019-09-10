@@ -1,0 +1,151 @@
+const app = getApp()
+let self;
+let isDisabled = 1;
+Page({
+  data: {
+    getAddressList: [],
+    def_add: {},
+    isload: 0,
+    price: {},
+    mark: '',
+    disabled_loading: false
+  },
+  price(product_id) {
+    app.http.post('/api/partner/store/price', {
+      product_id
+    }).then(res => {
+      this.setData({
+        price: res,
+        info: app.varStorage.get('storeDetail')
+      })
+      wx.hideLoading()
+    })
+  },
+  pay(order_id, form_id) {
+    app.http.get('/api/customer/pay/pay', {
+      order_id
+    }).then(res => {
+      wx.hideLoading()
+      if (res) {
+        wx.requestPayment({
+          timeStamp: res.timeStamp,
+          nonceStr: res.nonceStr,
+          package: res.package,
+          signType: res.signType,
+          paySign: res.paySign,
+          success(res) {
+            self.setData({
+              disabled_loading: false
+            })
+            app.http.get('/api/customer/pay/queryOrder', {
+              order_id,
+              form_id,
+            }).then(res => {
+              // &position=${res.position}&outnums=${res.outnums}
+              wx.reLaunch({
+                "url": `/pages/customer/paysuccess/index?total_price=${res.total_price}`
+              })
+            })
+          },
+          fail() {
+            self.setData({
+              disabled_loading: false
+            })
+          }
+        })
+      } else {
+        wx.showModal({
+          content: '稍后重试 ',
+          showCancel: false
+        })
+      }
+    })
+  },
+  createOrder(formId) {
+    if (self.data.product_id && self.data.def_add && self.data.def_add.id) {
+      wx.showLoading({
+        mask: true
+      })
+      app.http.post('/api/order/createOrder', {
+        product_id: self.data.product_id,
+        address_id: self.data.def_add.id,
+        mark: self.data.mark
+      }).then(res => {
+        this.pay(res.order_id, formId)
+        wx.hideLoading()
+        isDisabled = 1;
+      }, () => {
+        isDisabled = 1;
+        self.setData({
+          disabled_loading: false
+        })
+      })
+    } else {
+      wx.showToast({
+        title: '请添加收货地址',
+        icon: 'none'
+      })
+    }
+  },
+  setMark(e) {
+    this.setData({
+      mark: e.detail.value
+    })
+  },
+  getAddressList() {
+    app.http.get('/api/Address/getAddressList').then(res => {
+      let def_add;
+      if (app.varStorage.get('selectAddress') !== undefined) {
+        def_add = app.varStorage.get('selectAddress')
+      } else {
+        def_add = res.filter(ele => {
+          return ele.is_default
+        })
+        if (def_add.length) {
+          def_add = def_add[0]
+        } else {
+          def_add = res[0]
+        }
+      }
+      this.setData({
+        getAddressList: res,
+        isload: 1,
+        def_add
+      })
+      wx.hideLoading()
+    })
+  },
+  formSubmit(e) {
+    if (isDisabled) {
+      isDisabled = 0;
+      this.setData({
+        disabled_loading: true
+      })
+      this.createOrder(e.detail.formId)
+    }
+  },
+  onLoad(e) {
+    self = this;
+    app.varStorage.del('isShareBack')
+    if (e.id) {
+      this.price(e.id)
+      this.setData({
+        product_id: e.id
+      })
+    } else
+      wx.navigateBack()
+  },
+  goAddAddress() {
+    wx.navigateTo({
+      "url": "/pages/partner/addAddress/index"
+    })
+  },
+  goAddList() {
+    wx.navigateTo({
+      "url": "/pages/partner/shippingAddress/index?selectAddress"
+    })
+  },
+  onShow() {
+    this.getAddressList();
+  }
+})

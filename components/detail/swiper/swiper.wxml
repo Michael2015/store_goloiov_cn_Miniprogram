@@ -1,0 +1,18 @@
+<view class="swiper-wrap">
+    <swiper
+            indicator-dots="{{false}}"
+            autoplay="true"
+            interval="5000"
+            duration="500"
+            circular="{{true}}"
+            class="swiper"
+            bindchange="handleChange"
+    >
+        <block wx:for="{{imgUrls}}" wx:key="{{item}}">
+            <swiper-item>
+                <image src="{{item}}" class="slide-image" data-index="{{index}}" bindtap='previewImg'/>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class="indicator">{{currentIndex}}/{{imgUrls.length}}</view>
+</view>

@@ -1,0 +1,13 @@
+<view class="{{show}}show login-view" catchtouchmove="touchMove" catchtap="close">
+  <view class="content">
+    <view class="info">
+      <image src="{{avatar}}" mode="aspectFit" class="head-img"></image>
+      <view class="item">
+        <text class="title">昵称</text><text class="text">{{nickname}}</text><button catchtap="copy">复制</button>
+      </view>
+      <view class="item" wx:if="{{phone}}">
+        <text class="title">手机</text><text class="text">{{phone}}</text><button catchtap="call">呼叫</button>
+      </view>
+    </view>
+  </view>
+</view>

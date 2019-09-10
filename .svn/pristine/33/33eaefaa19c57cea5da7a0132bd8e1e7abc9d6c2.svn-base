@@ -1,0 +1,30 @@
+function getContext() {
+    var pages = getCurrentPages();
+    return pages[pages.length - 1];
+}
+
+let login;
+
+var Login = (fun, props = undefined) => {
+    return new Promise(function (resolve) {
+        login = getContext().selectComponent('#login-view');
+        if (!login) {
+            console.warn('未找到节点，请在wxml里添加');
+        } else {
+            login[fun](props).then(() => {
+                resolve()
+            })
+        }
+    })
+}
+
+Login.show = function () {
+    return Login('show', arguments)
+}
+
+Login.close = () => {
+    return Login('close')
+}
+
+
+export default Login;

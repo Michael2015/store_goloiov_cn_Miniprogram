@@ -1,0 +1,153 @@
+page{
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+.header{
+  background: #e70002;
+  position: relative;
+  overflow: hidden;
+}
+.header>view:first-child{
+  position: relative;
+  z-index: 2;
+  padding: 24rpx  24rpx 48rpx;
+  display: flex;
+  align-items: center;
+}
+.header .circle{
+  position: absolute;
+  width:496rpx;
+  height: 496rpx;
+  border-radius: 50%;
+  background: #ec3537;
+  z-index: 1;
+  right: -350rpx;
+  top:0;
+}
+
+.header .avatar{
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  background: #ddd;
+  overflow: hidden;
+}
+.header .avatar image{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.info{
+  color:#fff;
+  padding-left: 24rpx;
+  flex: 1;
+}
+.info .name{
+  font-size: 32rpx;
+  font-weight: 800;
+}
+.info .num{
+  font-size: 24rpx;
+  margin-top: 3px;
+}
+.right{
+  width: 18rpx;
+}
+.right image{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.tabs{
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  background: #fff;
+  min-height: 120rpx;
+  margin-bottom: 24rpx;
+  position: relative;
+}
+.tabs>view{
+  flex:1;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+}
+.visitor, .partner{
+  width: 48rpx;
+  vertical-align: middle;
+  margin-right: 24rpx;
+  height: auto;
+}
+.partner{
+  width: 54rpx;
+}
+.partner-wrap{
+  
+}
+.tabs::after{
+  content: ' ';
+  display: block;
+  width:1px;
+  height: 60%;
+  left:50%;
+  top:20%;
+  background: #e4e4e4;
+  position: absolute;
+}
+.group{
+  background: #fff;
+  padding-left: 24rpx;
+  margin-bottom: 24rpx;
+}
+.group .nav{
+  display: flex;
+  align-items: center;
+  padding-right: 24rpx;
+  min-height: 90rpx;
+  position: relative;
+}
+.group .nav:after{
+  content: ' ';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  transform: scaleY(0.5);
+  left:0;
+  bottom: 0;
+  background: #e4e4e4;
+}
+.group .nav:last-child:after{
+  display: none;
+}
+.nav .icon{
+  width: 40rpx;
+}
+.nav image{
+  width:100%;
+  height: auto;
+}
+.nav .name{
+  font-size: 28rpx;
+  margin-left: 24rpx;
+  color: #666;
+}
+.nav .right-text{
+  flex:1;
+  text-align: right;
+  padding-right: 16rpx;
+  font-size: 24rpx;
+  color:#333;
+}
+.nav .right-text text{
+  color:#e70002;
+}
+.nav .right-icon{
+  width: 16rpx;
+}
+.nav .address{
+  width:86%;
+  position: relative;
+  top:3px;
+}

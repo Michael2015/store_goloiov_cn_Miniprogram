@@ -1,0 +1,45 @@
+import compositePoster from '../../../utils/compositePoster/compositePoster'
+
+const app = getApp()
+var self;
+Page({
+  data: {
+    info: {},
+    msg: ''
+  },
+  share() {
+    app.http.post('/api/customer/product/share', {
+      product_id: this.data.info.id
+    }).then(res => {
+      this.setData({
+        msg: res.msg
+      })
+    })
+  },
+  onLoad() {
+    self = this;
+    this.setData({
+      info: app.varStorage.get('storeDetail')
+    })
+    this.share()
+  },
+  onShow: function () {},
+  getShareImg() {
+    compositePoster.createPoster({
+      data: Object.assign(self.data.info, {
+        uid: app.globalData.userInfo.uid,
+        pid: app.globalData.role === 0 ? app.globalData.shareInfo.share_partner_id : app.globalData.userInfo.uid
+      })
+    })
+  },
+  back() {
+    wx.navigateBack()
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: '发现一个好商品【' + self.data.info.store_name + '】推荐给你！',
+      path: `pages/index/index?type=share&s=${app.globalData.userInfo.uid}&p=${app.globalData.role === 0 ? app.globalData.shareInfo.share_partner_id : app.globalData.userInfo.uid}&st=${self.data.info.id}`,
+      imageUrl: this.data.info.image
+    }
+  },
+})

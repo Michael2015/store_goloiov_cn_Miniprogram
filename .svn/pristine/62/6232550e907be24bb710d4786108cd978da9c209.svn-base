@@ -1,0 +1,37 @@
+const app = getApp()
+
+Page({
+  data: {
+    total_price: '...',
+    position: '',
+    outnums: ''
+  },
+  onLoad(e) {
+    this.setData({
+      total_price: e.total_price,
+      position: e.position,
+      outnums: e.outnums
+    })
+  },
+  goIndex() {
+    if (app.globalData.role === 0)
+      wx.switchTab({
+        url: '/pages/customer/index/index',
+      })
+    else
+      wx.switchTab({
+        url: '/pages/partner/index/index',
+      })
+  },
+  goDetail() {
+    wx.navigateTo({
+      url: '/pages/partner/personal/helper/gongpai'
+    })
+  },
+  goOrder() {
+    app.varStorage.set('orderListReload', true)
+    wx.switchTab({
+      url: '/pages/common/order/order',
+    })
+  }
+})

@@ -1,0 +1,24 @@
+<!--pages/partner/personal/visitor/index.wxml-->
+<view>
+  <scroll-view scroll-y bindscrolltolower="load" lower-threshold="20">
+    <view class="wrap">
+      <view class="item" wx:for="{{list}}" wx:key="index">
+        <view class="avatar">
+          <image src="{{item.avatar}}" mode="widthFix"></image>
+        </view>
+        <view class="content">
+          <view class="name">
+            {{item.nickname}}
+          </view>
+          <view class="goods">
+            {{item.status===0?'看了':'买了'}}：{{item.product_name}}
+          </view>
+        </view>
+        <view class="time">
+          {{item.update_time}}
+        </view>
+      </view>
+      <no-data wx:if="{{list&&list.length===0 || loaded}}" list="{{list}}" />
+    </view>
+  </scroll-view>
+</view>

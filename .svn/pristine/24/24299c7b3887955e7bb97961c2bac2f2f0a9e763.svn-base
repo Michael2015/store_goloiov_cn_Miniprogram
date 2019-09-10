@@ -1,0 +1,66 @@
+<view class="detail">
+    <view class="info-wrap">
+        <view class="goods-info-wrap">
+            <view class="goods-info">
+                <view class="goods">
+                    <view class="col-1">
+                        <image src="{{orderInfo.image}}"></image>
+                    </view>
+                    <view class="col-2">
+                        <view class="f">
+                            <view class="title">{{orderInfo.store_name}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="order-info">
+                <view class="title">
+                    <view class='l'>商  品  描  述</view>
+                    <view class='r'>
+                    <view wx:for="{{desc_imgs}}" wx:for-index="index">
+                         <image src="{{item}}" data-index="{{index}}"  class="contactIcon" bindtap="change" data-msg='desc'></image>
+                    </view>
+                    </view>
+                </view>
+                 <view class="title">
+                    <view class='l'>商  家  服  务</view>
+                    <view class='r'>
+                          <view wx:for="{{service_imgs}}" wx:for-index="index">
+                         <image src="{{item}}" data-index="{{index}}"  class="contactIcon" bindtap="change" data-msg='service'></image>
+                    </view>
+                    </view>
+                </view>
+                 <view class="title">
+                    <view class='l'>物  流  服  务</view>
+                    <view class='r'>
+                        <view wx:for="{{express_imgs}}" wx:for-index="index">
+                         <image src="{{item}}" data-index="{{index}}"  class="contactIcon" bindtap="change" data-msg='express'></image>
+                    </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="area">
+                <view class="section">
+                    <textarea placeholder="说说哪里好嘛，其他顾客想知道" bindinput="setCommentText" /></view>
+                </view>
+            </view>
+
+             <view class="upUpoto">
+                <view class="selectPhoto" bindtap="selectPhoto">
+                    <image mode="widthFix" src='/assets/image/add.png' class="add_img"></image>
+                </view>
+                <view class="photo_view">
+                    <image wx:for="{{imgList}}" wx:key="{{index}}" src="{{item}}" mode="aspectFit" class="user_select_photo"></image>
+                </view>
+            </view>
+
+            <view>
+                <button class="submit" bindtap="save">提交评论</button>     
+            </view>
+    </view>
+
+   
+    <popup-contact partner="{{partnerInfo}}" wx:if="{{showContact}}" bindclose="closeContact" productId="{{orderInfo.product_id}}"></popup-contact>
+    <popup-shouhuo ref="shouhuo"></popup-shouhuo>
+</view>

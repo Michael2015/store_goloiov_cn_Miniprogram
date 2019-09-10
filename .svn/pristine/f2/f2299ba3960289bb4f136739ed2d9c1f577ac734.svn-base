@@ -1,0 +1,117 @@
+.search_nav {
+    width: 100vw;
+    background: #e70002;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    overflow: hidden;
+    display: flex;
+}
+
+.search_nav .search_nav_title {
+    font-size: 34rpx;
+    color: #fff;
+    display: block;
+    width: 100vw;
+    text-align: center;
+    margin-top: 23rpx;
+}
+
+.search_nav .search_input {
+    width: 72%;
+    height: 60rpx;
+    margin: 30rpx 3% 29rpx 24rpx;
+    overflow: hidden;
+    font-size: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: #fff;
+    border-radius: 36rpx;
+}
+
+.search_input input {
+    font-size: 32rpx;
+    color: #000;
+    display: block;
+    height: 100%;
+}
+
+.search_input_placeholder {
+    color: #d5d5d5;
+    font-size: 26rpx;
+}
+
+.search_nav .other {
+    width: 496rpx;
+    height: 496rpx;
+    background-color: #ffffff;
+    opacity: 0.2;
+    border-radius: 50%;
+    position: absolute;
+    right: -282rpx;
+    top: 244rpx;
+}
+
+
+.search_nav .search_icon {
+    width: 50rpx;
+    margin: 0 23rpx;
+    padding: 0;
+}
+
+
+.search_nav .other {
+    top: 90rpx;
+}
+
+.commodity_list .commodity_item {
+    width: 702rpx;
+    height: 168rpx;
+    background: #fff;
+    padding: 25rpx 19rpx;
+    box-sizing: border-box;
+    margin: 24rpx auto 0 auto;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.commodity_list .commodity_item image {
+    width: 120rpx;
+    height: 120rpx;
+    float: left;
+}
+
+.commodity_list .commodity_item .title_volume {
+    height: 120rpx;
+    width: 519rpx;
+    margin-left: 19rpx;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.commodity_list .commodity_item .title {
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.commodity_list .commodity_item .volume {
+    font-size: 24rpx;
+    color: #999999;
+}
+
+.index_search_swiper {
+    font-size: 26rpx;
+    width: 542rpx;
+    height: 60rpx;
+    color: #fff;
+}
+
+.index_search_swiper swiper-item {
+    display: flex;
+    align-items: center;
+}

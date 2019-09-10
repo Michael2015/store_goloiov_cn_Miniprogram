@@ -1,0 +1,59 @@
+const app = getApp()
+Component({
+  properties: {
+    data: {
+      type: Object,
+    },
+  },
+  data: {
+    showPlatoonPopup: false,
+  },
+  methods: {
+    //领取优惠券
+  getCoupon()
+  {
+    let coupon_id = this.data.data.coupon_id;
+    let coupon_title = this.data.data.coupon_title;
+    if(!coupon_id || !coupon_title) return;
+    wx.showModal({
+      title: '领取优惠券',
+      content: '您有一张券【'+coupon_title+'】，确定领取？',
+      showCancel: true,//是否显示取消按钮
+      cancelText:"放弃",//默认是“取消”
+      cancelColor:'lightgrey',//取消文字的颜色
+      confirmText:"领取",//默认是“确定”
+      confirmColor: 'red',//确定文字的颜色
+      success: function (res) {
+         if (res.cancel) {
+            //点击取消,默认隐藏弹框
+         } else {
+            //点击确定
+            app.http.post('/api/coupon/setcoupon', {
+              coupon_id: coupon_id
+            }).then(res => {
+              wx.showToast({
+                title: '领取成功',
+                icon: 'none'
+              })
+            })
+         }
+      },
+   })
+  },
+    openPlatoonPopup() {
+      this.setData({
+        showPlatoonPopup: true
+      })
+    },
+    closePlatoonPopup() {
+      this.setData({
+        showPlatoonPopup: false
+      })
+    },
+    toGPDesc() {
+      wx.navigateTo({
+        url: '/pages/partner/personal/helper/gongpai'
+      })
+    }
+  }
+})

@@ -1,0 +1,47 @@
+<view class="index">
+    <view class="popup" wx:if="{{showAuth}}">
+        <view class="t border-bottom-global">微信登录万车品需要您的</view>
+        <view class="i border-bottom-global">
+            <view>· 微信名称</view>
+            <view>· 微信头像</view>
+        </view>
+        <view class="d">用于获取您的订单数据</view>
+        <view class="btn">
+            <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="handleUserInfo" data-opentype='getUserInfo' class="btn-getuser">登录</button>
+            <!--<button open-type="getPhoneNumber" lang="zh_CN" bindgetuserinfo="handleUserInfo" data-opentype='getPhoneNumber' class="btn-getuser">授权</button>-->
+        </view>
+    </view>
+    <view class="popup popup-wx-phone" wx:if="{{showAuthPhone}}">
+        <view class="t border-bottom-global">微信登录万车品需要您的</view>
+        <view class="i border-bottom-global">
+            <view>· 手机号码</view>
+        </view>
+        <view class="d">用于获取您的订单数据</view>
+        <view class="btn">
+            <button open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="handlePhoneNumber" class="btn-getuser">验证</button>
+        </view>
+    </view>
+    <view class="popup-submit-phone" wx:if="{{showBindPhone}}">
+        <view class="title">{{'微信手机授权失败，请重新验证'}}</view>
+        <view>
+            <view class="col">
+                <view class="icon">
+                    <image  mode="widthFix" src='/assets/image/phone.png' class="phone"></image>
+                </view>
+                <input type="number" placeholder="请输入11位手机号码" placeholder-class="input_placeholder" bindinput="setPhone" />
+            </view>
+            <view class="col">
+                <view class="icon">
+                    <image  mode="widthFix" src='/assets/image/check.png' class="check" ></image>
+                </view>
+                <input type="number" maxlength="4" placeholder="请输入验证码" placeholder-class="input_placeholder" bindinput="setCode" />
+                <view class="check-code" bindtap="sendCode">{{checkText}}</view>
+            </view>
+        </view>
+        <!-- <view class="get-phone">
+            <button  open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="handlePhoneNumber" ><text>微信手机登录</text></button>
+        </view> -->
+        <view class="{{'submit'+ ((phone&&code)? '':' disabled')}}" bindtap="submit">登录</view>
+    </view>
+    <view class="mask" wx:if="{{showAuth||showAuthPhone||showBindPhone}}"></view>
+</view>

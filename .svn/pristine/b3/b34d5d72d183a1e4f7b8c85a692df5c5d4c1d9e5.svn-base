@@ -1,0 +1,152 @@
+import Contact from '../../../utils/contactUser/contactUser'
+const app = getApp()
+let self;
+Page({
+  data: {
+    userInfo: {},
+    getinfo: {},
+    getnotice: [],
+    getProductList: [],
+    page: 1,
+    getPartnerInfo: {},
+    loading: false, // 加载中
+    loaded: false // 加载完毕
+  },
+  getnotice() {
+    app.http.get('/api/customer/mall/getnotice').then(res => {
+      this.setData({
+        getnotice: res
+      })
+      this.getProductList()
+      this.getPartnerInfo()
+    })
+  },
+  register() {
+    wx.navigateTo({
+      url: '/pages/partner/personal/partner/invite?share_id=' + this.data.getPartnerInfo.uid
+    })
+  },
+  getinfo() {
+    app.http.get('/api/customer/mall/getinfo').then(res => {
+      this.setData({
+        getinfo: res
+      })
+      this.getnotice()
+    })
+  },
+  getProductList() {
+    const size = 20 // 默认一页条数
+    if (this.data.loading) return // 已经在加载中了
+    wx.showLoading({
+      title: '加载中',
+    })
+    this.data.loading = true
+    app.http.get('/api/customer/mall/getProductList', {
+      page: this.data.page
+    }).then(res => {
+      let getProductList = this.data.getProductList.concat(res)
+      this.setData({
+        getProductList
+      }, () => {
+        wx.hideLoading()
+        this.data.loading = false
+        if (res && res.length < size) {
+          this.setData({
+            loaded: true
+          })
+        } else {
+          this.data.page++
+        }
+      })
+    })
+  },
+  getPartnerInfo() {
+    app.http.get('/api/customer/mall/getPartnerInfo').then(res => {
+      app.globalData.partnerInfo = res;
+      this.setData({
+        getPartnerInfo: res
+      }, () => {
+        wx.hideLoading()
+      })
+    })
+  },
+  goDetails(e) {
+    let getProductList = this.data.getProductList.filter(ele => {
+      return ele.id == e.currentTarget.id
+    })
+    app.varStorage.set('storeDetail', getProductList[0])
+    // wx.navigateTo({
+    //   "url": "/pages/customer/share/index"
+    // })
+    wx.navigateTo({
+      url: '/pages/customer/detail/detail?id=' + e.currentTarget.id
+    })
+  },
+  nextPage() {
+    if (!this.data.loaded) { // 没有到最后一页
+      this.getProductList()
+    }
+  },
+  onLoad: function () {
+    self = this;
+    this.getinfo()
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.getStorage({
+      key: 'noviceShow',
+      success(e) {
+        self.setData({
+          noviceShow: 0
+        })
+      },
+      fail(e) {
+        self.setData({
+          noviceShow: 1
+        })
+      }
+    })
+  },
+  contact() {
+    Contact.show(this.data.getPartnerInfo)
+  },
+  onReady() {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().toggleToClient()
+    }
+  },
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0
+      })
+    }
+  },
+  touchMove() {
+    return
+  },
+  goHelper() {
+    this.closeNovice();
+    wx.navigateTo({
+      "url": "/pages/partner/personal/helper/index"
+    })
+  },
+  goHelperAll() {
+    wx.navigateTo({
+      "url": "/pages/partner/useDesc/index"
+    })
+  },
+  closeNovice() {
+    wx.setStorage({
+      key: 'noviceShow',
+      data: 1,
+      success() {
+        self.setData({
+          noviceShow: 0
+        })
+      }
+    })
+  }
+})

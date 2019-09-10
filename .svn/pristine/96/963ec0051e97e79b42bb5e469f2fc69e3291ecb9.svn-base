@@ -1,0 +1,68 @@
+/* pages/partner/personal/partner/invite.wxss */
+.wrap{
+  min-height: 100vh;
+  background: #f9f9f9;
+  position: relative;
+}
+.content{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 64%;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 0 60rpx 40rpx;
+  text-align: center;
+}
+.avatar{
+  width: 78rpx;
+  height: 78rpx;
+  border-radius: 50%;
+  background: #fff;
+  overflow: hidden;
+  border: 12rpx solid #f9f9f9;
+  position: absolute;
+  left:50%;
+  top: -45rpx;
+  transform: translateX(-50%);
+}
+.avatar image{
+  width: 100%;
+  height: auto;
+}
+.nickname{
+  font-size: 28rpx;
+  color:#333;
+  font-weight: 800;
+  padding: 80rpx 0 40rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.title{
+  font-size: 28rpx;
+  color:#e70002;
+}
+.extra{
+  font-size: 24rpx;
+  color:#666;
+  /* text-align: left; */
+  margin-top: 28rpx;
+  line-height: 1.6;
+  min-height: 150rpx;
+}
+.btn{
+  color:#fff;
+  font-size: 32rpx;
+  line-height: 80rpx;
+  padding: 0 28rpx;
+  box-sizing: border-box;
+  min-width: 240rpx;
+  margin: 48rpx auto 0;
+  display: inline-block;
+  background: linear-gradient(to right, #ef5355, #e70203);
+  border-radius: 40rpx;
+  text-align: center;
+}

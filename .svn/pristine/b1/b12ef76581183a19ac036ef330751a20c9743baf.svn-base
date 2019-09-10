@@ -1,0 +1,26 @@
+<view class="add">
+    <view class="form">
+        <view class="row">
+            <view class="col-1">持卡人</view>
+            <view class="col-2">
+                <input type="text" placeholder="请输入持卡人姓名" placeholder-class="placeholder" value="{{name}}" bindinput="setname"/>
+            </view>
+        </view>
+        <view class="row">
+            <view class="col-1">银行卡号</view>
+            <view class="col-2">
+                <input type="text" placeholder="请输入银行卡号" placeholder-class="placeholder"  bindinput="setcardid" maxlength="24" value="{{cardid}}"/>
+            </view>
+        </view>
+        <!-- <view class="row">
+            <view class="col-1">银行</view>
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{bank_list}}">
+                <view class="picker">{{banktext == ''?'选择银行':banktext}}</view>
+            </picker>
+        </view> -->
+        <view class="row desc">
+            <view>*银行持卡人必须与当前微信账户实名用户相同</view>
+        </view>
+    </view>
+    <view class="button" bindtap="save">确定</view>
+</view>

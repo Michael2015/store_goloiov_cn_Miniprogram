@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view class="view">
+    <view class="content">
+        <image src="../../../assets/image/paysuccess.png" mode="widthFix" class="successPng"></image>
+        <view class="title">支付成功</view>
+        <view class="price">
+            <text class="min">￥</text>
+            <text>{{total_price}}</text>
+            <text class="min">元</text>
+        </view>
+        <view class="tips">
+            <!-- <view>订单已加入公排排队系统 当前公排位置：{{position}} </view> -->
+            <view class="goDetail" bindtap="goDetail">了解公排规则》</view>
+        </view>
+        <button class="goOrder" bindtap="goOrder">查看订单</button>
+        <button class="goIndex" bindtap="goIndex">返回首页</button>
+    </view>
+</view>

@@ -1,0 +1,263 @@
+import compositePoster from '../../../utils/compositePoster/compositePoster'
+
+const app = getApp()
+let WxParse = require('../../../utils/wxParse/wxParse.js')
+var self;
+Page({
+  data: {
+    // 商品id
+    id: '',
+    // 轮播图片
+    imgUrls: [],
+    title: {
+      title: '',
+      price: 0,
+      sale: 0
+    },
+    // 价格
+    price: {},
+    // 商品详情
+    description: {},
+    // 购买记录分页
+    buyRecordPage: 1,
+    // 购买记录分页大小
+    buyRecordPageSize: 10,
+    buyRecordList: [],
+    // 购买记录是否有更多数据
+    buyRecordMore: true,
+    // 访客记录页码
+    visitorPage: 1,
+    // 访客记录页码大小
+    visitorPageSize: 10,
+    // 访客记录数据
+    visitorList: [],
+    // 访客记录是否有更多数据
+    visitorMore: true,
+    tabs: ['价格', '详情', '购买记录', '访客'],
+    // 当前tab页下标
+    currentTab: 0,
+    // 内容swiper高度
+    contentSwiperHeight: 0,
+    // 滚动窗口高度
+    scrollViewHeight: '959rpx'
+  },
+  onLoad: function (options) {
+    self = this;
+    this.setData({
+      id: options.id || 1, // 获取商品id
+      info: app.varStorage.get('storeDetail')
+    })
+    // 调用接口获取详情数据
+    this.getDetail()
+    // 获取上牌详情
+    this.getPrice()
+    app.varStorage.del('isShareBack')
+  },
+  // 点击tab导航
+  handleTabChange(event) {
+    this.setData({
+      currentTab: event.detail.current
+    })
+  },
+  tabPageChange(event) {
+    wx.showLoading()
+    let index = event.detail.current
+    this.setData({
+      contentSwiperHeight: 0,
+      currentTab: index,
+      scrollViewHeight: '959rpx',
+      buyRecordMore: true,
+      buyRecordList: [],
+      buyRecordPage: 1,
+      visitorList: [],
+      visitorPage: 1,
+      visitorMore: true
+    })
+    if (index === 0) {
+      // 获取价格
+      this.getPrice()
+    } else if (index === 1) {
+      // 获取商品详情
+      this.getDescription()
+    } else if (index === 2) {
+      // 获取购买记录
+      this.getRecord()
+    } else if (index === 3) {
+      // 获取访客记录
+      this.getVisitor()
+    } else {
+      console.log('没有该类型')
+    }
+  },
+  // 页面滚动到底部
+  handleScrollToLower() {
+    console.log('滚动到底部')
+    // 购买记录加载更多
+    if (this.data.currentTab === 2 && this.data.buyRecordMore) {
+      let page = this.data.buyRecordPage + 1
+      this.setData({
+        buyRecordPage: page
+      })
+      this.getRecord()
+    }
+    // 访客记录加载更多
+    if (this.data.currentTab === 3 && this.data.visitorMore) {
+      let page = this.data.visitorPage + 1
+      this.setData({
+        visitorPage: page
+      })
+      this.getVisitor()
+    }
+  },
+  getDetail() {
+    wx.showLoading()
+    app.http.get('/api/partner/store/getinfo', {
+      product_id: this.data.id
+    }).then(res => {
+      wx.hideLoading()
+      res.image = res.slider_image[0]
+      app.varStorage.set('storeDetail', res)
+      this.setData({
+        info: res,
+        imgUrls: res.slider_image,
+        share_url_query: res.share_url_query,
+        title: {
+          title: res.store_name,
+          price: res.price,
+          sale: res.sales
+        }
+      })
+    }).catch((e) => {
+      console.log(e)
+      wx.hideLoading()
+    })
+  },
+  getPrice() {
+    wx.showLoading()
+    app.http.get('/api/partner/store/price', {
+      product_id: this.data.id
+    }).then(res => {
+      wx.hideLoading()
+      this.setData({
+        price: res
+      })
+      this.initContentSwiperHeight(0)
+    }).catch((e) => {
+      console.log(e)
+      wx.hideLoading()
+    })
+  },
+  // 获取详情描述
+  getDescription() {
+    wx.showLoading()
+    app.http.get('/api/partner/store/detail', {
+      product_id: this.data.id
+    }).then(res => {
+      wx.hideLoading()
+      let description = res.description.replace(/\<img/gi, '<img style="width:100%;height:auto" ')
+      description = description.replace(/float[\s]*:[\s]*(left|right)[\s]*;*/gi, 'float: auto;')
+      this.setData({
+        description: WxParse.wxParse('description', 'html', description, this, 5)
+        // description: description
+      })
+      this.initContentSwiperHeight(1)
+    }).catch((e) => {
+      wx.hideLoading()
+    })
+  },
+  // 获取购买记录
+  getRecord() {
+    console.log('获取购买记录')
+    wx.showLoading()
+    app.http.get('/api/partner/store/salesRecord', {
+      product_id: this.data.id,
+      page: this.data.buyRecordPage,
+      limit: this.data.buyRecordPageSize
+    }).then(res => {
+      wx.hideLoading()
+      this.data.buyRecordList.push(...res)
+      this.setData({
+        buyRecordList: this.data.buyRecordList
+      })
+      this.initContentSwiperHeight(2)
+      if (res.length < this.data.buyRecordPageSize) {
+        this.setData({
+          buyRecordMore: false
+        })
+      }
+    }).catch((e) => {
+      wx.hideLoading()
+    })
+  },
+  // 获取访客记录
+  getVisitor() {
+    console.log('获取访客记录')
+    wx.showLoading()
+    app.http.get('/api/partner/store/visitor', {
+      product_id: this.data.id,
+      page: this.data.visitorPage,
+      limit: this.data.visitorPageSize
+    }).then(res => {
+      wx.hideLoading()
+      this.data.visitorList.push(...res)
+      this.setData({
+        visitorList: this.data.visitorList
+      })
+      this.initContentSwiperHeight(3)
+      if (res.length < this.data.visitorPageSize) {
+        this.setData({
+          visitorMore: false
+        })
+      }
+    }).catch((e) => {
+      wx.hideLoading()
+    })
+  },
+  // 初始化内容swiper高度
+  initContentSwiperHeight(index) {
+    wx.createSelectorQuery().select('#item-wrap' + index).boundingClientRect().exec(rect => {
+      let h = rect[0].height
+      if (h < 400) {
+        h = 400
+      }
+      this.setData({
+        contentSwiperHeight: h
+      })
+      setTimeout(() => {
+        this.setData({
+          scrollViewHeight: '100%'
+        })
+      }, 100)
+      wx.hideLoading()
+    })
+  },
+  getShareImg() {
+    compositePoster.createPoster({
+      data: Object.assign(self.data.info, {
+        uid: app.globalData.userInfo.uid,
+        pid: app.globalData.userInfo.uid
+      })
+    })
+  },
+  goSettlement() {
+    wx.navigateTo({
+      url: `/pages/partner/settlement/index?id=${self.data.info.id}`
+    })
+  },
+  onUnload() {
+    wx.hideLoading()
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: '发现一个好产品【' + self.data.title.title + '】推荐给你！',
+      path: `pages/index/index?type=share&s=${app.globalData.userInfo.uid}&p=${app.globalData.userInfo.uid}&st=${self.data.info.id}`,
+      imageUrl: self.data.imgUrls[0]
+    }
+  },
+  // 滑动详情页
+  descTouch(event) {
+    console.log(44477)
+    // 动态计算swiper高度
+    this.initContentSwiperHeight(1)
+  },
+})

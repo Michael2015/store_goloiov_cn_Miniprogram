@@ -1,0 +1,14 @@
+<!--components/order/popup/shouhuo.wxml-->
+<!-- 收货弹窗 -->
+<view wx:if="{{show}}">
+  <view class="mask" bindtap="hide"></view>
+  <view class="wrap">
+    <view class="title">该商品参与免单活动，请选择免单类型</view>
+    <view class="one">1.快速免单：您可以邀请好友购买或者助攻推荐人参与免单活动，实现快速免单；</view>
+    <view class="two">2.自购免单：您可以只能通过自己购买参与免单活动；不能通过邀请好友实现快速免单；</view>
+    <view class="btn-wrap">
+      <view class="active" bindtap="left">快速免单</view>
+      <view bindtap="right">自购免单</view>
+    </view>
+  </view>
+</view>

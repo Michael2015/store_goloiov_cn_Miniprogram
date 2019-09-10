@@ -1,0 +1,16 @@
+<view class="track">
+    <view class="wrap">
+        <block wx:if="{{list.length}}">
+        <block wx:for="{{list}}" wx:key="{{index}}">
+            <view class="item">
+                <view class="point"></view>
+                <view class="info">{{item.AcceptStation}}</view>
+                <view class="time">{{item.AcceptTime}}</view>
+            </view>
+        </block>
+        </block>
+        <block wx:else>
+            <view style="text-align: center;padding: 24rpx;">暂无物流信息</view>
+        </block>
+    </view>
+</view>

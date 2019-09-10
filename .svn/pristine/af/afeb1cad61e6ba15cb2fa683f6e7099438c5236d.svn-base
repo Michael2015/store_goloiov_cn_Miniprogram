@@ -1,0 +1,158 @@
+page {
+  background: #F9F9F9;
+}
+
+.content {
+  widows: 702rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  background: #fff;
+  margin: 0 auto;
+  margin-top: 24rpx;
+  height: auto;
+}
+
+.add_address_btn {
+  min-height: 96rpx;
+  height: calc(96rpx + constant(safe-area-inset-bottom));
+  height: calc(96rpx + env(safe-area-inset-bottom));
+  width: 100vw;
+  background-color: #e70002;
+  font-size: 36rpx;
+  color: #ffffff;
+  border-radius: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 88rpx;
+}
+
+.item .title {
+  width: 150rpx;
+  height: 43rpx;
+  color: #666666;
+  font-size: 28rpx;
+  text-align: left;
+  margin-right: 49rpx;
+}
+
+.item .title {
+  font-size: 28rpx;
+}
+
+.search_input_placeholder,
+.picker {
+  font-size: 32rpx;
+  color: #d5d5d5;
+}
+
+.item input {
+  font-size: 28rpx;
+  width: 400rpx;
+}
+
+.item textarea {
+  height: 152rpx;
+  width: 250px;
+}
+
+.item.textarea {
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  border-bottom: none;
+  align-items: flex-start;
+}
+
+.openMap {
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 25px;
+  border: solid 1px #e70002;
+  background: #fff;
+  font-size: 24rpx;
+  color: #e70002;
+  padding: 0;
+  margin: 0;
+  float: left;
+}
+
+picker {
+  width: 450rpx;
+}
+
+.content .head{
+  font-size: 30rpx;
+}
+
+.content .item
+{
+  margin: 40rpx 0;
+  display: block;
+}
+
+.content .item .md-col-12
+{
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+.content .item .left
+{
+  float: left;
+  margin-right: 15rpx;
+}
+.content .item .right
+{
+  float: right;
+  font-size: 25rpx;
+  color: #999999
+}
+.content .item .md-col-4
+{
+  height: 40rpx;
+  margin-top: 5rpx;
+  line-height: 40rpx;
+}
+.content .item .md-col-12.h{
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size:28rpx;
+}
+
+.content .item .h .avatar-image
+{
+  height: 40rpx;
+  width: 40rpx;
+  border-radius: 40rpx;
+}
+.content .item .c{
+  font-size: 28rpx;
+}
+.content .item .swiper-wrap image
+{
+  width: 100%
+}
+.no-more {
+  text-align: center;
+  color: #aaa;
+  font-size: 24rpx;
+  box-sizing: border-box;
+  visibility:visible;
+}
+.content .comment_pics
+{
+  display: flex;
+}
+.content .item .avatar-image-2
+{
+width:120rpx;
+height:120rpx;
+margin-right: 20rpx;
+}
+

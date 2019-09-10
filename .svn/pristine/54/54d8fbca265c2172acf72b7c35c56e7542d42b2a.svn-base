@@ -1,0 +1,204 @@
+@import '/assets/wxss/search.wxss';
+@import '/assets/wxss/tutorial.wxss';
+
+page {
+    background: #F9F9F9
+}
+
+.search_nav {
+    height: 164rpx;
+}
+
+.headImg_call image.user_head {
+    width: 100rpx;
+    height: 100rpx;
+    margin-right: 25rpx;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.search_nav .head {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.head {
+    padding: 8rpx 24rpx 0 24rpx;
+    color: #fff;
+}
+
+.goPartner {
+    width: 175rpx;
+    height: 44rpx;
+    line-height: 40rpx;
+    background-color: #ffffff;
+    border-radius: 19px 0px 0px 19px;
+    opacity: 0.84;
+    position: absolute;
+    right: 0;
+    top: 26rpx;
+    font-size: 30rpx;
+    color: #e80608;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.price {
+    font-size: 24rpx;
+    color: #c01f1f;
+    line-height: 1;
+    bottom: 22rpx;
+    position: absolute;
+}
+.price small{
+    color: #999;
+}
+
+.commodity_list {
+    height: calc(100vh - 164rpx);
+    margin-top: 164rpx
+}
+
+.commodity_list .commodity_item .title {
+    line-height: 32rpx;
+}
+
+.title_swiper {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title_swiper .title {
+    font-size: 40rpx;
+}
+
+.headImg_call {
+    position: relative;
+}
+
+.headImg_call .contactIcon {
+    width: 44rpx;
+    height: 44rpx;
+    position: absolute;
+    right: 12rpx;
+    bottom: 5rpx;
+}
+
+.no-data {
+    color: #999;
+    font-size: 24rpx;
+    text-align: center;
+    padding: 32rpx 0;
+
+}
+.commodity_list .commodity_item .coupon
+{
+  height: 48rpx;
+  width: 48rpx;
+  float: right;
+  position: absolute;
+  right:30rpx;
+  bottom: 18rpx;
+}
+.commodity_list .commodity_item .coupon2
+{
+  float: right;
+  position: absolute;
+  right:30rpx;
+  bottom: 57rpx;
+  height: 35rpx;
+  line-height: 35rpx;
+  background: #AA0000;
+  color: #fff;
+  width: 130rpx;
+  text-align: center;
+  font-size: 20rpx;
+  border: 1rpx solid #AA0000;
+}
+.commodity_list .commodity_item .coupon3
+{
+  height: 33rpx;
+  line-height: 35rpx;
+  bottom: 23rpx;
+  border: 1rpx solid #AA0000;
+  color: #999;
+  position: absolute;
+  right:30rpx;
+  width: 130rpx;
+  text-align: center;
+  overflow: hidden;
+  font-size: 20rpx;
+}
+
+.modal-mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.5;
+    overflow: hidden;
+    z-index: 9000;
+    color: #fff;
+  }
+.modal-dialog {
+    width: 560rpx;
+    position: fixed;
+    top: -4%;
+    left: 12%;
+    z-index: 9999;
+  }
+.modal-dialog image
+{
+    width:560rpx;
+    height: 1120rpx;
+}
+.modal-title {
+    color: #030303;
+    text-align: center;
+    padding: 15rpx 0;
+  }
+.modal-content {
+    position: fixed;
+    width: 560rpx;
+    text-align: center;
+    top: 46%;
+    left: 12%;
+    color: #fff;
+    font-weight: bold;
+    height: 140rpx;
+  }
+  .modal-content .nav{
+      width: 50%;
+      margin: 0 auto;
+  }
+  .modal-content .head
+  {
+      font-size: 45rpx;
+      color: #AA0000;
+  }
+  .modal-content .title
+  {
+      text-align: left;
+      color:#555;
+      font-size: 20rpx;
+      font-weight: normal;
+      font-family: 'Courier New', Courier, monospace;
+  }
+
+  .modal-dialog .close
+  {
+    width: 560rpx;
+    text-align: center;
+    position: fixed;
+    top: 72%;
+    left: 12%;
+  }
+  .modal-dialog .close image{
+      width: 50rpx;
+      height: 50rpx;
+  }

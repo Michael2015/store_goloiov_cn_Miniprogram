@@ -1,0 +1,7 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "公排介绍",
+  "navigationBarBackgroundColor": "#e70002",
+  "navigationBarTextStyle": "white",
+  "disableScroll": true
+}

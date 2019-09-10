@@ -1,0 +1,68 @@
+/**
+ * 使用方法 
+ * json配置引用组件，js导入login.js 页面放置 <login id='login-view'/> 标签
+    Login.show({
+      autoClose: false, 成功后自动关闭 默认 true
+      close(){
+        console.log('已关闭') // 关闭回掉 autoClose 为 true 时可选参数
+      }
+      success(res) { //成功回掉
+        console.log(res)
+      },
+      error(res) { // 失败回掉
+        console.log(res)
+      }
+    })
+    Login.close().then(() => {
+      console.log('已关闭') // 关闭回掉
+    })
+ */
+Component({
+  data: {
+    headStyle: getApp().globalData.headStyle,
+    callBack: null,
+    show: false
+  },
+  methods: {
+    touchMove() {
+      return;
+    },
+    loginSuccess() {
+      let tdc = this.data.callBack;
+      tdc.success && tdc.success([1, 2, 3, 4, 5, 6, 7])
+      if (tdc.autoClose !== false) {
+        this.close()
+        tdc.close && tdc.close()
+      }
+    },
+    loginError() {
+      this.data.callBack.error && this.data.callBack.error([1, 2, 3, 4, 5, 6, 7])
+    },
+    onGotUserInfo(e) {
+      if (e.detail.errMsg.indexOf('fail') >= 0) {
+        wx.showToast({
+          title: '获取用户信息失败',
+          icon: 'none'
+        })
+      } else {
+        console.log(e.detail)
+      }
+    },
+    close() {
+      return new Promise((resolve) => {
+        this.setData({
+          show: false
+        }, () => {
+          resolve()
+        })
+      })
+    },
+    show(props) {
+      this.setData({
+        show: true,
+        callBack: props[0] ? props[0] : {}
+      })
+      return Promise.resolve()
+    }
+  }
+})

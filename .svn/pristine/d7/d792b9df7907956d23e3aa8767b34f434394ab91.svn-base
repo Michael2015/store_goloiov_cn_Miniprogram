@@ -1,0 +1,33 @@
+<!--pages/partner/personal/partner/index.wxml-->
+<scroll-view scroll-y="{{true}}">
+<view class="wrap">
+  <view class="top">
+    <view class="avatar">
+      <image src="{{avatar}}"></image>
+    </view>
+    <view class="name">{{name}}</view>
+    <view class="sum"><text>{{all}}</text> 人</view>
+  </view>
+  <view class="search-wrap">
+    <image src="/assets/image/p-search.png" mode="widthFix" class="icon"></image>
+    <input type="text" bindinput="oninput" placeholder="请输入合伙人昵称" placeholder-class="placeholder" />
+  </view>
+  <view class="list">
+    <view class="item" wx:for="{{list}}" wx:key="index">
+      <view class="avatar">
+        <image src="{{item.avatar}}"></image>
+      </view>
+      <view class="name">{{item.nickname}}</view>
+      <view class="badge" wx:if="{{item.lower_nums}}">{{item.lower_nums}}</view>
+    </view>
+  </view>
+  <no-data wx:if="{{list&&list.length === 0}}" />
+  <view class="bottom">
+    <button class="btn" open-type="share">邀请合伙人</button>
+    <!-- 显示上级合伙人的按钮 -->
+    <!-- <view class="contact" bindtap="showHigher"><image src="{{higher.avatar||default}}" wx:if="{{higher||default}}"></image></view> -->
+  </view>
+  <!-- 弹出上级 -->
+  <contact-user id="contact-view"></contact-user>
+</view>
+</scroll-view>

@@ -1,0 +1,99 @@
+<view class="detail">
+    <view class="info-wrap">
+        <view class="user-info">
+            <view>
+                <view class="col-1">
+                    <view class="icon"></view>
+                </view>
+                <view class="col-2">
+                    <view class="f">收货人: <text class="name">{{orderInfo.real_name}}</text><text class="tel">{{orderInfo.user_phone}}</text></view>
+                    <view class="s">{{orderInfo.user_address}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="goods-info-wrap">
+            <view class="goods-info">
+                <view class="goods" bindtap="toDetail">
+                    <view class="col-1">
+                        <image src="{{orderInfo.image}}"></image>
+                    </view>
+                    <view class="col-2">
+                        <view class="f">
+                            <view class="title">{{orderInfo.store_name}}</view>
+                            <view class="price">¥{{orderInfo.pay_price}}</view>
+                        </view>
+                        <view class="s">
+                            <view class="desc">{{orderInfo.suk}}</view>
+                            <view class="qty">X{{orderInfo.total_num}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="remark" wx:if="{{orderInfo.mark}}">
+                    <view class="col-1">备注</view>
+                    <view class="col-2">{{orderInfo.mark}}</view>
+                </view>
+                <view class="total">合计: <text>¥{{orderInfo.pay_price}}</text></view>
+            </view>
+        </view>
+    </view>
+    <view class="order-info">
+        <view class="title">订单详情</view>
+        <view class="item">
+            <view class="row">
+                <view class="col-1">订单来源:</view>
+                <view class="col-2">{{orderInfo.nickname}}</view>
+            </view>
+            <view class="row">
+                <view class="col-1">订单编号:</view>
+                <view class="col-2">{{orderInfo.order_id}}</view>
+            </view>
+            <view class="row">
+                <view class="col-1">下单时间:</view>
+                <view class="col-2">{{orderInfo.add_time}}</view>
+            </view>
+            <view class="row">
+                <view class="col-1">物流信息:</view>
+                <view class="col-2">
+                    <block wx:if="{{orderInfo.delivery_id}}">
+                        <view class="left">{{orderInfo.delivery_name}}({{orderInfo.delivery_id}})</view>
+                        <view class="right" bindtap="toTrack" data-id="{{orderInfo.delivery_id}}" data-name="{{orderInfo.delivery_name}}">查看物流</view>
+                    </block>
+                    <block wx:else>
+                        <view class="left">暂无物流信息</view>
+                    </block>
+                </view>
+            </view>
+            <view class="row">
+                <view class="col-1">订单状态:</view>
+                <view class="col-2">
+                    <block wx:if="{{orderInfo.status_of_order === 0}}">待支付</block>
+                    <block wx:if="{{orderInfo.status_of_order === 1}}">待发货</block>
+                    <block wx:elif="{{orderInfo.status_of_order === 2}}">退款中</block>
+                    <block wx:elif="{{orderInfo.status_of_order === 3}}">已发货</block>
+                    <block wx:elif="{{orderInfo.status_of_order === 4}}">已退款</block>
+                    <block wx:elif="{{orderInfo.status_of_order === 5 && (orderInfo.status == 2 || orderInfo.status == 4)}}">已收货</block>
+                    <block wx:elif="{{orderInfo.status_of_order === 5 &&  orderInfo.status == 3}}">已评价</block>
+                </view>
+            </view>
+            <block wx:if="{{orderInfo.status_of_order === 4}}">
+                <view class="row">
+                    <view class="col-1">退款时间:</view>
+                    <view class="col-2">{{orderInfo.refund_reason_time}}</view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view style="margin-top:30rpx;color:#b1b1b1;text-align:center;font-size:24rpx;line-height:1.7;" wx:if="{{orderInfo.is_platoon == 1}}">适用免单奖励计划的商品不适用7天无理由退货</view>
+    <view class="action-bar" wx:if="{{orderInfo.is_allow_operation==1}}">
+        <view class="btn" bindtap="copyInfo">复制信息</view>
+        <view class="btn" bindtap="contact">联系卖家</view>
+        <view class="btn" wx:if="{{orderInfo.status_of_order === 0}}" bindtap="goPay">去支付</view>
+        <view class="btn" wx:if="{{orderInfo.status_of_order === 1}}" bindtap="refund">申请退款</view>
+        <view class="btn" wx:if="{{orderInfo.status_of_order === 3}}" bindtap="confirmOrder">确认收货</view>
+        <view class="btn" wx:if="{{orderInfo.status_of_order === 5 && orderInfo.is_allow_refund !== 0}}" bindtap="toSalesBack">申请退货</view>
+        <view class="btn" wx:if="{{orderInfo.status_of_order === 5 && orderInfo.status !== 3}}" bindtap="comment">去评价</view>
+    </view>
+    <!--<contact-user id="contact-view"></contact-user>-->
+    <popup-contact partner="{{partnerInfo}}" wx:if="{{showContact}}" bindclose="closeContact" productId="{{orderInfo.product_id}}"></popup-contact>
+    <popup-shouhuo ref="shouhuo"></popup-shouhuo>
+</view>

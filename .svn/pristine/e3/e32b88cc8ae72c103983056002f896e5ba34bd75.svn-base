@@ -1,0 +1,63 @@
+/* pages/partner/personal/visitor/index.wxss */
+page{
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+.wrap{
+  padding: 24rpx;
+}
+scroll-view{
+  height: 100vh;
+  box-sizing: border-box;
+}
+.item{
+  display: flex;
+  align-items: center;
+  min-height: 148rpx;
+  background: #fff;
+  border-radius: 74rpx;
+  padding: 0 28rpx;
+  margin-bottom: 22rpx;
+}
+.item .avatar{
+  width:92rpx;
+  height: 92rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #ddd;
+  border:2px solid #f9f9f9; 
+}
+.item .avatar image{
+  width: 100%;
+  height: auto;
+}
+.item .content{
+  padding-left: 24rpx;
+  box-sizing: border-box;
+  width: calc(100% - 242rpx);
+}
+.item .content .name{
+  font-size: 28rpx;
+  color:#333;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.item .content .goods{
+  font-size: 24rpx;
+  color:#999;
+  margin-top: 18rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.item .time{
+  font-size:20rpx;
+  color:#999;
+  padding-bottom: 46rpx;
+  padding-right: 24rpx;
+  width: 150rpx;
+  box-sizing: border-box;
+  text-align: right;
+}

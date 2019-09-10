@@ -1,0 +1,11 @@
+@import '/assets/wxss/share.wxss';
+
+.back {
+    width: 220rpx;
+    height: 72rpx;
+    border-radius: 36px;
+    border: solid 1px #e4e4e4;
+    font-size: 28rpx;
+    background-color: white;
+    margin-top: 109rpx;
+}

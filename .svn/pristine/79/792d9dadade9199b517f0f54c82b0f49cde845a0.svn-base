@@ -1,0 +1,100 @@
+let app
+App({
+  onLaunch(options) {
+    app = this
+    // 版本更新
+    const updateManager = wx.getUpdateManager()
+    updateManager.onUpdateReady(function () {
+      wx.showModal({
+        title: '更新提示',
+        content: '新版本已经准备好，是否重启应用？',
+        success: function (res) {
+          if (res.confirm) {
+            updateManager.applyUpdate()
+          }
+        }
+      })
+    })
+  },
+  http: {
+    request(url, method, data) {
+      wx.showNavigationBarLoading()
+      return new Promise((resolve, reject) => {
+        url = `${app.globalData.HOST}${url}`
+        let sendData = {
+          url,
+          method,
+          data: {
+            token: app.globalData.token
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success(res) {
+            let {
+              data
+            } = res;
+            if (data.code === 200) {
+              wx.hideNavigationBarLoading()
+              resolve(data.data)
+            } else {
+              wx.hideLoading()
+              wx.showModal({
+                content: data.msg ? data.msg : '系统错误,稍后重试 ',
+                showCancel: false,
+                success() {
+                  wx.hideLoading()
+                }
+              })
+              reject(data)
+            }
+          },
+          fail(err) {
+            wx.hideNavigationBarLoading()
+            wx.hideLoading()
+            reject(err)
+          }
+        }
+        if (data) {
+          sendData['data'] = Object.assign({}, sendData['data'], data)
+        }
+        wx.request(sendData)
+      })
+    },
+    get(url, data = {}) {
+      return this.request(url, "GET", data)
+    },
+    post(url, data = {}) {
+      return this.request(url, "POST", data)
+    },
+    socket() {
+      //
+    }
+  },
+  varStorage: {
+    set(name, val) {
+      this[name] = val
+    },
+    get(name) {
+      if (this[name] instanceof Object) {
+        return JSON.parse(JSON.stringify(this[name]))
+      } else {
+        return this[name]
+      }
+    },
+    del(name) {
+      delete this[name]
+    }
+  },
+  globalData: {
+    userInfo: {},
+    partnerInfo: {},
+    token: '' || 'bdf2caa816ca98f83d6340b7eb8d8f93',
+    // role: 用户角色 0客户 1合伙人
+    role: null,
+    HOST: 'https://storemp.golodata.com',
+    // HOST: 'http://storemp.golodev.cn',
+    shareInfo: {},
+    tabInst:[]
+  }
+})

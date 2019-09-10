@@ -1,0 +1,80 @@
+import compositePoster from '../../../utils/compositePoster/compositePoster'
+
+const app = getApp()
+var self;
+Page({
+  data: {
+    info: {},
+    msg: '',
+    coupon_id:'',
+    coupon_title:''
+  },
+  share() {
+    app.http.post('/api/customer/product/share', {
+      product_id: this.data.info.id
+    }).then(res => {
+      this.setData({
+        product_rebate_amount: res.profit.product_rebate_amount || null,
+        invite_user_count: res.profit.invite_user_count || null,
+        coupon_id:res.coupon.data.id,
+        coupon_title:res.coupon.data.title,
+      })
+    })
+  },
+  
+  //领取优惠券
+  getCoupon(e)
+  {
+    let coupon_id = this.data.coupon_id;
+    let coupon_title = this.data.coupon_title;
+    if(!coupon_id || !coupon_title) return;
+    wx.showModal({
+      title: '领取优惠券',
+      content: '您有一张券【'+coupon_title+'】，确定领取？',
+      showCancel: true,//是否显示取消按钮
+      cancelText:"放弃",//默认是“取消”
+      confirmText:"领取",//默认是“确定”
+      success: function (res) {
+         if (res.cancel) {
+            //点击取消,默认隐藏弹框
+         } else {
+            //点击确定
+            app.http.post('/api/coupon/setcoupon', {
+              coupon_id: coupon_id
+            }).then(res => {
+              wx.showToast({
+                title: '领取成功',
+                icon: 'none'
+              })
+            })
+         }
+      },
+   })
+  },
+  onLoad() {
+    self = this;
+    this.setData({
+      info: app.varStorage.get('storeDetail')
+    })
+    this.share()
+  },
+  onShow: function () {},
+  getShareImg() {
+    compositePoster.createPoster({
+      data: Object.assign(self.data.info, {
+        uid: app.globalData.userInfo.uid,
+        pid: app.globalData.role === 0 ? app.globalData.shareInfo.share_partner_id : app.globalData.userInfo.uid
+      })
+    })
+  },
+  back() {
+    wx.navigateBack()
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: '发现一个好商品【' + self.data.info.store_name + '】推荐给你！',
+      path: `pages/index/index?type=share&s=${app.globalData.userInfo.uid}&p=${app.globalData.role === 0 ? app.globalData.shareInfo.share_partner_id : app.globalData.userInfo.uid}&st=${self.data.info.id}`,
+      imageUrl: this.data.info.image
+    }
+  },
+})
