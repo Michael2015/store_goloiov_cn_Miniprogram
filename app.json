@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/login/index",
     "pages/partner/index/index",
     "pages/common/order/order",
     "pages/common/order/detail",

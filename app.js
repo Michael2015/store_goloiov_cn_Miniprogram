@@ -37,7 +37,15 @@ App({
             if (data.code === 200) {
               wx.hideNavigationBarLoading()
               resolve(data.data)
-            } else {
+            }
+            else if(data.code === 403)
+            {
+              //定向到登录
+                wx.redirectTo({
+                    url: '/pages/login/index',
+                });
+            }
+            else {
               wx.hideLoading()
               wx.showModal({
                 content: data.msg ? data.msg : '系统错误,稍后重试 ',
@@ -90,7 +98,7 @@ App({
   globalData: {
     userInfo: {},
     partnerInfo: {},
-    token: '' || '92f862c626264fdf7ec87b7b1b80c917',
+    token: '',
     // role: 用户角色 0客户 1合伙人
     role: null,   
     //HOST: 'https://wcp.szyrwl.com',
