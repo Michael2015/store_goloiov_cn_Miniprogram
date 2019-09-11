@@ -93,8 +93,8 @@ App({
     token: '' || '92f862c626264fdf7ec87b7b1b80c917',
     // role: 用户角色 0客户 1合伙人
     role: null,   
-    HOST: 'https://wcp.szyrwl.com',
-    //HOST: 'https://storemp.golodata.com',
+    //HOST: 'https://wcp.szyrwl.com',
+    HOST: 'https://storemp.golodata.com',
     shareInfo: {},
     tabInst: []
   }
