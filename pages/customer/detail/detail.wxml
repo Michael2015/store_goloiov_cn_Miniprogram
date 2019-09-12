@@ -108,6 +108,8 @@
             <view class="r" bindtap="goSettlement">立即购买</view>
         </view>
     </view>
+    <!--
     <view class="zhuan" bindtap="toShare">赚</view>
+    -->
     <contact-user id="contact-view"></contact-user>
 </view>

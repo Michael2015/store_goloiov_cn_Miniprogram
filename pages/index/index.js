@@ -49,18 +49,20 @@ Page({
                     //用户未授权的情况下
                     app.globalData.token = '';
                     app.globalData.role = 0;
+                    app.globalData.partner_invite_id = options.share_id || 0;
+                    app.globalData.shareInfo.share_user_id = options.s || 0; // 推荐人
+                    app.globalData.shareInfo.share_partner_id = options.p || 0;// 店铺 或者 合伙人id
+                    app.globalData.shareInfo.share_product_id = options.st  || 0;// 商品id
                     if (options.type === 'invite') {
+                        let partner_invite_id = app.globalData.partner_invite_id;
                         // 邀请合伙人
                         wx.redirectTo({
-                            url: '/pages/partner/personal/partner/invite?share_id=' + options.share_id
+                            url: '/pages/partner/personal/partner/invite?share_id='+partner_invite_id,
                         });
                     } else if (options.type === 'share') {
                         // 分享进来的
-                        app.globalData.shareInfo.share_user_id = options.s // 推荐人
-                        app.globalData.shareInfo.share_partner_id = options.p // 店铺 或者 合伙人id
-                        app.globalData.shareInfo.share_product_id = options.st // 商品id
                         wx.redirectTo({
-                            url: '/pages/customer/detail/detail?id=' + app.globalData.shareInfo.share_product_id
+                            url: '/pages/customer/detail/detail?id=' + app.globalData.shareInfo.share_product_id+'&type=share'
                         });
                     } else {
                         wx.switchTab({
@@ -328,16 +330,14 @@ function analysisOptions(options, res) {
         app.globalData.shareInfo.share_user_id = options.s // 推荐人
         app.globalData.shareInfo.share_partner_id = options.p // 店铺 或者 合伙人id
         app.globalData.shareInfo.share_product_id = options.st // 商品id
-        console.log('捕获分享入口：')
-        console.log(app.globalData.shareInfo)
         //根据用户身份不同去对应的商品详情页
         if (res.is_promoter === 0) {
             wx.redirectTo({
-                url: '/pages/customer/detail/detail?id=' + app.globalData.shareInfo.share_product_id
+                url: '/pages/customer/detail/detail?id=' + app.globalData.shareInfo.share_product_id+'&type=share'
             })
         } else if (res.is_promoter === 1) {
             wx.redirectTo({
-                url: '/pages/partner/detail/detail?id=' + app.globalData.shareInfo.share_product_id
+                url: '/pages/partner/detail/detail?id=' + app.globalData.shareInfo.share_product_id+'&type=share'
             })
         }
     } else {

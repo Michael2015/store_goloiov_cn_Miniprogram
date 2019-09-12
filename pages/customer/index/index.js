@@ -59,8 +59,9 @@ Page({
     })
   },
   register() {
+    var partner_invite_id = app.globalData.partner_invite_id ? app.globalData.partner_invite_id : app.globalData.shareInfo.share_user_id;
     wx.navigateTo({
-      url: '/pages/partner/personal/partner/invite?share_id=' + this.data.getPartnerInfo.uid
+      url: '/pages/partner/personal/partner/invite?share_id=' + partner_invite_id,
     })
   },
   getinfo() {
@@ -147,7 +148,7 @@ Page({
      })
     },
   getPartnerInfo() {
-    app.http.get('/api/customer/mall/getPartnerInfo').then(res => {
+    app.http.get('/api/customer/mall/getPartnerInfo',{share_id:app.globalData.shareInfo.share_user_id}).then(res => {
       app.globalData.partnerInfo = res;
       this.setData({
         getPartnerInfo: res

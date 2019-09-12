@@ -15,7 +15,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     var timer = null
     if (this.check()) {
       wx.showModal({
@@ -32,11 +31,6 @@ Page({
           }
         }
       })
-      // timer = setTimeout(()=> {
-      //   wx.switchTab({
-      //     url: '/pages/partner/index/index'
-      //   })
-      // }, 3000)
     }
     if (options && options.share_id) {
       this.data.shareId = options.share_id
@@ -68,7 +62,6 @@ Page({
     }
   },
   check() {
-    console.log(app.globalData.role === 1)
     return app.globalData.role === 1 // 判断是不是合伙人了
   }
 })

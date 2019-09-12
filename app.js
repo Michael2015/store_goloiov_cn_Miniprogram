@@ -40,9 +40,9 @@ App({
             }
             else if(data.code === 403)
             {
-              //定向到登录
+                //定向到登录
                 wx.redirectTo({
-                    url: '/pages/login/index',
+                    url: '/pages/login/index?'+data.data.params,
                 });
             }
             else {
